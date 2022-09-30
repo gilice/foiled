@@ -6,7 +6,8 @@
 
 Flattering is an opinionated **framework to build [Flutter](https://flutter.dev/) apps**; handling all of those for you:
   - CI using [GitHub actions](https://github.com/features/actions)
-  - Dynamic M3 theming *with all the hacks and quirks you need implemented!*
+    - Automatic deployment of [Flutter web](https://flutter.dev/multi-platform/web) on [GitHub pages](https://pages.github.com/)
+  - Dynamic [M3 theming](https://m3.material.io/) *with all the hacks and quirks you need implemented!*
     - Manually setting themes for platforms that don't support auto-theming  
  - Efficient reactivitivy and declaravitivity with [Riverpod](https://riverpod.dev)
  - Declarative development environments and reproducable builds with [Nix](https://nixos.org/)
