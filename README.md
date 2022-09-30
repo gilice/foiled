@@ -12,3 +12,4 @@ Flattering is an opinionated **framework to build [Flutter](https://flutter.dev/
  - Efficient reactivitivy and declaravitivity with [Riverpod](https://riverpod.dev)
  - Declarative development environments and reproducable builds with [Nix](https://nixos.org/)
    - This is a [Nix Flake](https://nixos.wiki/wiki/Flakes) to build apps with the help of Nix. In comparison to other templates I've seen, it does work building Linux apps with `nix-build` (or `nix build` once the nix-command is merged).
+- [Move fast, whithout breaking things](https://en.wikipedia.org/w/index.php?title=Move_fast_and_break_things_(motto)&redirect=no): Generating your own project from this repo from this one is easy. Just click the big green `Use this template` button, or, [\[Click here!\]](https://github.com/gilice/flattering/generate)
