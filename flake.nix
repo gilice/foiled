@@ -32,6 +32,14 @@
           x_stuff = with pkgs; [ xorg.libX11.dev xorg.xorgproto pkg-config gtk3-x11 xlibsWrapper ];
         in
         {
+          packages.default = pkgs.flutter.mkFlutterApp
+            rec {
+              name = "flattering";
+              version = "1.0.0";
+              src = self;
+              vendorHash = "sha256-P9/tfMXj1gUIXImmDZwYA5ei49X+/5A6/2m/J7BrSrY=";
+
+            };
           devShells.default = pkgs.mkShell rec {
             buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
             nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config ];
