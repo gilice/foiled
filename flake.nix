@@ -37,7 +37,7 @@
               name = "flattering";
               version = "1.0.0";
               src = self;
-              vendorHash = "sha256-EJIrluVtRDD3pTyE0WioKnyIY11ajJP6fCybdSRHNLI=";
+              vendorHash = "sha256-P9/tfMXj1gUIXImmDZwYA5ei49X+/5A6/2m/J7BrSrY=";
 
             };
           devShells.default = pkgs.mkShell rec {
