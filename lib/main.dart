@@ -1,10 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flattering/screens/home_screen.dart';
-import 'package:flattering/utils/constants.dart';
-import 'package:flattering/utils/log_all_observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foiled/screens/home_screen.dart';
+import 'package:foiled/utils/constants.dart';
+import 'package:foiled/utils/log_all_observer.dart';
 
 void main() => runApp(const MyApp());
 

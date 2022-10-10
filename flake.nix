@@ -33,22 +33,28 @@
         in
         {
           packages.default = pkgs.flutter.mkFlutterApp
-            rec {
-              name = "flattering";
+            {
+              preBuild = '''
+                flutter pub run build_runner build
+              '';
+              name = "foiled";
               version = "1.0.0";
               src = self;
-              vendorHash = "sha256-P9/tfMXj1gUIXImmDZwYA5ei49X+/5A6/2m/J7BrSrY=";
+              vendorHash = "sha256-PYck4vDjRJoQg5ppboxLK70xrFYJlSrm9z9kNmkbar8=";
 
             };
-          devShells.default = pkgs.mkShell rec {
+          devShells.default = pkgs.mkShell {
             buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
             nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config ];
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             C_INCLUDE_PATH = "${pkgs.xorg.libX11.dev}/include:${pkgs.libepoxy}/include";
             shellHook = ''
-              export LD_LIBRARY_PATH=${pkgs.libepoxy}/lib
+              export
+              LD_LIBRARY_PATH=${pkgs.libepoxy}/lib
             '';
           };
         });
 
 }
+
+

@@ -1,4 +1,4 @@
-import 'package:flattering/api/model/discourse_category.dart';
+import 'package:foiled/api/model/discourse_category.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 

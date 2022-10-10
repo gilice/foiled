@@ -1,9 +1,9 @@
-import 'package:flattering/main.dart';
-import 'package:flattering/utils/constants.dart';
-import 'package:flattering/utils/utils.dart';
-import 'package:flattering/widgets/account_manager_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foiled/main.dart';
+import 'package:foiled/utils/constants.dart';
+import 'package:foiled/utils/utils.dart';
+import 'package:foiled/widgets/account_manager_popup.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<dynamic> showSettingsBottomSheet(BuildContext context) {
@@ -60,9 +60,7 @@ class _SettingsBottomSheet extends StatelessWidget {
                 multiplier: 2,
                 Center(
                   child: ElevatedButton.icon(
-                      onPressed: () {
-                        launchUrl(Uri.parse(sourceUrl));
-                      },
+                      onPressed: () => launchUrl(Uri.parse(sourceUrl)),
                       icon: const Icon(Icons.code_outlined),
                       label: const Text("View source code")),
                 ),

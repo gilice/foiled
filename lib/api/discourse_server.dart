@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flattering/api/model/discourse_server_info.dart';
+import 'package:foiled/api/model/discourse_server_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
 
@@ -37,13 +37,4 @@ class DiscourseServer {
       }
     }
   }
-
-  // Future<void> getCategoryPosts(String slug, int id, int count) async {
-  //   var url = Uri.parse("$baseUrl/c/$slug/$id.json");
-  //   print(url);
-  //   print((await http.get(url)).body);
-  // }
-
-  @override
-  String toString() => 'Api(baseUrl: $baseUrl)';
 }

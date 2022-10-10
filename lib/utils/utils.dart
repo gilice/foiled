@@ -1,6 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flattering/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:foiled/utils/constants.dart';
 
 Color harmonize(Color inp, BuildContext context) {
   return inp.harmonizeWith(Theme.of(context).colorScheme.primary);

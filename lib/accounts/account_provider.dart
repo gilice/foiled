@@ -1,7 +1,7 @@
-import 'package:flattering/accounts/account.dart';
-import 'package:flattering/api/discourse_server.dart';
-import 'package:flattering/api/model/discourse_server_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foiled/accounts/account.dart';
+import 'package:foiled/api/discourse_server.dart';
+import 'package:foiled/api/model/discourse_server_info.dart';
 import 'package:isar/isar.dart';
 
 final accountUpdatesProvider = StreamProvider<void>(
@@ -17,8 +17,8 @@ final accountUpdatesProvider = StreamProvider<void>(
 
 final allAccountsProvider = FutureProvider<List<Account>>(
   (ref) async {
-    var aD = await ref.watch(dbProvider.future);
     ref.watch(accountUpdatesProvider);
+    var aD = await ref.watch(dbProvider.future);
 
     return aD.accounts.where().findAll();
   },
@@ -26,8 +26,12 @@ final allAccountsProvider = FutureProvider<List<Account>>(
 
 final currentDiscourseServerProvider = FutureProvider<DiscourseServer>(
   (ref) async {
-    var accId = await ref.watch(selectedAccountProvider.state).state;
-    var aD = await ref.watch(dbProvider.future);
+    var futures = await Future.wait([
+      ref.watch(selectedAccountProvider.state).state,
+      ref.watch(dbProvider.future)
+    ]);
+    var accId = futures[0] as int;
+    var aD = futures[1] as Isar;
 
     var acc = await aD.accounts.get(accId);
     if (acc == null) {
@@ -52,8 +56,8 @@ final dbProvider = FutureProvider<Isar>(
 
 final selectedAccountProvider = StateProvider<Future<int>>(
   (ref) async {
-    var aD = await ref.watch(dbProvider.future);
     ref.watch(accountUpdatesProvider);
+    var aD = await ref.watch(dbProvider.future);
     var first = (await aD.accounts.where().findFirst());
     if (first != null) {
       return first.id;
