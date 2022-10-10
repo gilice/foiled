@@ -1,5 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flattering/screens/home.dart';
+import 'package:flattering/screens/home_screen.dart';
 import 'package:flattering/utils/constants.dart';
 import 'package:flattering/utils/log_all_observer.dart';
 import 'package:flutter/foundation.dart';

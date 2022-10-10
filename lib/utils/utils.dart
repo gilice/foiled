@@ -1,5 +1,29 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flattering/utils/constants.dart';
 import 'package:flutter/material.dart';
+
+Color harmonize(Color inp, BuildContext context) {
+  return inp.harmonizeWith(Theme.of(context).colorScheme.primary);
+}
+
+Future showModalPopUp(BuildContext context,
+        {Widget? content, String title = ""}) =>
+    showModalBottomSheet(
+        context: context,
+        shape: StandardSheetBorder(multiplier: 2),
+        builder: (context) => StandardPadding(Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                StandardPadding(Text(
+                  title,
+                  style: titleTextStyle(context),
+                )),
+                if (content != null) ...[Expanded(child: content)]
+              ],
+            )));
+
+Color textToColor(String inp) => Color(int.parse(inp, radix: 16) + 0xFF000000);
 
 ThemeData themeFromColorScheme(ColorScheme inp) {
   return ThemeData(
@@ -14,6 +38,11 @@ ThemeData themeFromColorScheme(ColorScheme inp) {
     ),
   );
 }
+
+TextStyle titleTextStyle(BuildContext context) => Theme.of(context)
+    .textTheme
+    .titleMedium!
+    .copyWith(fontWeight: FontWeight.bold);
 
 class BrandedAppBar extends AppBar {
   @override
@@ -34,4 +63,15 @@ class StandardPadding extends Padding {
           child: _child,
           padding: EdgeInsets.all(multiplier * 8),
         );
+}
+
+class StandardSheetBorder extends RoundedRectangleBorder {
+  final double multiplier;
+  StandardSheetBorder({this.multiplier = 1})
+      : super(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(multiplier * 8),
+                topLeft: Radius.circular(multiplier * 8)));
+  // return const RoundedRectangleBorder(
+
 }
