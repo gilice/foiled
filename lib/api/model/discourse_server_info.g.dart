@@ -41,8 +41,7 @@ const DiscourseServerInfoSchema = CollectionSchema(
     r'categories': PropertySchema(
       id: 4,
       name: r'categories',
-      type: IsarType.objectList,
-      target: r'DiscourseCategory',
+      type: IsarType.string,
     ),
     r'defaultArchetype': PropertySchema(
       id: 5,
@@ -87,7 +86,7 @@ const DiscourseServerInfoSchema = CollectionSchema(
   idName: r'id',
   indexes: {},
   links: {},
-  embeddedSchemas: {r'DiscourseCategory': DiscourseCategorySchema},
+  embeddedSchemas: {},
   getId: _discourseServerInfoGetId,
   getLinks: _discourseServerInfoGetLinks,
   attach: _discourseServerInfoAttach,
@@ -101,14 +100,6 @@ int _discourseServerInfoEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.categories.length * 3;
-  {
-    final offsets = allOffsets[DiscourseCategory]!;
-    for (var i = 0; i < object.categories.length; i++) {
-      final value = object.categories[i];
-      bytesCount +=
-          DiscourseCategorySchema.estimateSize(value, offsets, allOffsets);
-    }
-  }
   {
     final value = object.defaultArchetype;
     if (value != null) {
@@ -146,12 +137,7 @@ void _discourseServerInfoSerialize(
   writer.writeBool(offsets[1], object.canCreateTag);
   writer.writeBool(offsets[2], object.canTagPms);
   writer.writeBool(offsets[3], object.canTagTopics);
-  writer.writeObjectList<DiscourseCategory>(
-    offsets[4],
-    allOffsets,
-    DiscourseCategorySchema.serialize,
-    object.categories,
-  );
+  writer.writeString(offsets[4], object.categories);
   writer.writeString(offsets[5], object.defaultArchetype);
   writer.writeString(offsets[6], object.tagsFilterRegexp);
   writer.writeLong(offsets[7], object.uncategorizedCategoryId);
@@ -172,13 +158,7 @@ DiscourseServerInfo _discourseServerInfoDeserialize(
     canCreateTag: reader.readBoolOrNull(offsets[1]),
     canTagPms: reader.readBoolOrNull(offsets[2]),
     canTagTopics: reader.readBoolOrNull(offsets[3]),
-    categories: reader.readObjectList<DiscourseCategory>(
-          offsets[4],
-          DiscourseCategorySchema.deserialize,
-          allOffsets,
-          DiscourseCategory(),
-        ) ??
-        [],
+    categories: reader.readString(offsets[4]),
     defaultArchetype: reader.readStringOrNull(offsets[5]),
     tagsFilterRegexp: reader.readStringOrNull(offsets[6]),
     uncategorizedCategoryId: reader.readLongOrNull(offsets[7]),
@@ -207,13 +187,7 @@ P _discourseServerInfoDeserializeProp<P>(
     case 3:
       return (reader.readBoolOrNull(offset)) as P;
     case 4:
-      return (reader.readObjectList<DiscourseCategory>(
-            offset,
-            DiscourseCategorySchema.deserialize,
-            allOffsets,
-            DiscourseCategory(),
-          ) ??
-          []) as P;
+      return (reader.readString(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -442,91 +416,138 @@ extension DiscourseServerInfoQueryFilter on QueryBuilder<DiscourseServerInfo,
   }
 
   QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
-      categoriesLengthEqualTo(int length) {
+      categoriesEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        length,
-        true,
-        length,
-        true,
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'categories',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'categories',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
+      categoriesMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'categories',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
       categoriesIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        0,
-        true,
-        0,
-        true,
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'categories',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
       categoriesIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
-      categoriesLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
-      categoriesLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
-      categoriesLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'categories',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'categories',
+        value: '',
+      ));
     });
   }
 
@@ -1380,14 +1401,7 @@ extension DiscourseServerInfoQueryFilter on QueryBuilder<DiscourseServerInfo,
 }
 
 extension DiscourseServerInfoQueryObject on QueryBuilder<DiscourseServerInfo,
-    DiscourseServerInfo, QFilterCondition> {
-  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterFilterCondition>
-      categoriesElement(FilterQuery<DiscourseCategory> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'categories');
-    });
-  }
-}
+    DiscourseServerInfo, QFilterCondition> {}
 
 extension DiscourseServerInfoQueryLinks on QueryBuilder<DiscourseServerInfo,
     DiscourseServerInfo, QFilterCondition> {}
@@ -1447,6 +1461,20 @@ extension DiscourseServerInfoQuerySortBy
       sortByCanTagTopicsDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'canTagTopics', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterSortBy>
+      sortByCategories() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categories', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterSortBy>
+      sortByCategoriesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categories', Sort.desc);
     });
   }
 
@@ -1608,6 +1636,20 @@ extension DiscourseServerInfoQuerySortThenBy
   }
 
   QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterSortBy>
+      thenByCategories() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categories', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterSortBy>
+      thenByCategoriesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'categories', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QAfterSortBy>
       thenByDefaultArchetype() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'defaultArchetype', Sort.asc);
@@ -1751,6 +1793,13 @@ extension DiscourseServerInfoQueryWhereDistinct
   }
 
   QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QDistinct>
+      distinctByCategories({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'categories', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<DiscourseServerInfo, DiscourseServerInfo, QDistinct>
       distinctByDefaultArchetype({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'defaultArchetype',
@@ -1840,7 +1889,7 @@ extension DiscourseServerInfoQueryProperty
     });
   }
 
-  QueryBuilder<DiscourseServerInfo, List<DiscourseCategory>, QQueryOperations>
+  QueryBuilder<DiscourseServerInfo, String, QQueryOperations>
       categoriesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'categories');
@@ -1914,9 +1963,7 @@ DiscourseServerInfo _$DiscourseServerInfoFromJson(Map<String, dynamic> json) =>
       canAssociateGroups: json['canAssociateGroups'] as bool?,
       watchedWordsReplace: json['watchedWordsReplace'] as String?,
       watchedWordsLink: json['watchedWordsLink'] as String?,
-      categories: (json['categories'] as List<dynamic>)
-          .map((e) => DiscourseCategory.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      categories: toS(json['categories']),
     );
 
 Map<String, dynamic> _$DiscourseServerInfoToJson(

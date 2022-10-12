@@ -35,6 +35,12 @@ const DiscourseServerSchema = CollectionSchema(
       name: r'cachedServerInfo',
       target: r'DiscourseServerInfo',
       single: true,
+    ),
+    r'cachedCategories': LinkSchema(
+      id: 7452536902466900400,
+      name: r'cachedCategories',
+      target: r'DiscourseCategory',
+      single: false,
     )
   },
   embeddedSchemas: {},
@@ -95,7 +101,7 @@ Id _discourseServerGetId(DiscourseServer object) {
 }
 
 List<IsarLinkBase<dynamic>> _discourseServerGetLinks(DiscourseServer object) {
-  return [object.cachedServerInfo];
+  return [object.cachedServerInfo, object.cachedCategories];
 }
 
 void _discourseServerAttach(
@@ -103,6 +109,8 @@ void _discourseServerAttach(
   object.id = id;
   object.cachedServerInfo.attach(
       col, col.isar.collection<DiscourseServerInfo>(), r'cachedServerInfo', id);
+  object.cachedCategories.attach(
+      col, col.isar.collection<DiscourseCategory>(), r'cachedCategories', id);
 }
 
 extension DiscourseServerQueryWhereSort
@@ -396,6 +404,68 @@ extension DiscourseServerQueryLinks
       cachedServerInfoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(r'cachedServerInfo', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategories(FilterQuery<DiscourseCategory> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'cachedCategories');
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedCategories', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedCategories', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedCategories', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedCategories', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'cachedCategories', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<DiscourseServer, DiscourseServer, QAfterFilterCondition>
+      cachedCategoriesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'cachedCategories', lower, includeLower, upper, includeUpper);
     });
   }
 }

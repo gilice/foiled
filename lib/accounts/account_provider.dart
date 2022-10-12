@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/accounts/account.dart';
 import 'package:foiled/api/discourse_server.dart';
+import 'package:foiled/api/model/discourse_category.dart';
 import 'package:foiled/api/model/discourse_server_info.dart';
 import 'package:isar/isar.dart';
 
@@ -49,8 +50,12 @@ final currentDiscourseServerProvider = FutureProvider<DiscourseServer>(
 
 final dbProvider = FutureProvider<Isar>(
   (ref) {
-    return Isar.open(
-        [AccountSchema, DiscourseServerSchema, DiscourseServerInfoSchema]);
+    return Isar.open([
+      AccountSchema,
+      DiscourseServerSchema,
+      DiscourseServerInfoSchema,
+      DiscourseCategorySchema
+    ]);
   },
 );
 

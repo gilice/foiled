@@ -33,8 +33,7 @@ class _ColorBorderCard extends StatelessWidget {
               border: Border(
                   left: BorderSide(
             width: 8,
-            color:
-                color != null ? harmonize(color, context) : Colors.transparent,
+            color: harmonize(color, context),
             style: BorderStyle.solid,
           ))),
           child: child,
@@ -68,15 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
           }),
           child: Consumer(
             builder: (context, ref, child) =>
-                ref.watch(currentServerInfoProvider).when(
+                ref.watch(currentCategoriesProvider).when(
                     data: (data) {
-                      var cat = data.categories;
-
+                      var cat = data;
                       return ListView.builder(
                         shrinkWrap: true,
                         itemCount: cat.length,
                         itemBuilder: (context, index) {
-                          var tc = cat[index];
+                          var tc = cat.elementAt(index);
                           return GestureDetector(
                             onTap: (() {
                               // print(tc);
@@ -85,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: textToColor(tc.color ?? "ffffff"),
                               child: StandardPadding(
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
                                       tc.name ?? 'No name',
@@ -95,6 +94,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       tc.description ?? "No description",
                                       overflow: TextOverflow.clip,
                                     ),
+                                    SingleChildScrollView(
+                                      physics: const ScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: tc.subcategories
+                                            .map((e) =>
+                                                Chip(label: Text(e.name ?? "")))
+                                            .toList(),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 multiplier: 2,

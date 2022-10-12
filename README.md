@@ -22,3 +22,6 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
  - use the tenary operator for an one-level if else, but nothing more
  - don't make spaghetti widgets, use private classes instead.
  - unix philosophy to the max, in the code too: **each function, class, provider, and whatever should do one thing, but that well**.
+
+## Useful links
+ - [Discourse API Docs](https://docs.discourse.org/)
