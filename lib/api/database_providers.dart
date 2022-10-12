@@ -1,5 +1,4 @@
 // Desc: providers for Isar database objects, so they don't get [Isar.()open()] ed repeatedly
-// Modified: 2022-10-09T15:03:18.051Z
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/accounts/account_provider.dart';

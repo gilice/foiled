@@ -83,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: textToColor(tc.color ?? "ffffff"),
                               child: StandardPadding(
                                 Column(
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       tc.name ?? 'No name',
@@ -99,8 +98,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: tc.subcategories
-                                            .map((e) =>
-                                                Chip(label: Text(e.name ?? "")))
+                                            .map((e) => Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8, right: 8),
+                                                child: Chip(
+                                                    label: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8),
+                                                      child: CircleAvatar(
+                                                        radius: 8,
+                                                        backgroundColor:
+                                                            harmonize(
+                                                                textToColor(e
+                                                                        .color ??
+                                                                    "FFFFFF"),
+                                                                context),
+                                                      ),
+                                                    ),
+                                                    Text(e.name ?? ""),
+                                                  ],
+                                                ))))
                                             .toList(),
                                       ),
                                     )

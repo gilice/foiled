@@ -15,7 +15,7 @@ String toS(dynamic l) => json.encode(l);
 /// main- and subcategories.
 class DiscourseServerInfo {
   @JsonKey(ignore: true)
-  Id id = Isar.autoIncrement;
+  late Id id;
 
   // Map<String, int> notificationTypes;
   // PostTypes postTypes;
@@ -70,8 +70,9 @@ class DiscourseServerInfo {
 
   /// Connect the generated [_$DiscourseServerInfo] function to the `fromJson`
   /// factory.
-  factory DiscourseServerInfo.fromJson(Map<String, dynamic> json) {
+  factory DiscourseServerInfo.fromJson(Map<String, dynamic> json, int id) {
     var gen = _$DiscourseServerInfoFromJson(json);
+    gen.id = id;
     return gen;
   }
 

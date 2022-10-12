@@ -45,7 +45,7 @@
 
           devShells.default = pkgs.mkShell {
             buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
-            nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config libepoxy libepoxy.dev ];
+            nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config libepoxy cmake libepoxy.dev ];
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             C_INCLUDE_PATH = "${pkgs.xorg.libX11.dev}/include:${pkgs.libepoxy}/include";
             shellHook = ''

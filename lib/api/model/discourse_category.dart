@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:foiled/api/discourse_server.dart';
+import 'package:foiled/utils/utils.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -113,7 +113,7 @@ class DiscourseCategory {
   factory DiscourseCategory.fromJson(
       Map<String, dynamic> json, String baseUrl) {
     var t = _$DiscourseCategoryFromJson(json);
-    t.isarId = fastHash(baseUrl + t.id.toString());
+    t.isarId = hash(baseUrl + t.id.toString());
     return t;
   }
 
