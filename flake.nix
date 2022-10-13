@@ -30,6 +30,9 @@
           }).androidsdk;
 
           x_stuff = with pkgs; [ xorg.libX11.dev xorg.xorgproto pkg-config gtk3-x11 xlibsWrapper ];
+          buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
+          nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config libepoxy cmake libepoxy.dev ];
+
         in
         {
           packages.default = pkgs.flutter.mkFlutterApp
@@ -40,12 +43,12 @@
               name = "foiled";
               version = "1.0.0";
               src = self;
+              inherit buildInputs nativeBuildInputs;
               vendorHash = "sha256-PYck4vDjRJoQg5ppboxLK70xrFYJlSrm9z9kNmkbar8=";
             };
 
           devShells.default = pkgs.mkShell {
-            buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
-            nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config libepoxy cmake libepoxy.dev ];
+            inherit buildInputs nativeBuildInputs;
             ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
             C_INCLUDE_PATH = "${pkgs.xorg.libX11.dev}/include:${pkgs.libepoxy}/include";
             shellHook = ''
