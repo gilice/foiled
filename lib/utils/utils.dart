@@ -6,6 +6,10 @@ Color harmonize(Color inp, BuildContext context) {
   return inp.harmonizeWith(Theme.of(context).colorScheme.primary);
 }
 
+int hash(String string) {
+  return string.hashCode;
+}
+
 Future showModalPopUp(BuildContext context,
         {Widget? content, String title = ""}) =>
     showModalBottomSheet(
@@ -72,6 +76,4 @@ class StandardSheetBorder extends RoundedRectangleBorder {
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(multiplier * 8),
                 topLeft: Radius.circular(multiplier * 8)));
-  // return const RoundedRectangleBorder(
-
 }

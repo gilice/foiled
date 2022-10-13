@@ -5,23 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/screens/home_screen.dart';
 import 'package:foiled/utils/constants.dart';
 import 'package:foiled/utils/log_all_observer.dart';
+import 'package:foiled/utils/utils.dart';
 
 void main() => runApp(const MyApp());
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
-
-ThemeData themeFromColorScheme(ColorScheme inp) {
-  return ThemeData(
-      useMaterial3: true,
-      appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
-      dialogBackgroundColor: inp.surface,
-      colorScheme: inp,
-      brightness: inp.brightness,
-      cardColor: inp.surface,
-      dialogTheme: DialogTheme(
-        backgroundColor: inp.surface,
-      ));
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
