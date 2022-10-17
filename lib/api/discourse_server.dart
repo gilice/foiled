@@ -19,7 +19,7 @@ class DiscourseServer {
 
   DiscourseServer({
     required this.baseUrl,
-  }) : id = hash(baseUrl);
+  }) : id = localHash(baseUrl);
 
   Future<List<DiscourseCategory>> getCategories(Isar db) async {
     try {

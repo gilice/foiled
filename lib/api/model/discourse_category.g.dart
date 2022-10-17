@@ -220,6 +220,12 @@ const DiscourseCategorySchema = CollectionSchema(
       name: r'subcategories',
       target: r'DiscourseCategory',
       single: false,
+    ),
+    r'cachedTopics': LinkSchema(
+      id: -877239898081442741,
+      name: r'cachedTopics',
+      target: r'DiscourseTopic',
+      single: false,
     )
   },
   embeddedSchemas: {},
@@ -536,7 +542,7 @@ Id _discourseCategoryGetId(DiscourseCategory object) {
 
 List<IsarLinkBase<dynamic>> _discourseCategoryGetLinks(
     DiscourseCategory object) {
-  return [object.subcategories];
+  return [object.subcategories, object.cachedTopics];
 }
 
 void _discourseCategoryAttach(
@@ -544,6 +550,8 @@ void _discourseCategoryAttach(
   object.isarId = id;
   object.subcategories.attach(
       col, col.isar.collection<DiscourseCategory>(), r'subcategories', id);
+  object.cachedTopics
+      .attach(col, col.isar.collection<DiscourseTopic>(), r'cachedTopics', id);
 }
 
 extension DiscourseCategoryQueryWhereSort
@@ -4715,6 +4723,67 @@ extension DiscourseCategoryQueryLinks
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(
           r'subcategories', lower, includeLower, upper, includeUpper);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopics(FilterQuery<DiscourseTopic> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'cachedTopics');
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedTopics', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedTopics', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedTopics', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedTopics', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'cachedTopics', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      cachedTopicsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'cachedTopics', lower, includeLower, upper, includeUpper);
     });
   }
 }

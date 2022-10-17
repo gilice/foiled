@@ -6,7 +6,7 @@ Color harmonize(Color inp, BuildContext context) {
   return inp.harmonizeWith(Theme.of(context).colorScheme.primary);
 }
 
-int hash(String string) {
+int localHash(String string) {
   return string.hashCode;
 }
 
@@ -61,6 +61,7 @@ class StandardPadding extends Padding {
   final double multiplier;
   // ignore: unused_field
   final Widget? _child;
+
   StandardPadding(this._child, {Key? key, this.multiplier = 1})
       : super(
           key: key,

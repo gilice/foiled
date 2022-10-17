@@ -3,6 +3,7 @@ import 'package:foiled/accounts/account.dart';
 import 'package:foiled/api/discourse_server.dart';
 import 'package:foiled/api/model/discourse_category.dart';
 import 'package:foiled/api/model/discourse_server_info.dart';
+import 'package:foiled/api/model/discourse_topic.dart';
 import 'package:isar/isar.dart';
 
 final accountUpdatesProvider = StreamProvider<void>(
@@ -54,7 +55,8 @@ final dbProvider = FutureProvider<Isar>(
       AccountSchema,
       DiscourseServerSchema,
       DiscourseServerInfoSchema,
-      DiscourseCategorySchema
+      DiscourseCategorySchema,
+      DiscourseTopicSchema
     ]);
   },
 );

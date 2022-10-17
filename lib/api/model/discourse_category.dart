@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:convert';
+
+import 'package:foiled/api/model/discourse_topic.dart';
 import 'package:foiled/utils/utils.dart';
+import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -65,6 +69,9 @@ class DiscourseCategory {
   String? uploadedLogo;
   String? uploadedBackground;
 
+  @JsonKey(ignore: true)
+  var cachedTopics = IsarLinks<DiscourseTopic>();
+
   DiscourseCategory({
     //this.isarId,
     required this.id,
@@ -113,8 +120,34 @@ class DiscourseCategory {
   factory DiscourseCategory.fromJson(
       Map<String, dynamic> json, String baseUrl) {
     var t = _$DiscourseCategoryFromJson(json);
-    t.isarId = hash(baseUrl + t.id.toString());
+    t.isarId = localHash(baseUrl + t.id.toString());
     return t;
+  }
+
+  Future<List<DiscourseTopic>> getTopics(Isar db, String baseUrl) async {
+    try {
+      var req = await (http.get(Uri.parse("$baseUrl/c/$slug/$id.json")));
+      var reqjson = json.decode(req.body)["topic_list"]["topics"];
+      var topics = <DiscourseTopic>[];
+      for (var topic in reqjson) {
+        topics.add(DiscourseTopic.fromJson(topic, isarId));
+      }
+
+      await db.writeTxn(() async {
+        await db.discourseTopics.putAll(topics);
+        cachedTopics.addAll(topics);
+        await cachedTopics.save();
+      });
+
+      return cachedTopics.toList();
+    } on http.ClientException {
+      // Cannot connect to server
+      try {
+        return cachedTopics.toList();
+      } catch (e2) {
+        return Future.error(e2);
+      }
+    }
   }
 
   /// Connect the generated [_$DiscourseCategoryToJson] function to the `toJson` method.
