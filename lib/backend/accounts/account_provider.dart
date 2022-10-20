@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/accounts/account.dart';
-import 'package:foiled/api/discourse_server.dart';
-import 'package:foiled/api/model/discourse_category.dart';
-import 'package:foiled/api/model/discourse_server_info.dart';
-import 'package:foiled/api/model/discourse_topic.dart';
+import 'package:foiled/backend/accounts/account.dart';
+import 'package:foiled/backend/api/discourse_server.dart';
+import 'package:foiled/backend/api/model/discourse_category.dart';
+import 'package:foiled/backend/api/model/discourse_server_info.dart';
+import 'package:foiled/backend/api/model/discourse_topic.dart';
 import 'package:isar/isar.dart';
 
 final accountUpdatesProvider = StreamProvider<void>(
@@ -50,15 +50,13 @@ final currentDiscourseServerProvider = FutureProvider<DiscourseServer>(
 );
 
 final dbProvider = FutureProvider<Isar>(
-  (ref) {
-    return Isar.open([
-      AccountSchema,
-      DiscourseServerSchema,
-      DiscourseServerInfoSchema,
-      DiscourseCategorySchema,
-      DiscourseTopicSchema
-    ]);
-  },
+  (ref) => Isar.open([
+    AccountSchema,
+    DiscourseServerSchema,
+    DiscourseServerInfoSchema,
+    DiscourseCategorySchema,
+    DiscourseTopicSchema
+  ]),
 );
 
 final selectedAccountProvider = StateProvider<Future<int>>(
@@ -75,13 +73,12 @@ final selectedAccountProvider = StateProvider<Future<int>>(
   name: "defaultAccount",
 );
 
-Future<void> addAccount(Account a, DiscourseServer s, Isar db) async {
-  return db.writeTxn(() async {
-    await db.accounts.put(a);
-    await db.discourseServers.put(s);
-    await a.server.save();
-  });
-}
+Future<void> addAccount(Account a, DiscourseServer s, Isar db) async =>
+    db.writeTxn(() async {
+      await db.accounts.put(a);
+      await db.discourseServers.put(s);
+      await a.server.save();
+    });
 
 class AccountNotFoundException implements Exception {}
 

@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:foiled/api/model/discourse_topic.dart';
+import 'package:foiled/backend/api/model/discourse_topic.dart';
 import 'package:foiled/utils/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';

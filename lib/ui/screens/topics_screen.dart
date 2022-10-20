@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/accounts/account_provider.dart';
-import 'package:foiled/api/discourse_server.dart';
-import 'package:foiled/api/model/discourse_category.dart';
-import 'package:foiled/api/model/discourse_topic.dart';
+import 'package:foiled/backend/accounts/account_provider.dart';
+import 'package:foiled/backend/api/discourse_server.dart';
+import 'package:foiled/backend/api/model/discourse_category.dart';
+import 'package:foiled/backend/api/model/discourse_topic.dart';
+import 'package:foiled/ui/widgets/subcategory_chip.dart';
 import 'package:foiled/utils/utils.dart';
 import 'package:isar/isar.dart';
 
 final selectedCategoryProvider = StateProvider.autoDispose<DiscourseCategory?>(
-  (ref) {
-    return null;
-  },
+  (ref) => null,
 );
 
 final topicsProvider = FutureProvider.autoDispose<List<DiscourseTopic>>(
@@ -61,53 +60,37 @@ class TopicsScreen extends ConsumerWidget {
             title: Text(category.name ?? 'Unnamed category'),
           ),
           Consumer(
-            builder: (context, ref, child) {
-              var sc = category.subcategories.toList();
+            builder: (context, ref, child) => SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                // TODO: I know this is ugly. There is no better way I found, yet.
 
-              return SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-                  // TODO: I know this is ugly. There is no better way I found, yet.
-
-                  child: Wrap(
-                    alignment: WrapAlignment.start,
-                    spacing: 8,
-                    children: category.subcategories
-                        .map((e) => InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TopicsScreen(
-                                        category: e,
-                                      ),
-                                    ));
-                              },
-                              child: StandardPadding(
-                                Chip(
-                                  avatar: CircleAvatar(
-                                    radius: 8,
-                                    backgroundColor: harmonize(
-                                        textToColor(e.color ?? "FFFFFF"),
-                                        context),
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  spacing: 8,
+                  children: category.subcategories
+                      .map((e) => InkWell(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TopicsScreen(
+                                    category: e,
                                   ),
-                                  // selected: false,
-                                  label: Text(e.name ?? 'No name'),
-                                ),
-                                multiplier: 0.5,
-                              ),
-                            ))
-                        .toList(),
-                  ),
+                                )),
+                            child: StandardPadding(
+                              SubcategoryChip(
+                                  labelText: e.name, color: e.color),
+                              multiplier: 0.5,
+                            ),
+                          ))
+                      .toList(),
                 ),
-              );
-            },
+              ),
+            ),
           ),
           Consumer(
-            builder: (context, ref, child) {
-              return ref.watch(topicsProvider).when(
-                  data: (data) {
-                    return SliverList(
+            builder: (context, ref, child) => ref.watch(topicsProvider).when(
+                data: (data) => SliverList(
                       delegate: SliverChildBuilderDelegate(
                         childCount: data.length,
                         (context, index) {
@@ -145,13 +128,11 @@ class TopicsScreen extends ConsumerWidget {
                           );
                         },
                       ),
-                    );
-                  },
-                  error: (Object e, StackTrace? s) =>
-                      SliverToBoxAdapter(child: ErrorWidget(e)),
-                  loading: () => const SliverToBoxAdapter(
-                      child: CircularProgressIndicator()));
-            },
+                    ),
+                error: (Object e, StackTrace? s) =>
+                    SliverToBoxAdapter(child: ErrorWidget(e)),
+                loading: () => const SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator()))),
           )
         ],
       ),

@@ -1,6 +1,5 @@
 name: foiled
 description: A new Flutter project.
-isar_version: &isar_version 3.0.2 # define the version to be used
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -40,8 +39,9 @@ dependencies:
   path: ^1.8.1
   path_provider: ^2.0.11
   json_annotation: ^4.7.0
-  isar: *isar_version
-  isar_flutter_libs: *isar_version # contains Isar Core
+  isar: ^3.0.2
+  isar_flutter_libs: ^3.0.2 # contains Isar Core
+  hexcolor: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +54,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   build_runner: ^2.0.0
-  isar_generator: *isar_version
+  isar_generator: ^3.0.2
   json_serializable: ^6.0.5
 
 # For information on the generic Dart part of this file, see the

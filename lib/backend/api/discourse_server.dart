@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:foiled/api/model/discourse_category.dart';
-import 'package:foiled/api/model/discourse_server_info.dart';
+import 'package:foiled/backend/api/model/discourse_category.dart';
+import 'package:foiled/backend/api/model/discourse_server_info.dart';
 import 'package:foiled/utils/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
@@ -60,9 +60,8 @@ class DiscourseServer {
 
       for (var element in needParse) {
         log("parsing cat ${element.name}, sC= ${element.subcategoryIds}");
-        var belongToThis = aCG.where((x) {
-          return element.subcategoryIds?.contains(x.id) ?? false;
-        });
+        var belongToThis =
+            aCG.where((x) => element.subcategoryIds?.contains(x.id) ?? false);
 
         element.subcategories.addAll(belongToThis.toList());
       }

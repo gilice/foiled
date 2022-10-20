@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/accounts/account.dart';
-import 'package:foiled/accounts/account_provider.dart';
-import 'package:foiled/api/discourse_server.dart';
+import 'package:foiled/backend/accounts/account.dart';
+import 'package:foiled/backend/accounts/account_provider.dart';
+import 'package:foiled/backend/api/discourse_server.dart';
 import 'package:foiled/utils/utils.dart';
 
 Future showAddAccountDialog(BuildContext context) => showModalPopUp(
@@ -26,19 +26,17 @@ class _AccountPopupQuestion extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return StandardPadding(
-      TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: label,
-            helperText:
-                kDebugMode ? "Defaults to $defaults in debug mode" : null,
-            hintText: "e.g $example"),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => StandardPadding(
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: label,
+              helperText:
+                  kDebugMode ? "Defaults to $defaults in debug mode" : null,
+              hintText: "e.g $example"),
+        ),
+      );
 }
 
 class _AddAccountPopUp extends StatelessWidget {

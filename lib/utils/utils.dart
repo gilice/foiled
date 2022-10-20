@@ -1,14 +1,15 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:foiled/utils/constants.dart';
+import 'package:hexcolor/hexcolor.dart';
 
-Color harmonize(Color inp, BuildContext context) {
-  return inp.harmonizeWith(Theme.of(context).colorScheme.primary);
-}
+Color harmonize(Color inp, BuildContext context) =>
+    inp.harmonizeWith(Theme.of(context).colorScheme.primary);
 
-int localHash(String string) {
-  return string.hashCode;
-}
+Color harmonizeToColor(String? inp, BuildContext context) =>
+    harmonize(HexColor(inp ?? '#FF000000'), context);
+
+int localHash(String string) => string.hashCode;
 
 Future showModalPopUp(BuildContext context,
         {Widget? content, String title = ""}) =>
@@ -27,21 +28,17 @@ Future showModalPopUp(BuildContext context,
               ],
             )));
 
-Color textToColor(String inp) => Color(int.parse(inp, radix: 16) + 0xFF000000);
-
-ThemeData themeFromColorScheme(ColorScheme inp) {
-  return ThemeData(
-    useMaterial3: true,
-    appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
-    dialogBackgroundColor: inp.surface,
-    colorScheme: inp,
-    brightness: inp.brightness,
-    cardColor: inp.surface,
-    dialogTheme: DialogTheme(
-      backgroundColor: inp.surface,
-    ),
-  );
-}
+ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
+      useMaterial3: true,
+      appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
+      dialogBackgroundColor: inp.surface,
+      colorScheme: inp,
+      brightness: inp.brightness,
+      cardColor: inp.surface,
+      dialogTheme: DialogTheme(
+        backgroundColor: inp.surface,
+      ),
+    );
 
 TextStyle titleTextStyle(BuildContext context) => Theme.of(context)
     .textTheme
@@ -54,6 +51,15 @@ class BrandedAppBar extends AppBar {
   final List<Widget>? actions;
   BrandedAppBar({Key? key, this.actions})
       : super(key: key, title: const Text(appDisplayName), actions: actions);
+}
+
+class LoggingErrorWidget extends StatelessWidget {
+  final Object error;
+  const LoggingErrorWidget({Key? key, required this.error}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) =>
+      ErrorWidget(FlutterError(error.toString()));
 }
 
 /// A faster way to write Padding()s, roughly equals to `x: Padding(padding: EdgeInsets.all(8*x))`
