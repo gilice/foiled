@@ -6,8 +6,12 @@ import 'package:foiled/ui/screens/home_screen.dart';
 import 'package:foiled/utils/constants.dart';
 import 'package:foiled/utils/log_all_observer.dart';
 import 'package:foiled/utils/utils.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  GoogleFonts.config.allowRuntimeFetching = false;
+  runApp(const MyApp());
+}
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 

@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:foiled/utils/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 Color harmonize(Color inp, BuildContext context) =>
@@ -29,16 +30,19 @@ Future showModalPopUp(BuildContext context,
             )));
 
 ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
-      useMaterial3: true,
-      appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
-      dialogBackgroundColor: inp.surface,
-      colorScheme: inp,
-      brightness: inp.brightness,
-      cardColor: inp.surface,
-      dialogTheme: DialogTheme(
-        backgroundColor: inp.surface,
-      ),
-    );
+    useMaterial3: true,
+    appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
+    dialogBackgroundColor: inp.surface,
+    colorScheme: inp,
+    scaffoldBackgroundColor: inp.background,
+    brightness: inp.brightness,
+    cardColor: inp.surface,
+    dialogTheme: DialogTheme(
+      backgroundColor: inp.surface,
+    ),
+    textTheme: GoogleFonts.dmSansTextTheme(inp.brightness == Brightness.light
+        ? ThemeData.light().textTheme
+        : ThemeData.dark().textTheme));
 
 TextStyle titleTextStyle(BuildContext context) => Theme.of(context)
     .textTheme

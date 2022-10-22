@@ -1,3 +1,5 @@
+<img src="./assets/icons/web/icon-512.png" width="85em" style="padding-bottom: 1em"/>
+
 # foiled
 
 > "Foiled structures" is an anagram of what this project aims to be: a [Discourse](https://discourse.org) client written in [Flutter](https://flutter.dev)
@@ -25,4 +27,6 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
 
 ## Useful stuff
  - [Discourse API Docs](https://docs.discourse.org/)
+  - [User API key generation](https://meta.discourse.org/t/user-api-keys-specification/48536)
+    - example auth URL can be found in `assets/test_keys/url.txt`
  - during development, you can use `flutter pub run build_runner watch --delete-conflicting-outputs` to automatically call codegen on file changes
