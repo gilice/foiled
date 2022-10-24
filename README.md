@@ -16,6 +16,7 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
 ## Non-goals
  - any feature that requires login (for now)
  - admin access
+ - web support: db on web is complicated, and the discourse web client is fine (although if you want to work on this, feel free to)
 
 ## Code style
  - use [Riverpod](https://riverpod.dev) where possible
