@@ -7,11 +7,16 @@ import 'package:foiled/utils/constants.dart';
 import 'package:foiled/utils/log_all_observer.dart';
 import 'package:foiled/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:talker/talker.dart';
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
   runApp(const MyApp());
 }
+
+final talker = Talker(
+    loggerSettings: const TalkerLoggerSettings(enableColors: false),
+    loggerFormater: const ColoredLoggerFormatter());
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 

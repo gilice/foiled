@@ -44,7 +44,7 @@
               version = "1.0.0";
               src = self;
               inherit buildInputs nativeBuildInputs;
-              vendorHash = "sha256-Er3SGpRlMhvdur61N8tTXjzi0s0n0iuaV4wMC7MjDi4=";
+              vendorHash = "sha256-zk83bKX/XMfkWp/aLA4yDv+6dtlHHcm1R+fyMWPrhlM=";
             };
 
           devShells.default = pkgs.mkShell rec {

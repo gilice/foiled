@@ -59,7 +59,7 @@ class _AccountManagerPopup extends StatelessWidget {
                                                 Expanded(
                                                   child: Column(
                                                     children: [
-                                                      Text(ta.displayName),
+                                                      Text(ta.userName),
                                                       Text(ta.server.value
                                                               ?.baseUrl ??
                                                           "No URL found")

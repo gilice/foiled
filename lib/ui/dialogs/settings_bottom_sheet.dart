@@ -4,6 +4,7 @@ import 'package:foiled/main.dart';
 import 'package:foiled/ui/dialogs/account_manager_popup.dart';
 import 'package:foiled/utils/constants.dart';
 import 'package:foiled/utils/utils.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<dynamic> showSettingsBottomSheet(BuildContext context) =>
@@ -55,11 +56,36 @@ class _SettingsBottomSheet extends StatelessWidget {
               aboutBoxChildren: [
                 StandardPadding(
                   multiplier: 2,
-                  Center(
-                    child: ElevatedButton.icon(
-                        onPressed: () => launchUrl(Uri.parse(sourceUrl)),
-                        icon: const Icon(Icons.code_outlined),
-                        label: const Text("View source code")),
+                  Wrap(
+                    alignment: WrapAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      TalkerScreen(
+                                        talker: talker,
+                                        theme: TalkerScreenTheme(
+                                            textColor: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                            iconsColor: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                            backgroudColor: Theme.of(context)
+                                                .colorScheme
+                                                .background),
+                                        appBarTitle: "Logs",
+                                      ))),
+                          icon: const Icon(Icons.bug_report_outlined),
+                          label: const Text("Logs")),
+                      ElevatedButton.icon(
+                          onPressed: () => launchUrl(Uri.parse(sourceUrl),
+                              mode: LaunchMode.externalApplication),
+                          icon: const Icon(Icons.code_outlined),
+                          label: const Text("View source code")),
+                    ],
                   ),
                 ),
               ],

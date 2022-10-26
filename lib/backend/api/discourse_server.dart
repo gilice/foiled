@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:foiled/backend/api/model/discourse_category.dart';
 import 'package:foiled/backend/api/model/discourse_server_info.dart';
@@ -13,18 +12,34 @@ part 'discourse_server.g.dart';
 class DiscourseServer {
   Id id;
   String baseUrl;
-
+  http.Client? _client;
   var cachedServerInfo = IsarLink<DiscourseServerInfo>();
-  var cachedCategories = IsarLinks<DiscourseCategory>();
 
+  var cachedCategories = IsarLinks<DiscourseCategory>();
   DiscourseServer({
     required this.baseUrl,
   }) : id = localHash(baseUrl);
 
+  @ignore
+  http.Client get client {
+    if (_client != null) {
+      return _client!;
+    }
+
+    _client = http.Client();
+    Future.delayed(
+      const Duration(seconds: 5),
+      () {
+        client.close();
+        _client = null;
+      },
+    );
+    return _client!;
+  }
+
   Future<List<DiscourseCategory>> getCategories(Isar db) async {
     try {
-      // TODO: Don't even try if the device isn't connected to a network
-      var req = await (http.get(Uri.parse("$baseUrl/categories.json")));
+      var req = await (client.get(Uri.parse("$baseUrl/categories.json")));
       var reqjson =
           json.decode(req.body)['category_list']['categories'] as List<dynamic>;
 
@@ -59,7 +74,6 @@ class DiscourseServer {
       await fst;
 
       for (var element in needParse) {
-        log("parsing cat ${element.name}, sC= ${element.subcategoryIds}");
         var belongToThis =
             aCG.where((x) => element.subcategoryIds?.contains(x.id) ?? false);
 
@@ -85,7 +99,7 @@ class DiscourseServer {
 
   Future<DiscourseServerInfo> getServerInfo(Isar db) async {
     try {
-      var req = await (http.get(Uri.parse("$baseUrl/site.json")));
+      var req = await (client.get(Uri.parse("$baseUrl/site.json")));
       var reqjson = json.decode(req.body);
       var resServerInfo = DiscourseServerInfo.fromJson(reqjson, id);
 

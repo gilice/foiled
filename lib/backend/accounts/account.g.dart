@@ -17,9 +17,19 @@ const AccountSchema = CollectionSchema(
   name: r'Account',
   id: -6646797162501847804,
   properties: {
-    r'displayName': PropertySchema(
+    r'apiKey': PropertySchema(
       id: 0,
-      name: r'displayName',
+      name: r'apiKey',
+      type: IsarType.string,
+    ),
+    r'isAuthorized': PropertySchema(
+      id: 1,
+      name: r'isAuthorized',
+      type: IsarType.bool,
+    ),
+    r'userName': PropertySchema(
+      id: 2,
+      name: r'userName',
       type: IsarType.string,
     )
   },
@@ -50,7 +60,13 @@ int _accountEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.displayName.length * 3;
+  {
+    final value = object.apiKey;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.userName.length * 3;
   return bytesCount;
 }
 
@@ -60,7 +76,9 @@ void _accountSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.displayName);
+  writer.writeString(offsets[0], object.apiKey);
+  writer.writeBool(offsets[1], object.isAuthorized);
+  writer.writeString(offsets[2], object.userName);
 }
 
 Account _accountDeserialize(
@@ -70,9 +88,11 @@ Account _accountDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Account(
-    displayName: reader.readString(offsets[0]),
+    userName: reader.readString(offsets[2]),
   );
+  object.apiKey = reader.readStringOrNull(offsets[0]);
   object.id = id;
+  object.isAuthorized = reader.readBool(offsets[1]);
   return object;
 }
 
@@ -84,6 +104,10 @@ P _accountDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readStringOrNull(offset)) as P;
+    case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -181,59 +205,75 @@ extension AccountQueryWhere on QueryBuilder<Account, Account, QWhereClause> {
 
 extension AccountQueryFilter
     on QueryBuilder<Account, Account, QFilterCondition> {
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameEqualTo(
-    String value, {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyEqualTo(
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameGreaterThan(
-    String value, {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyGreaterThan(
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameLessThan(
-    String value, {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyLessThan(
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameBetween(
-    String lower,
-    String upper, {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyBetween(
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'displayName',
+        property: r'apiKey',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -243,70 +283,69 @@ extension AccountQueryFilter
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameStartsWith(
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameEndsWith(
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameContains(
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'displayName',
+        property: r'apiKey',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameMatches(
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'displayName',
+        property: r'apiKey',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition> displayNameIsEmpty() {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'displayName',
+        property: r'apiKey',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Account, Account, QAfterFilterCondition>
-      displayNameIsNotEmpty() {
+  QueryBuilder<Account, Account, QAfterFilterCondition> apiKeyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'displayName',
+        property: r'apiKey',
         value: '',
       ));
     });
@@ -363,6 +402,146 @@ extension AccountQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> isAuthorizedEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isAuthorized',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'userName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'userName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> userNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension AccountQueryObject
@@ -385,30 +564,54 @@ extension AccountQueryLinks
 }
 
 extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
-  QueryBuilder<Account, Account, QAfterSortBy> sortByDisplayName() {
+  QueryBuilder<Account, Account, QAfterSortBy> sortByApiKey() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displayName', Sort.asc);
+      return query.addSortBy(r'apiKey', Sort.asc);
     });
   }
 
-  QueryBuilder<Account, Account, QAfterSortBy> sortByDisplayNameDesc() {
+  QueryBuilder<Account, Account, QAfterSortBy> sortByApiKeyDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displayName', Sort.desc);
+      return query.addSortBy(r'apiKey', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByIsAuthorized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAuthorized', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByIsAuthorizedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAuthorized', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
     });
   }
 }
 
 extension AccountQuerySortThenBy
     on QueryBuilder<Account, Account, QSortThenBy> {
-  QueryBuilder<Account, Account, QAfterSortBy> thenByDisplayName() {
+  QueryBuilder<Account, Account, QAfterSortBy> thenByApiKey() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displayName', Sort.asc);
+      return query.addSortBy(r'apiKey', Sort.asc);
     });
   }
 
-  QueryBuilder<Account, Account, QAfterSortBy> thenByDisplayNameDesc() {
+  QueryBuilder<Account, Account, QAfterSortBy> thenByApiKeyDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'displayName', Sort.desc);
+      return query.addSortBy(r'apiKey', Sort.desc);
     });
   }
 
@@ -423,14 +626,51 @@ extension AccountQuerySortThenBy
       return query.addSortBy(r'id', Sort.desc);
     });
   }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByIsAuthorized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAuthorized', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByIsAuthorizedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAuthorized', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
+    });
+  }
 }
 
 extension AccountQueryWhereDistinct
     on QueryBuilder<Account, Account, QDistinct> {
-  QueryBuilder<Account, Account, QDistinct> distinctByDisplayName(
+  QueryBuilder<Account, Account, QDistinct> distinctByApiKey(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'displayName', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'apiKey', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Account, Account, QDistinct> distinctByIsAuthorized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isAuthorized');
+    });
+  }
+
+  QueryBuilder<Account, Account, QDistinct> distinctByUserName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'userName', caseSensitive: caseSensitive);
     });
   }
 }
@@ -443,9 +683,21 @@ extension AccountQueryProperty
     });
   }
 
-  QueryBuilder<Account, String, QQueryOperations> displayNameProperty() {
+  QueryBuilder<Account, String?, QQueryOperations> apiKeyProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'displayName');
+      return query.addPropertyName(r'apiKey');
+    });
+  }
+
+  QueryBuilder<Account, bool, QQueryOperations> isAuthorizedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isAuthorized');
+    });
+  }
+
+  QueryBuilder<Account, String, QQueryOperations> userNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'userName');
     });
   }
 }
