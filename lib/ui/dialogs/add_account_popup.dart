@@ -63,7 +63,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
             _AccountPopupQuestion(
               controller: _urlController,
               label: "URL",
-              defaults: "https://discourse.nixos.org",
+              defaults: "https://meta.discourse.org",
               example: "https://meta.discourse.org",
             ),
             _AccountPopupQuestion(
@@ -85,7 +85,6 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
                     var acc = Account(userName: nick)..server.value = s;
                     _account = acc;
                     _server = s;
-                    // await s.getServerInfo(db);
 
                     await acc.launchAuth();
 

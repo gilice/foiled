@@ -66,16 +66,8 @@ class _SettingsBottomSheet extends StatelessWidget {
                                   builder: (BuildContext context) =>
                                       TalkerScreen(
                                         talker: talker,
-                                        theme: TalkerScreenTheme(
-                                            textColor: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground,
-                                            iconsColor: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground,
-                                            backgroudColor: Theme.of(context)
-                                                .colorScheme
-                                                .background),
+                                        theme: talkerScreenThemeFromContext(
+                                            context),
                                         appBarTitle: "Logs",
                                       ))),
                           icon: const Icon(Icons.bug_report_outlined),

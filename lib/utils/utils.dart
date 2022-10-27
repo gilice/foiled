@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foiled/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 Color harmonize(Color inp, BuildContext context) =>
     inp.harmonizeWith(Theme.of(context).colorScheme.primary);
@@ -29,6 +30,12 @@ Future showModalPopUp(BuildContext context,
               ],
             )));
 
+TalkerScreenTheme talkerScreenThemeFromContext(BuildContext context) =>
+    TalkerScreenTheme(
+        textColor: Theme.of(context).colorScheme.onBackground,
+        iconsColor: Theme.of(context).colorScheme.onBackground,
+        backgroudColor: Theme.of(context).colorScheme.background);
+
 ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
     useMaterial3: true,
     appBarTheme: AppBarTheme(foregroundColor: inp.onBackground),
@@ -43,7 +50,6 @@ ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
     textTheme: GoogleFonts.dmSansTextTheme(inp.brightness == Brightness.light
         ? ThemeData.light().textTheme
         : ThemeData.dark().textTheme));
-
 TextStyle titleTextStyle(BuildContext context) => Theme.of(context)
     .textTheme
     .titleMedium!

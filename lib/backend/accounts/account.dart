@@ -1,10 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypton/crypton.dart';
-//import 'package:fast_rsa/fast_rsa.dart';
 import 'package:foiled/backend/api/discourse_server.dart';
 import 'package:foiled/main.dart';
 import 'package:foiled/utils/constants.dart';
@@ -32,8 +29,6 @@ class Account {
     if (server.value == null) {
       return Future.error(NoServerException());
     }
-
-    // TODO: do this async, when possible
     _keys = RSAKeypair.fromRandom();
 
     var baseUri = Uri.parse(server.value!.baseUrl);
