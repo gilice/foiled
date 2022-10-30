@@ -9,7 +9,7 @@ import 'package:foiled/utils/utils.dart';
 Future showAddAccountDialog(BuildContext context) => showModalPopUp(
       context,
       title: "Add new account",
-      content: _AddAccountPopUp(),
+      content: const _AddAccountPopUp(),
     );
 
 class _AccountPopupQuestion extends StatelessWidget {
@@ -39,51 +39,96 @@ class _AccountPopupQuestion extends StatelessWidget {
       );
 }
 
-class _AddAccountPopUp extends StatelessWidget {
-  final TextEditingController _urlController = TextEditingController();
-  final TextEditingController _nicknameController = TextEditingController();
+enum _AddAccountAuthStatus { none, code, full }
 
-  _AddAccountPopUp({Key? key}) : super(key: key);
+class _AddAccountPopUp extends StatefulWidget {
+  const _AddAccountPopUp({Key? key}) : super(key: key);
+
+  @override
+  State<_AddAccountPopUp> createState() => _AddAccountPopUpState();
+}
+
+class _AddAccountPopUpState extends State<_AddAccountPopUp> {
+  final TextEditingController _urlController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+
+  Account? _account;
+  DiscourseServer? _server;
+  _AddAccountAuthStatus isAuthenticated = _AddAccountAuthStatus.none;
   @override
   Widget build(BuildContext context) => Stack(children: [
         Column(
           children: [
             _AccountPopupQuestion(
-              controller: _nicknameController,
-              label: "Nickname",
-              defaults: "NixOS",
-              example: "Discourse Meta",
-            ),
-            _AccountPopupQuestion(
               controller: _urlController,
               label: "URL",
-              defaults: "https://discourse.nixos.org",
+              defaults: "https://meta.discourse.org",
               example: "https://meta.discourse.org",
             ),
+            _AccountPopupQuestion(
+                controller: _usernameController,
+                label: "Username on Discourse",
+                defaults: "null",
+                example: "your-username-here"),
+            if (isAuthenticated == _AddAccountAuthStatus.none)
+              Consumer(
+                builder: (context, ref, child) => ElevatedButton.icon(
+                  onPressed: () async {
+                    var url = _urlController.text.isEmpty && kDebugMode
+                        ? "https://meta.discourse.org"
+                        : _urlController.text;
+                    var nick = _usernameController.text.isEmpty && kDebugMode
+                        ? "gilice"
+                        : _usernameController.text;
+                    var s = DiscourseServer(baseUrl: url);
+                    var acc = Account(userName: nick)..server.value = s;
+                    _account = acc;
+                    _server = s;
+
+                    await acc.launchAuth();
+
+                    setState(() {
+                      isAuthenticated = _AddAccountAuthStatus.code;
+                    });
+
+                    _codeController.addListener(() {
+                      setState(() {
+                        isAuthenticated = _AddAccountAuthStatus.full;
+                      });
+                    });
+                  },
+                  icon: const Icon(Icons.perm_identity_outlined),
+                  label: const Text("Authenticate"),
+                ),
+              ),
+            if (isAuthenticated.index >= _AddAccountAuthStatus.code.index)
+              _AccountPopupQuestion(
+                controller: _codeController,
+                label: "Auth code",
+                defaults: "null",
+                example: "a long string of characters",
+              ),
           ],
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: StandardPadding(
-            Consumer(
-              builder: (context, ref, child) => FloatingActionButton(
-                  onPressed: () {
-                    var url = _urlController.text.isEmpty && kDebugMode
-                        ? "https://discourse.nixos.org"
-                        : _urlController.text;
-                    var nick = _nicknameController.text.isEmpty && kDebugMode
-                        ? "NixOS"
-                        : _nicknameController.text;
-                    var db = ref.watch(dbProvider);
-                    var s = DiscourseServer(baseUrl: url);
-                    var acc = Account(displayName: nick)..server.value = s;
+        if (isAuthenticated == _AddAccountAuthStatus.full)
+          Align(
+            alignment: Alignment.bottomRight,
+            child: StandardPadding(
+              Consumer(
+                builder: (BuildContext context, ref, child) =>
+                    FloatingActionButton(
+                        onPressed: () async {
+                          await _account!.postAuth(_codeController.text);
+                          var db = await ref.watch(dbProvider.future);
+                          await addAccount(_account!, _server!, db);
 
-                    db.whenData((v) => addAccount(acc, s, v)
-                        .then((_) => Navigator.of(context).pop()));
-                  },
-                  child: const Icon(Icons.done_outlined)),
+                          // ignore: use_build_context_synchronously
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(Icons.done_outlined)),
+              ),
             ),
-          ),
-        )
+          )
       ]);
 }

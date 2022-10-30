@@ -19,7 +19,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: BrandedAppBar(actions: [
         IconButton(
             onPressed: () => showSettingsBottomSheet(context),

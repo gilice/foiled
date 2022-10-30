@@ -2,5 +2,5 @@
 // Modified: 2022-09-14T16:50:38.451Z
 const String appDisplayName = "foiled";
 const String appSales = "A client for https://discourse.com based forums";
-
+const String appVersion = "0.1.0";
 const String sourceUrl = 'https://github.com/gilice/foiled';

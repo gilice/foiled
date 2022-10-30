@@ -14,7 +14,7 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
  - [SemVer](https://semver.org) versioning, where the user interface is the "API"
 
 ## Non-goals
- - any feature that requires login (for now)
+ - any feature that writes to the server (eg. replying, posting, etc. only for now)
  - admin access
  - web support: db on web is complicated, and the discourse web client is fine (although if you want to work on this, feel free to)
 
@@ -31,3 +31,4 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
   - [User API key generation](https://meta.discourse.org/t/user-api-keys-specification/48536)
     - example auth URL can be found in `assets/test_keys/url.txt`
  - during development, you can use `flutter pub run build_runner watch --delete-conflicting-outputs` to automatically call codegen on file changes
+ajo

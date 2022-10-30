@@ -93,40 +93,10 @@ class TopicsScreen extends ConsumerWidget {
                 data: (data) => SliverList(
                       delegate: SliverChildBuilderDelegate(
                         childCount: data.length,
-                        (context, index) {
-                          var tt = data[index];
-
-                          return StandardPadding(
-                            Card(
-                                child: StandardPadding(
-                              Stack(
-                                children: [
-                                  if ((tt.pinned != null && tt.pinned!) ||
-                                      (tt.pinnedGlobally != null &&
-                                          tt.pinnedGlobally!))
-                                    const Align(
-                                        alignment: Alignment.topRight,
-                                        child: Icon(
-                                          Icons.push_pin,
-                                        )),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        tt.title ?? 'No title',
-                                        style: titleTextStyle(context),
-                                      ),
-                                      if (tt.excerpt != null) Text(tt.excerpt!),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              multiplier: 2,
-                            )),
-                            multiplier: 0.5,
-                          );
-                        },
+                        (context, index) => StandardPadding(
+                          _TopicWidget(tt: data[index]),
+                          multiplier: 0.5,
+                        ),
                       ),
                     ),
                 error: (Object e, StackTrace? s) =>
@@ -137,5 +107,43 @@ class TopicsScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+}
+
+class _TopicWidget extends StatelessWidget {
+  final DiscourseTopic tt;
+
+  const _TopicWidget({
+    Key? key,
+    required this.tt,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        child: StandardPadding(
+      Stack(
+        children: [
+          if ((tt.pinned != null && tt.pinned!) ||
+              (tt.pinnedGlobally != null && tt.pinnedGlobally!))
+            const Align(
+                alignment: Alignment.topRight,
+                child: Icon(
+                  Icons.push_pin,
+                )),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tt.title ?? 'No title',
+                style: titleTextStyle(context),
+              ),
+              if (tt.excerpt != null) Text(tt.excerpt!),
+            ],
+          ),
+        ],
+      ),
+      multiplier: 2,
+    ));
   }
 }

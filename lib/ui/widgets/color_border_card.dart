@@ -17,7 +17,7 @@ class ColorBorderCard extends StatelessWidget {
           child: ClipPath(
             clipper: const ShapeBorderClipper(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)))),
+                    borderRadius: BorderRadius.all(Radius.circular(12)))),
             child: Container(
               decoration: BoxDecoration(
                   border: Border(
