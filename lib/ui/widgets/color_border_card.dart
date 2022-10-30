@@ -9,14 +9,15 @@ class ColorBorderCard extends StatelessWidget {
       {super.key, required this.color, this.child, this.onTap});
 
   @override
-  Widget build(BuildContext context) => Material(
-        child: InkWell(
-          onTap: onTap,
-          child: Card(
-            child: ClipPath(
-              clipper: const ShapeBorderClipper(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)))),
+  Widget build(BuildContext context) => Card(
+        child: ClipPath(
+          clipper: const ShapeBorderClipper(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)))),
+          child: Material(
+            type: MaterialType.transparency,
+            child: InkWell(
+              onTap: onTap,
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(

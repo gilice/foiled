@@ -20,8 +20,10 @@ final topicsProvider = FutureProvider.autoDispose<List<DiscourseTopic>>(
         ref.watch(dbProvider.future),
         ref.watch(currentDiscourseServerProvider.future)
       ]);
+
       var db = futures[0] as Isar;
       var baseUrl = (futures[1] as DiscourseServer).baseUrl;
+
       try {
         var ret = (await category.getTopics(db, baseUrl)).toList();
         return ret;
