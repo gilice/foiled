@@ -28,7 +28,7 @@ class _AccountPopupQuestion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => StandardPadding(
-        TextFormField(
+        child: TextFormField(
           controller: controller,
           decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -121,7 +121,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
             Align(
               alignment: Alignment.bottomRight,
               child: StandardPadding(
-                Consumer(
+                child: Consumer(
                   builder: (BuildContext context, ref, child) =>
                       FloatingActionButton(
                           onPressed: () async {

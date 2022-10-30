@@ -20,7 +20,7 @@ class _AccountManagerPopup extends StatelessWidget {
                   itemBuilder: (context, index) {
                     if (index >= data.length) {
                       return StandardPadding(
-                        Center(
+                        child: Center(
                           child: ElevatedButton.icon(
                               onPressed: () => showAddAccountDialog(context),
                               icon: const Icon(Icons.add_outlined),
@@ -41,7 +41,7 @@ class _AccountManagerPopup extends StatelessWidget {
                                     elevation = 3;
                                   }
                                   return StandardPadding(
-                                    Material(
+                                    child: Material(
                                       child: InkWell(
                                         onTap: () => ref
                                             .read(selectedAccountProvider.state)
@@ -50,7 +50,7 @@ class _AccountManagerPopup extends StatelessWidget {
                                           margin: EdgeInsets.zero,
                                           elevation: elevation,
                                           child: StandardPadding(
-                                            Row(
+                                            child: Row(
                                               children: [
                                                 if (elevation > 1) ...[
                                                   const Icon(Icons

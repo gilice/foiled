@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.settings_outlined))
       ]),
       body: StandardPadding(
-        Consumer(
+        child: Consumer(
           builder: ((context, ref, child) {
             try {
               ref.watch(currentDiscourseServerProvider);
@@ -58,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ))),
                             color: harmonizeToColor(tc.color, context),
                             child: StandardPadding(
-                              Column(
+                              multiplier: 2,
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -86,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   )
                                 ],
                               ),
-                              multiplier: 2,
                             ),
                           );
                         },

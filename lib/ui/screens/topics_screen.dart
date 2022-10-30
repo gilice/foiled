@@ -71,19 +71,18 @@ class TopicsScreen extends ConsumerWidget {
                   alignment: WrapAlignment.start,
                   spacing: 8,
                   children: category.subcategories
-                      .map((e) => InkWell(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TopicsScreen(
-                                    category: e,
-                                  ),
-                                )),
-                            child: StandardPadding(
-                              SubcategoryChip(
-                                  labelText: e.name, color: e.color),
-                              multiplier: 0.5,
-                            ),
+                      .map((e) => StandardPadding(
+                            multiplier: 0.5,
+                            child: SubcategoryChip(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TopicsScreen(
+                                        category: e,
+                                      ),
+                                    )),
+                                labelText: e.name,
+                                color: e.color),
                           ))
                       .toList(),
                 ),
@@ -96,7 +95,7 @@ class TopicsScreen extends ConsumerWidget {
                       delegate: SliverChildBuilderDelegate(
                         childCount: data.length,
                         (context, index) => StandardPadding(
-                          _TopicWidget(tt: data[index]),
+                          child: _TopicWidget(tt: data[index]),
                           multiplier: 0.5,
                         ),
                       ),
@@ -123,7 +122,8 @@ class _TopicWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
           child: StandardPadding(
-        Stack(
+        multiplier: 2,
+        child: Stack(
           children: [
             if ((tt.pinned != null && tt.pinned!) ||
                 (tt.pinnedGlobally != null && tt.pinnedGlobally!))
@@ -144,6 +144,5 @@ class _TopicWidget extends StatelessWidget {
             ),
           ],
         ),
-        multiplier: 2,
       ));
 }

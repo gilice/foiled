@@ -29,6 +29,7 @@ class Account {
     if (server.value == null) {
       return Future.error(NoServerException());
     }
+
     _keys = RSAKeypair.fromRandom();
 
     var baseUri = Uri.parse(server.value!.baseUrl);

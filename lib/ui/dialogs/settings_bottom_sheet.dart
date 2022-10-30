@@ -22,7 +22,7 @@ class _SettingsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => StandardPadding(
         multiplier: 2,
-        Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
@@ -56,7 +56,7 @@ class _SettingsBottomSheet extends StatelessWidget {
               aboutBoxChildren: [
                 StandardPadding(
                   multiplier: 2,
-                  Wrap(
+                  child: Wrap(
                     alignment: WrapAlignment.spaceEvenly,
                     children: [
                       ElevatedButton.icon(

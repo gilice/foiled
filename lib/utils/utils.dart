@@ -18,11 +18,13 @@ Future showModalPopUp(BuildContext context,
     showModalBottomSheet(
         context: context,
         shape: StandardSheetBorder(multiplier: 2),
-        builder: (context) => StandardPadding(Column(
+        builder: (context) => StandardPadding(
+                child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                StandardPadding(Text(
+                StandardPadding(
+                    child: Text(
                   title,
                   style: titleTextStyle(context),
                 )),
@@ -75,13 +77,10 @@ class LoggingErrorWidget extends StatelessWidget {
 /// A faster way to write Padding()s, roughly equals to `x: Padding(padding: EdgeInsets.all(8*x))`
 class StandardPadding extends Padding {
   final double multiplier;
-  // ignore: unused_field
-  final Widget? _child;
 
-  StandardPadding(this._child, {Key? key, this.multiplier = 1})
+  StandardPadding({super.child, Key? key, this.multiplier = 1})
       : super(
           key: key,
-          child: _child,
           padding: EdgeInsets.all(multiplier * 8),
         );
 }

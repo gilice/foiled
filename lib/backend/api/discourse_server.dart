@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:foiled/backend/api/model/discourse_category.dart';
 import 'package:foiled/backend/api/model/discourse_server_info.dart';
+import 'package:foiled/main.dart';
 import 'package:foiled/utils/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
@@ -118,5 +119,11 @@ class DiscourseServer {
         return Future.error(e2);
       }
     }
+  }
+
+  Future<void> fetchTopic(Isar db, int topicId, String apiKey) async {
+    var req = await (client.get(Uri.parse("$baseUrl/t/$topicId.json"),
+        headers: {"User-Api-Key": apiKey}));
+    talker.debug(req);
   }
 }
