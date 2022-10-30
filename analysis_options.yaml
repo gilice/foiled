@@ -2,8 +2,8 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    prefer_    - lib/server/*.g.dartexpression_function_bodies: true
+    prefer_expression_function_bodies: true
 
 analyzer:
   exclude:
-    - "*.g.dart"
+    - "**/**.g.dart"

@@ -35,7 +35,7 @@ packages:
       name: asn1lib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.2"
   async:
     dependency: transitive
     description:
@@ -175,7 +175,7 @@ packages:
       name: crypton
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -290,7 +290,7 @@ packages:
     source: hosted
     version: "2.1.0"
   google_fonts:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: google_fonts
       url: "https://pub.dartlang.org"
@@ -575,7 +575,7 @@ packages:
       name: share_plus_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.2"
+    version: "3.2.0"
   share_plus_web:
     dependency: transitive
     description:
@@ -777,6 +777,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.6"
   vector_math:
     dependency: transitive
     description:
