@@ -25,7 +25,7 @@ class Account {
     required this.userName,
   });
 
-  Future<void> launchAuth() async {
+  Future<String> launchAuth() async {
     if (server.value == null) {
       return Future.error(NoServerException());
     }
@@ -44,6 +44,7 @@ class Account {
 
     talker.debug("launching auth uri: $assembledUri");
     await launchUrl(assembledUri);
+    return assembledUri.toString();
   }
 
   Future<void> postAuth(String serverResponse) async {

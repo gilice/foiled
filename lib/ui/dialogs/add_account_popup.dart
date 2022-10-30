@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/backend/accounts/account.dart';
 import 'package:foiled/backend/accounts/account_provider.dart';
@@ -57,78 +58,84 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
   DiscourseServer? _server;
   _AddAccountAuthStatus isAuthenticated = _AddAccountAuthStatus.none;
   @override
-  Widget build(BuildContext context) => Stack(children: [
-        Column(
-          children: [
-            _AccountPopupQuestion(
-              controller: _urlController,
-              label: "URL",
-              defaults: "https://meta.discourse.org",
-              example: "https://meta.discourse.org",
-            ),
-            _AccountPopupQuestion(
-                controller: _usernameController,
-                label: "Username on Discourse",
-                defaults: "null",
-                example: "your-username-here"),
-            if (isAuthenticated == _AddAccountAuthStatus.none)
-              Consumer(
-                builder: (context, ref, child) => ElevatedButton.icon(
-                  onPressed: () async {
-                    var url = _urlController.text.isEmpty && kDebugMode
-                        ? "https://meta.discourse.org"
-                        : _urlController.text;
-                    var nick = _usernameController.text.isEmpty && kDebugMode
-                        ? "gilice"
-                        : _usernameController.text;
-                    var s = DiscourseServer(baseUrl: url);
-                    var acc = Account(userName: nick)..server.value = s;
-                    _account = acc;
-                    _server = s;
+  Widget build(BuildContext context) => Scaffold(
+        body: Stack(children: [
+          Column(
+            children: [
+              _AccountPopupQuestion(
+                controller: _urlController,
+                label: "URL",
+                defaults: "https://meta.discourse.org",
+                example: "https://meta.discourse.org",
+              ),
+              _AccountPopupQuestion(
+                  controller: _usernameController,
+                  label: "Username on Discourse",
+                  defaults: "null",
+                  example: "your-username-here"),
+              if (isAuthenticated == _AddAccountAuthStatus.none)
+                Consumer(
+                  builder: (context, ref, child) => ElevatedButton.icon(
+                    onPressed: () async {
+                      var url = _urlController.text.isEmpty && kDebugMode
+                          ? "https://meta.discourse.org"
+                          : _urlController.text;
+                      var nick = _usernameController.text.isEmpty && kDebugMode
+                          ? "gilice"
+                          : _usernameController.text;
+                      var s = DiscourseServer(baseUrl: url);
+                      var acc = Account(userName: nick)..server.value = s;
+                      _account = acc;
+                      _server = s;
 
-                    await acc.launchAuth();
+                      var uri = await acc.launchAuth();
+                      Clipboard.setData(ClipboardData(text: uri));
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("URL copied to clipboard")));
 
-                    setState(() {
-                      isAuthenticated = _AddAccountAuthStatus.code;
-                    });
-
-                    _codeController.addListener(() {
                       setState(() {
-                        isAuthenticated = _AddAccountAuthStatus.full;
+                        isAuthenticated = _AddAccountAuthStatus.code;
                       });
-                    });
-                  },
-                  icon: const Icon(Icons.perm_identity_outlined),
-                  label: const Text("Authenticate"),
+
+                      _codeController.addListener(() {
+                        setState(() {
+                          isAuthenticated = _AddAccountAuthStatus.full;
+                        });
+                      });
+                    },
+                    icon: const Icon(Icons.perm_identity_outlined),
+                    label: const Text("Authenticate"),
+                  ),
+                ),
+              if (isAuthenticated.index >= _AddAccountAuthStatus.code.index)
+                _AccountPopupQuestion(
+                  controller: _codeController,
+                  label: "Auth code",
+                  defaults: "null",
+                  example: "a long string of characters",
+                ),
+            ],
+          ),
+          if (isAuthenticated == _AddAccountAuthStatus.full)
+            Align(
+              alignment: Alignment.bottomRight,
+              child: StandardPadding(
+                Consumer(
+                  builder: (BuildContext context, ref, child) =>
+                      FloatingActionButton(
+                          onPressed: () async {
+                            await _account!.postAuth(_codeController.text);
+                            var db = await ref.watch(dbProvider.future);
+                            await addAccount(_account!, _server!, db);
+
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context).pop();
+                          },
+                          child: const Icon(Icons.done_outlined)),
                 ),
               ),
-            if (isAuthenticated.index >= _AddAccountAuthStatus.code.index)
-              _AccountPopupQuestion(
-                controller: _codeController,
-                label: "Auth code",
-                defaults: "null",
-                example: "a long string of characters",
-              ),
-          ],
-        ),
-        if (isAuthenticated == _AddAccountAuthStatus.full)
-          Align(
-            alignment: Alignment.bottomRight,
-            child: StandardPadding(
-              Consumer(
-                builder: (BuildContext context, ref, child) =>
-                    FloatingActionButton(
-                        onPressed: () async {
-                          await _account!.postAuth(_codeController.text);
-                          var db = await ref.watch(dbProvider.future);
-                          await addAccount(_account!, _server!, db);
-
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context).pop();
-                        },
-                        child: const Icon(Icons.done_outlined)),
-              ),
-            ),
-          )
-      ]);
+            )
+        ]),
+      );
 }

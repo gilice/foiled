@@ -119,31 +119,29 @@ class _TopicWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-        child: StandardPadding(
-      Stack(
-        children: [
-          if ((tt.pinned != null && tt.pinned!) ||
-              (tt.pinnedGlobally != null && tt.pinnedGlobally!))
-            const Align(
-                alignment: Alignment.topRight,
-                child: Icon(
-                  Icons.push_pin,
-                )),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                tt.title ?? 'No title',
-                style: titleTextStyle(context),
-              ),
-              if (tt.excerpt != null) Text(tt.excerpt!),
-            ],
-          ),
-        ],
-      ),
-      multiplier: 2,
-    ));
-  }
+  Widget build(BuildContext context) => Card(
+          child: StandardPadding(
+        Stack(
+          children: [
+            if ((tt.pinned != null && tt.pinned!) ||
+                (tt.pinnedGlobally != null && tt.pinnedGlobally!))
+              const Align(
+                  alignment: Alignment.topRight,
+                  child: Icon(
+                    Icons.push_pin,
+                  )),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tt.title ?? 'No title',
+                  style: titleTextStyle(context),
+                ),
+                if (tt.excerpt != null) Text(tt.excerpt!),
+              ],
+            ),
+          ],
+        ),
+        multiplier: 2,
+      ));
 }
