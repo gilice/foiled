@@ -1,66 +1,39 @@
 {
-  description = "A simple quickstart for flutter based flakes";
+  description = "A client for discourse, written in flutter";
+
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    dart-flutter.url = "github:flafydev/dart-flutter-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, flake-utils, nixpkgs, dart-flutter }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = import nixpkgs {
             inherit system;
-            config = {
-              android_sdk.accept_license = true;
-              allowUnfree = true;
-            };
+            overlays = [ dart-flutter.overlays.default ];
           };
-
-          buildToolsVersion = "30.0.3";
-
-          androidSdk = (pkgs.androidenv.composeAndroidPackages {
-            buildToolsVersions = [ buildToolsVersion "28.0.3" ];
-            platformVersions = [ "31" "30" ];
-            toolsVersion = "26.1.1";
-            abiVersions = [ "armeabi-v7a" "arm64-v8a" ];
-          }).androidsdk;
-
-          x_stuff = with pkgs; [ xorg.libX11.dev xorg.xorgproto pkg-config gtk3-x11 xlibsWrapper ];
-          buildInputs = x_stuff ++ (with pkgs; [ flutter mount androidSdk cmake ninja clang gtk3 pcre jdk libepoxy ]);
-          nativeBuildInputs = with pkgs; [ nix-ld mount pkg-config libepoxy cmake libepoxy.dev stdenv stdenv.cc ];
-
         in
         {
-          packages.default = pkgs.flutter.mkFlutterApp
-            {
-              preBuild = '''
-                flutter pub run build_runner build
-              '';
-              name = "foiled";
-              version = "1.0.0";
-              src = self;
-              inherit buildInputs nativeBuildInputs;
-              vendorHash = "sha256-VxgCOppuk2OlQygS6u8MbhIs4dzglxF9VFTNMOOb0F8=";
+          devShells.default = pkgs.mkFlutterShell {
+            android = {
+              enable = true;
             };
 
-          devShells.default = pkgs.mkShell rec {
-            inherit buildInputs nativeBuildInputs;
+            linux = {
+              enable = true;
+            };
             NIX_LD = pkgs.stdenv.cc.bintools.dynamicLinker;
-            ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-            C_INCLUDE_PATH = "${pkgs.xorg.libX11.dev}/include:${pkgs.libepoxy}/include:${pkgs.libepoxy.dev}/include";
-            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
-              libepoxy
-              libepoxy.dev
-              # ...
-            ]);
-            NIX_LD_LIBRARY_PATH = LD_LIBRARY_PATH;
           };
+
+          packages.default = pkgs.buildFlutterApp
+            {
+              pname = "foiled";
+              version = "0.0.1";
+              src = ./.;
+            };
         });
-
 }
-
 

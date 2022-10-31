@@ -2,16 +2,16 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/ui/screens/home_screen.dart';
-import 'package:foiled/utils/constants.dart';
-import 'package:foiled/utils/log_all_observer.dart';
-import 'package:foiled/utils/utils.dart';
+import 'package:foiled/features/homescreen/home_screen.dart';
+import 'package:foiled/shared/constants.dart';
+import 'package:foiled/shared/log_all_observer.dart';
+import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:talker/talker.dart';
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
-  runApp(const MyApp());
+  runApp(const FoiledApp());
 }
 
 final talker = Talker(
@@ -20,8 +20,8 @@ final talker = Talker(
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class FoiledApp extends StatelessWidget {
+  const FoiledApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => DynamicColorBuilder(
@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark,
             ).harmonized();
           }
+
           return ProviderScope(
             observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(

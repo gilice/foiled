@@ -224,7 +224,7 @@ const DiscourseCategorySchema = CollectionSchema(
     r'cachedTopics': LinkSchema(
       id: -877239898081442741,
       name: r'cachedTopics',
-      target: r'DiscourseTopic',
+      target: r'DiscourseTopicModel',
       single: false,
     )
   },
@@ -550,8 +550,8 @@ void _discourseCategoryAttach(
   object.isarId = id;
   object.subcategories.attach(
       col, col.isar.collection<DiscourseCategory>(), r'subcategories', id);
-  object.cachedTopics
-      .attach(col, col.isar.collection<DiscourseTopic>(), r'cachedTopics', id);
+  object.cachedTopics.attach(
+      col, col.isar.collection<DiscourseTopicModel>(), r'cachedTopics', id);
 }
 
 extension DiscourseCategoryQueryWhereSort
@@ -4727,7 +4727,7 @@ extension DiscourseCategoryQueryLinks
   }
 
   QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
-      cachedTopics(FilterQuery<DiscourseTopic> q) {
+      cachedTopics(FilterQuery<DiscourseTopicModel> q) {
     return QueryBuilder.apply(this, (query) {
       return query.link(q, r'cachedTopics');
     });

@@ -49,3 +49,7 @@ app.*.map.json
 .direnv
 result/*
 result
+
+# only for now
+android/fastlane
+fastlane
