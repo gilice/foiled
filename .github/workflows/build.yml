@@ -29,3 +29,17 @@ jobs:
         with:
           name: linux
           path: result/app/*
+  codecov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - run: |
+          flutter pub get
+          dart pub global activate coverage
+          dart pub global run coverage:test_with_coverage --package-name foiled
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov

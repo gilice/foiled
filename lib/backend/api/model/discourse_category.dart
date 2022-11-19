@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:foiled/backend/api/model/discourse_topic.dart';
-import 'package:foiled/utils/utils.dart';
+import 'package:foiled/features/topics/model/discourse_topic_model.dart';
+import 'package:foiled/shared/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -70,7 +70,7 @@ class DiscourseCategory {
   String? uploadedBackground;
 
   @JsonKey(ignore: true)
-  var cachedTopics = IsarLinks<DiscourseTopic>();
+  var cachedTopics = IsarLinks<DiscourseTopicModel>();
 
   DiscourseCategory({
     //this.isarId,
@@ -124,17 +124,22 @@ class DiscourseCategory {
     return t;
   }
 
-  Future<List<DiscourseTopic>> getTopics(Isar db, String baseUrl) async {
+  Future<List<DiscourseTopicModel>> getTopics(Isar db, String baseUrl) async {
     try {
       var req = await (http.get(Uri.parse("$baseUrl/c/$slug/$id.json")));
       var reqjson = json.decode(req.body)["topic_list"]["topics"];
-      var topics = <DiscourseTopic>[];
+      var topics = <DiscourseTopicModel>[];
+
       for (var topic in reqjson) {
-        topics.add(DiscourseTopic.fromJson(topic, isarId));
+        var thisTopic = DiscourseTopicModel.fromJson(topic);
+
+        var topicIid =
+            localHash(Uri.parse("$baseUrl/t/${thisTopic.id}.json").toString());
+        topics.add(thisTopic..isarId = topicIid);
       }
 
       await db.writeTxn(() async {
-        await db.discourseTopics.putAll(topics);
+        await db.discourseTopicModels.putAll(topics);
         cachedTopics.addAll(topics);
         await cachedTopics.save();
       });
