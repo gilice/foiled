@@ -1,4 +1,4 @@
-package com.example.foiled
+package org.foiled.mobileapp
 
 import io.flutter.embedding.android.FlutterActivity
 

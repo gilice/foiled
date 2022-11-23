@@ -8,11 +8,19 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: actions/cache@v3
         with:
-          channel: "stable"
-      - run: flutter build apk --split-per-abi
+          key: dep-cache
+          path: |
+            ~/.pub-cache
+            ~/.cache/flutter
+            ~/.gradle/caches
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v15
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - run: nix develop -c flutter build apk --split-per-abi
       - uses: actions/upload-artifact@v3
         with:
           name: android
@@ -20,26 +28,49 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        with:
+          key: dep-cache
+          path: |
+            ~/.pub-cache
+            ~/.cache/flutter
+            ~/.gradle/caches
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v15
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+
       - run: nix build -v
       - uses: actions/upload-artifact@v3
         with:
           name: linux
           path: result/app/*
-  codecov:
+  codegen:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: cachix/install-nix-action@v15
         with:
-          channel: "stable"
-      - run: |
-          flutter pub get
-          dart pub global activate coverage
-          dart pub global run coverage:test_with_coverage --package-name foiled
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov
+          nix_path: nixpkgs=channel:nixos-unstable
+      - run: nix develop -c flutter pub get
+      - run: nix develop -c flutter pub run build_runner build -d
+      - run: nix develop -c deps2nix
+      - uses: EndBug/add-and-commit@v9.1.0
+  create-release:
+    needs: [build-android, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+      - run: ls -R
+      - run: zip -r -q lin.zip linux
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: nightly
+          body: |
+            this is an automatic nightly release
+          files: |
+            android/*.apk
+            lin.zip

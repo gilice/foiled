@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypton/crypton.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/auth/account.dart';
 import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/model/account_model.dart';
@@ -19,10 +20,14 @@ import 'package:url_launcher/url_launcher.dart';
 class AccountBackend extends AsyncNotifier<AccountModel> {
   int? _selectedID;
 
-  static var allAccountsProvider = FutureProvider<List<AccountModel>>(
-    (ref) async {
+  static var allAccountUpdatesProvider = StreamProvider<List<AccountModel>>(
+    (ref) async* {
       var db = await ref.watch(dbProvider.future);
-      return db.accountModels.where().findAll();
+      var stream = db.accountModels.watchLazy(fireImmediately: true);
+      await for (var _ in stream) {
+        var allAccounts = await db.accountModels.where().findAll();
+        yield allAccounts;
+      }
     },
   );
 
@@ -30,6 +35,13 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     (ref) async {
       var acc = await ref.watch(Account.provider.future);
       return acc.apiKey;
+    },
+  );
+
+  static var apiKeyHeaderProvider = FutureProvider<Map<String, String>>(
+    (ref) async {
+      var apiKey = await ref.watch(apiKeyProvider.future);
+      return {"User-Api-Key": apiKey};
     },
   );
 
@@ -43,7 +55,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     } else {
       state =
           AsyncValue.error(NoAccountsConfiguredException(), StackTrace.current);
-      throw NoAccountsConfiguredException();
+      return Future.error(NoAccountsConfiguredException());
     }
   }
 
@@ -113,6 +125,8 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
       a.server.value = newServer;
       await a.server.save();
     });
+
+    talker.debug("finished writing account $a with server $newServer");
 
     // since [DiscourseServerBackend] is `ref.watch()`ing this provider too
     // it'll automatically update

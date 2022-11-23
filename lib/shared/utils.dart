@@ -23,7 +23,6 @@ Future showModalPopUp(BuildContext context,
   }
   return showModalBottomSheet(
       context: context,
-      shape: StandardSheetBorder(multiplier: 2),
       builder: (context) => StandardPadding(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -56,6 +55,10 @@ ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
     scaffoldBackgroundColor: inp.background,
     brightness: inp.brightness,
     cardColor: inp.surface,
+    bottomSheetTheme: BottomSheetThemeData(
+        modalBackgroundColor: inp.surface,
+        shape: StandardSheetBorder(),
+        backgroundColor: inp.surface),
     dialogTheme: DialogTheme(
       backgroundColor: inp.surface,
     ),
@@ -96,6 +99,9 @@ class LoggingErrorWidget extends StatelessWidget {
 class LoggingFutureWidget<T> extends StatelessWidget {
   final AsyncValue<T> future;
   final Widget Function(T) onData;
+
+  /// Display [error] and [loading] as slivers.
+  /// Please note that this DOES NOT apply to [onData]
   final bool sliver;
   final bool intrinsic;
   const LoggingFutureWidget(

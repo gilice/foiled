@@ -20,6 +20,7 @@
           devShells.default = pkgs.mkFlutterShell {
             android = {
               enable = true;
+              platformsAndroidVersions = [ "30" "31" "32" "33" ]; # TODO: this is way too much
             };
 
             linux = {

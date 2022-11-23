@@ -17,9 +17,11 @@ class DiscourseTopicModel {
   String? fancyTitle;
   String? slug;
   int? postsCount;
+
   int? replyCount;
   int? highestPostNumber;
   String? imageUrl;
+
   @JsonKey(name: "created_at")
   String? createdAt;
   String? lastPostedAt;
@@ -33,6 +35,7 @@ class DiscourseTopicModel {
   bool? visible;
   bool? closed;
   bool? archived;
+
   bool? bookmarked;
   String? liked;
   int? views;
@@ -54,6 +57,7 @@ class DiscourseTopicModel {
   Map<dynamic, dynamic>? tagsDescriptions;
 
   int? wordCount;
+
   int? userId;
   int? slowModeSeconds;
   String? draftKey;
