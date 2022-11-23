@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:foiled/backend/api/model/discourse_post.dart';
 import 'package:foiled/features/auth/account_backend.dart';
+import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/server/discourse_server.dart';
 import 'package:foiled/features/topics/model/discourse_topic_model.dart';
 import 'package:foiled/features/topics/ui/topic_more_popup.dart';
@@ -44,11 +45,12 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
         ref.read(currentTopicProvider.notifier).state =
             const AsyncValue.loading();
 
-        var s = ref.watch(DiscourseServer.provider.notifier);
-        var t = await s.getTopic(
+        var gT = DiscourseServerBackend.getTopic(
             topicId: widget.topicID,
             apiKey: ref.watch(AccountBackend.apiKeyProvider).value ?? '',
             parentCategory: ref.watch(selectedCategoryProvider)!);
+        var t = await ref.read(gT.future);
+
         ref.read(currentTopicProvider.notifier).state = AsyncValue.data(t);
       }
     });
@@ -100,15 +102,12 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
           LoggingFutureWidget(
               future: ref.watch(firstPostInTopicProvider),
               onData: (DiscoursePost post) => Consumer(
-                    builder: (context, ref, child) {
-                      // var serverF = dserver;
-                      var serverNotifier =
-                          ref.watch(DiscourseServer.provider.notifier);
-                      var imgUrl = serverNotifier
-                          .getImgUrlFromTemplate(post.avatarTemplate!);
-
-                      return SliverToBoxAdapter(
-                          child: Padding(
+                    builder: (context, ref, child) => SliverToBoxAdapter(
+                        child: LoggingFutureWidget(
+                      future: ref.watch(
+                          DiscourseServerBackend.imgUrlFromTemplate(
+                              post.avatarTemplate!)),
+                      onData: (String imgUrl) => Padding(
                         padding: const EdgeInsets.only(left: 8, top: 8),
                         child: Wrap(
                           spacing: 8,
@@ -118,8 +117,8 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
                             Text("${post.name} (${post.username})"),
                           ],
                         ),
-                      ));
-                    },
+                      ),
+                    )),
                   ),
               sliver: true),
           LoggingFutureWidget(

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/auth/account.dart';
+import 'package:foiled/main.dart';
 import 'package:foiled/shared/utils.dart';
 
 Future showAddAccountDialog(BuildContext context) => showModalPopUp(
@@ -68,6 +69,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
               Consumer(
                 builder: (context, ref, child) => ElevatedButton.icon(
                   onPressed: () async {
+                    talker.debug("Initiating auth");
                     var url = _urlController.text.isEmpty && kDebugMode
                         ? "https://meta.discourse.org"
                         : _urlController.text;

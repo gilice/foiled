@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/ui/account_manager_popup.dart';
 import 'package:foiled/features/categories/categories_ui.dart';
-import 'package:foiled/features/server/discourse_server_backend.dart';
+import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/settings/settings_popup.dart';
 import 'package:foiled/shared/utils.dart';
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: ((context, ref, child) =>
               // We can't use [LoggingFutureWidget] here, since we want more
               // complex error handling logic.
-              ref.watch(DiscourseServerBackend.categoryProvider).when(
+              ref.watch(DiscourseServerBackend.categoriesProvider).when(
                   data: CategoriesUI.new,
                   error: (Object e, StackTrace? s) {
                     if (e.runtimeType == NoAccountsConfiguredException) {

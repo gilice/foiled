@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/features/server/discourse_server_backend.dart';
+import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/server/model/discourse_server_model.dart';
 
 class DiscourseServer {

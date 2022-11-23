@@ -16,7 +16,7 @@ class _AccountManagerPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Consumer(
       builder: (context, ref, child) => LoggingFutureWidget(
-          future: ref.watch(AccountBackend.allAccountsProvider),
+          future: ref.watch(AccountBackend.allAccountUpdatesProvider),
           onData: (List<AccountModel> data) => ListView.builder(
               itemCount: data.length + 1,
               shrinkWrap: true,
