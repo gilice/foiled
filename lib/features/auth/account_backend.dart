@@ -48,7 +48,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     } else {
       state =
           AsyncValue.error(NoAccountsConfiguredException(), StackTrace.current);
-      throw NoAccountsConfiguredException();
+      return Future.error(NoAccountsConfiguredException());
     }
   }
 

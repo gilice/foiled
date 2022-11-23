@@ -192,7 +192,16 @@ Future<String> _getImgUrlFromTemplate(
 
 @riverpod
 Future<List<DiscourseCategory>> _getCategories(_GetCategoriesRef ref) async {
-  var server = await ref.watch(DiscourseServer.provider.future);
+  DiscourseServerModel server;
+  try {
+    server = await ref.watch(DiscourseServer.provider.future);
+  } on NoServerException {
+    talker.warning(
+        "getCategoriesProvider encountered a NoServerException. This is fine on fast rebuilds, but will hurt long term.",
+        StackTrace.current);
+    return Future.error(NoServerException);
+  }
+
   var serverClient = ref.watch(DiscourseServer.provider.notifier).client;
   var baseUrl = server.baseUrl;
   talker.debug("server: $server");
