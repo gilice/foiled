@@ -21,9 +21,9 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
 
 - any feature that writes to the server (eg. replying, posting, etc. only for now)
 - admin access
-- web support: db on web is complicated, and the discourse web client is fine (although if you want to work on this, feel free to)
+- web support: working with databases with this tech on web is complicated, and the discourse web client is fine (although if you want to work on this, feel free to)
 
-## Code style
+## Code style & dev information
 
 - use [Riverpod](https://riverpod.dev) where possible
 - negative code = better code
@@ -49,5 +49,5 @@ ajo
 - Database
   - object's `Id`s should be **a hash of the query url** for easy discoverability and reusability
   
-  - schema-ish:
+  - schema-ish of how I envision :
   [![](https://mermaid.ink/svg/pako:eNqNkLkKwzAMhl_FaGogWTJ6KBS6lI6hmxfVUQ7wEXwUQsi7102T0HaqJ_2_jk_yBNLWBBykQu_PPbYOtTCLYicpbTSBTcKw9HDorzSucQzdwZN7kLs5lTFhZvbTVv7fJ8yGKoojq5b07pVf5gZ56w3RUriYxh6yXVbkfW_Np3tHTwmakK8xkIMmp7Gv0_XLGAGhI00CeAprajCqICCVp9K0t61GI4EHFymHONQYaP0v4A0qT_MTJhFxkg?type=png)](https://mermaid.live/edit#pako:eNqNkLkKwzAMhl_FaGogWTJ6KBS6lI6hmxfVUQ7wEXwUQsi7102T0HaqJ_2_jk_yBNLWBBykQu_PPbYOtTCLYicpbTSBTcKw9HDorzSucQzdwZN7kLs5lTFhZvbTVv7fJ8yGKoojq5b07pVf5gZ56w3RUriYxh6yXVbkfW_Np3tHTwmakK8xkIMmp7Gv0_XLGAGhI00CeAprajCqICCVp9K0t61GI4EHFymHONQYaP0v4A0qT_MTJhFxkg)

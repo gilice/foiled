@@ -105,8 +105,9 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
           ],
         ),
         if (isAuthenticated == _AddAccountAuthStatus.full)
-          Align(
-            alignment: Alignment.bottomRight,
+          Positioned(
+            right: 8,
+            bottom: 8,
             child: StandardPadding(
               child: Consumer(
                 builder: (BuildContext context, ref, child) =>
@@ -118,6 +119,6 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
                         child: const Icon(Icons.done_outlined)),
               ),
             ),
-          )
+          ),
       ]);
 }

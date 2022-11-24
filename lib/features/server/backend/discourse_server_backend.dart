@@ -200,6 +200,9 @@ Future<List<DiscourseCategory>> _getCategories(_GetCategoriesRef ref) async {
         "getCategoriesProvider encountered a NoServerException. This is fine on fast rebuilds, but will hurt long term.",
         StackTrace.current);
     return Future.error(NoServerException);
+  } catch (e) {
+    talker.error("Error while executing getCategories: $e");
+    return Future.error(e);
   }
 
   var serverClient = ref.watch(DiscourseServer.provider.notifier).client;
