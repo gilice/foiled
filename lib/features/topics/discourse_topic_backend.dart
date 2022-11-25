@@ -19,7 +19,7 @@ class DiscourseTopicBackend extends AsyncNotifier<DiscourseTopicModel?> {
     var server = ref.watch(DiscourseServer.provider.notifier);
     var apiKey = await ref.watch(AccountBackend.apiKeyProvider.future);
     var top = DiscourseServerBackend.getTopic(
-        apiKey: apiKey, parentCategory: parentCategory, topicId: topicID);
+        parentCategory: parentCategory, topicId: topicID);
     var res = await ref.read(top.future);
 
     topicStack.add(res);

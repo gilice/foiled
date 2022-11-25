@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:foiled/backend/api/model/discourse_post.dart';
-import 'package:foiled/features/auth/account_backend.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/server/discourse_server.dart';
 import 'package:foiled/features/topics/model/discourse_topic_model.dart';
@@ -47,7 +46,6 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
 
         var gT = DiscourseServerBackend.getTopic(
             topicId: widget.topicID,
-            apiKey: ref.watch(AccountBackend.apiKeyProvider).value ?? '',
             parentCategory: ref.watch(selectedCategoryProvider)!);
         var t = await ref.read(gT.future);
 
@@ -135,7 +133,7 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
                       Text(data.title ?? 'Untitled data'),
                       if (data.cachedPosts.isNotEmpty)
                         HtmlWidget(
-                          data.cachedPosts.first.cooked ?? '',
+                          data.cachedPosts.first.cooked ?? 'No text in topic',
                           isSelectable: true,
                           // For some reason, images were loading indeffinitely on the default settings.
                           // Filter by element?
@@ -185,36 +183,50 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
               )),
             ),
           ),
+          // LoggingFutureWidget(
+          //     future: tvalue,
+          //     sliver: true,
+          //     intrinsicProgressWidth: true,
+          //     onData: (DiscourseTopicModel topic) => SliverList(
+          //             delegate: SliverChildBuilderDelegate(
+          //                 childCount: topic.postStream!.commentPostIDs!.length -
+          //                     1, // don't render the first post this way -- it gets special treatment anyway.,
+          //                 (context, dontUseThisIndex) {
+          //           var commentIndex = dontUseThisIndex + 1;
+
+          //           return null;
+          //         })))
           LoggingFutureWidget(
-              future: tvalue,
               sliver: true,
-              intrinsicProgressWidth: true,
-              onData: (DiscourseTopicModel topic) => SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                          childCount: topic.postStream!.commentPostIDs!.length -
-                              1, // don't render the first post this way -- it gets special treatment anyway.,
-                          (context, index) {
-                    // var pID = topic.postStream!.commentPostIDs![index + 1];
-                    return FutureBuilder(
-                      // future: key.then((keyv) => s.then(
-                      //       (server) =>
-                      //           server.getPost(apiKey: keyv!, postId: pID),
-                      //     )),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return LoggingErrorWidget(
-                              error: snapshot.error.toString, stackTrace: null);
-                        } else if (snapshot.hasData) {
-                          return InkWell(
-                            child: const Text("lol"),
-                            onTap: () async {},
-                          );
-                        } else {
-                          return const LinearProgressIndicator();
-                        }
-                      },
-                    );
-                  })))
+              future: tvalue,
+              onData: (DiscourseTopicModel topic) {
+                var postStream = topic.postStream;
+                if (postStream == null ||
+                    postStream.commentPostIDs == null ||
+                    postStream.commentPostIDs!.isEmpty) {
+                  return const SliverToBoxAdapter(child: Text("No comments."));
+                }
+
+                var comments = postStream.commentPostIDs!;
+                // because the first post gets special treatment
+                var commentsLength = comments.length - 1;
+
+                return SliverList(
+                    delegate:
+                        SliverChildBuilderDelegate((context, dontUseThisIndex) {
+                  var idx = dontUseThisIndex + 1;
+                  var thisPostID = comments[idx];
+                  var thisPost = ref.watch(
+                      DiscourseServerBackend.getPost(postId: thisPostID));
+                  return LoggingFutureWidget(
+                    future: thisPost,
+                    onData: (DiscoursePost post) => HtmlWidget(
+                        post.cooked ?? '',
+                        onLoadingBuilder: (context, element, loadingProgress) =>
+                            const SizedBox.shrink()),
+                  );
+                }, childCount: commentsLength));
+              }),
         ],
       ),
     );

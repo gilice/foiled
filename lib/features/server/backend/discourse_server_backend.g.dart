@@ -29,19 +29,87 @@ class _SystemHash {
   }
 }
 
-String $_getTopicHash() => r'd394b8506a93d7e1cc8ab413d2b4f260bb06106d';
+String $_getPostHash() => r'532aaa9b39c7321106182bd0d26380866ddef0eb';
+
+/// See also [_getPost].
+class _GetPostProvider extends AutoDisposeFutureProvider<DiscoursePost> {
+  _GetPostProvider({
+    required this.postId,
+  }) : super(
+          (ref) => _getPost(
+            ref,
+            postId: postId,
+          ),
+          from: _getPostProvider,
+          name: r'_getPostProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : $_getPostHash,
+        );
+
+  final int postId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _GetPostProvider && other.postId == postId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, postId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+typedef _GetPostRef = AutoDisposeFutureProviderRef<DiscoursePost>;
+
+/// See also [_getPost].
+final _getPostProvider = _GetPostFamily();
+
+class _GetPostFamily extends Family<AsyncValue<DiscoursePost>> {
+  _GetPostFamily();
+
+  _GetPostProvider call({
+    required int postId,
+  }) {
+    return _GetPostProvider(
+      postId: postId,
+    );
+  }
+
+  @override
+  AutoDisposeFutureProvider<DiscoursePost> getProviderOverride(
+    covariant _GetPostProvider provider,
+  ) {
+    return call(
+      postId: provider.postId,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'_getPostProvider';
+}
+
+String $_getTopicHash() => r'5df4a641fdafd7bed1a3a709d9aaf93160f17aad';
 
 /// See also [_getTopic].
 class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
   _GetTopicProvider({
     required this.topicId,
-    required this.apiKey,
     required this.parentCategory,
   }) : super(
           (ref) => _getTopic(
             ref,
             topicId: topicId,
-            apiKey: apiKey,
             parentCategory: parentCategory,
           ),
           from: _getTopicProvider,
@@ -53,14 +121,12 @@ class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
         );
 
   final int topicId;
-  final String apiKey;
   final DiscourseCategory parentCategory;
 
   @override
   bool operator ==(Object other) {
     return other is _GetTopicProvider &&
         other.topicId == topicId &&
-        other.apiKey == apiKey &&
         other.parentCategory == parentCategory;
   }
 
@@ -68,7 +134,6 @@ class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, topicId.hashCode);
-    hash = _SystemHash.combine(hash, apiKey.hashCode);
     hash = _SystemHash.combine(hash, parentCategory.hashCode);
 
     return _SystemHash.finish(hash);
@@ -85,12 +150,10 @@ class _GetTopicFamily extends Family<AsyncValue<DiscourseTopicModel>> {
 
   _GetTopicProvider call({
     required int topicId,
-    required String apiKey,
     required DiscourseCategory parentCategory,
   }) {
     return _GetTopicProvider(
       topicId: topicId,
-      apiKey: apiKey,
       parentCategory: parentCategory,
     );
   }
@@ -101,7 +164,6 @@ class _GetTopicFamily extends Family<AsyncValue<DiscourseTopicModel>> {
   ) {
     return call(
       topicId: provider.topicId,
-      apiKey: provider.apiKey,
       parentCategory: provider.parentCategory,
     );
   }
@@ -128,7 +190,7 @@ final _getServerInfoProvider = AutoDisposeFutureProvider<DiscourseServerInfo>(
 );
 typedef _GetServerInfoRef = AutoDisposeFutureProviderRef<DiscourseServerInfo>;
 String $_getImgUrlFromTemplateHash() =>
-    r'80eb111a9e5667977ac051858ec9c5c089a9d747';
+    r'06f58cc3d12d56e606f92acb91a13e1798cc2281';
 
 /// See also [_getImgUrlFromTemplate].
 class _GetImgUrlFromTemplateProvider extends AutoDisposeFutureProvider<String> {
@@ -207,7 +269,7 @@ class _GetImgUrlFromTemplateFamily extends Family<AsyncValue<String>> {
   String? get name => r'_getImgUrlFromTemplateProvider';
 }
 
-String $_getCategoriesHash() => r'a10f7a1ac55eb058008b28e16717b3814ceeb0a0';
+String $_getCategoriesHash() => r'c0953c65f81082a7fba2ecd321c51acfd91f0e47';
 
 /// See also [_getCategories].
 final _getCategoriesProvider =

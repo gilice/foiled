@@ -5,6 +5,7 @@ import 'package:foiled/backend/api/model/discourse_category.dart';
 import 'package:foiled/backend/api/model/discourse_post.dart';
 import 'package:foiled/backend/api/model/discourse_server_info.dart';
 import 'package:foiled/features/auth/account.dart';
+import 'package:foiled/features/auth/account_backend.dart';
 import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/model/account_model.dart';
 import 'package:foiled/features/server/discourse_server.dart';
@@ -58,44 +59,53 @@ class DiscourseServerBackend extends AsyncNotifier<DiscourseServerModel> {
     return currentAccount.server.value!;
   }
 
-  // Future<DiscoursePost?> getPost(
-  //     {required int postId,
-  //     required String apiKey,
-  //     required Isar db,
-  //     required String topicIsarID}) async {
-  //   try {
-  //     var req = await client.get(Uri.parse("$baseUrl/posts/$postId.json"),
-  //         headers: {"User-Api-Key": apiKey});
-  //   } on http.ClientException {
-  //     // Cannot connect to server
-  //     try {
-  //       if (cachedServerInfo.value != null) {
-  //         return db.discoursePosts
-  //             .filter()
-  //             .isarIDEqualTo(localHash("$topicIsarID$postId"))
-  //             .build()
-  //             .findFirst();
-  //       } else {
-  //         return Future.error("No server info");
-  //       }
-  //     } catch (e2) {
-  //       return Future.error(e2);
-  //     }
-  //   }
-  //   return null;
-  // }
-
   static var imgUrlFromTemplate = _getImgUrlFromTemplateProvider;
   static var getServerInfo = _getServerInfoProvider;
   static var categoriesProvider = _getCategoriesProvider;
   static var getTopic = _getTopicProvider;
+  static var getPost = _getPostProvider;
+}
+
+@riverpod
+Future<DiscoursePost> _getPost(_GetPostRef ref, {required int postId}) async {
+  talker.debug("getPost() called");
+  var server = await ref.watch(DiscourseServer.provider.future);
+  var baseUrl = server.baseUrl;
+  var notifier = ref.watch(DiscourseServer.provider.notifier);
+  var client = notifier.client;
+  var apiKeyHeader =
+      await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
+  var db = await ref.watch(dbProvider.future);
+
+  var uri = Uri.parse("$baseUrl/posts/$postId.json");
+  try {
+    var req = await client.get(uri, headers: apiKeyHeader);
+    var decoded = json.decode(req.body);
+    var parsed = DiscoursePost.fromJson(decoded)
+      ..isarID = localHash(uri.toString());
+
+    talker.debug("getPost server response: ${req.body}");
+
+    db.writeTxn(() async {
+      await db.discoursePosts.put(parsed);
+    });
+
+    return parsed;
+  } on http.ClientException {
+    try {
+      var d = await db.discoursePosts.get(localHash(uri.toString()));
+      return d!;
+    } catch (e) {
+      talker.error("getPost error: $e");
+      return Future.error(e);
+    }
+  }
 }
 
 @riverpod
 Future<DiscourseTopicModel> _getTopic(
   _GetTopicRef ref, {
   required int topicId,
-  required String apiKey,
   required DiscourseCategory parentCategory,
 }) async {
   var server = await ref.watch(DiscourseServer.provider.future);
@@ -103,10 +113,12 @@ Future<DiscourseTopicModel> _getTopic(
   var client = notifier.client;
   var baseUrl = server.baseUrl;
   var db = await ref.watch(dbProvider.future);
+  var apiKeyHeader =
+      await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
 
   try {
     var uri = Uri.parse("$baseUrl/t/$topicId.json");
-    var req = await (client.get(uri, headers: {"User-Api-Key": apiKey}));
+    var req = await (client.get(uri, headers: apiKeyHeader));
     var jsonDecoded = json.decode(req.body);
     var parsed = DiscourseTopicModel.fromJson(
       jsonDecoded,
@@ -123,9 +135,11 @@ Future<DiscourseTopicModel> _getTopic(
     });
 
     var posts = jsonDecoded["post_stream"]["posts"] as List<dynamic>;
-    var decodedPosts = posts
-        .map((e) => DiscoursePost.fromJson(e, topicIsarID: parsed.isarId))
-        .toList();
+    var decodedPosts = posts.map((e) {
+      var parsed = DiscoursePost.fromJson(e);
+      parsed.isarID = localHash("$baseUrl/posts/${parsed.id}");
+      return parsed;
+    }).toList();
 
     await db.writeTxn(() async {
       await db.discoursePosts.putAll(decodedPosts);
@@ -185,8 +199,16 @@ Future<DiscourseServerInfo> _getServerInfo(_GetServerInfoRef ref) async {
 Future<String> _getImgUrlFromTemplate(
     _GetImgUrlFromTemplateRef ref, String template,
     {int size = 32}) async {
-  var server = await ref.watch(DiscourseServer.provider.future);
-  var baseUrl = server.baseUrl;
+  var baseUrl = "";
+  var tryParse = Uri.parse(template);
+
+  try {
+    tryParse.origin;
+  } catch (e) {
+    var server = await ref.watch(DiscourseServer.provider.future);
+    baseUrl = server.baseUrl;
+  }
+
   return baseUrl + template.replaceAll("{size}", size.toString());
 }
 

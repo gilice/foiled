@@ -96,6 +96,9 @@ class LoggingErrorWidget extends StatelessWidget {
 class LoggingFutureWidget<T> extends StatelessWidget {
   final AsyncValue<T> future;
   final Widget Function(T) onData;
+
+  /// Display [error] and [loading] as slivers.
+  /// Please note that this DOES NOT apply to [onData]
   final bool sliver;
   final bool intrinsic;
   const LoggingFutureWidget(

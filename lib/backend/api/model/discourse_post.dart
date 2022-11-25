@@ -1,4 +1,3 @@
-import 'package:foiled/shared/utils.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -121,17 +120,8 @@ class DiscoursePost {
     this.acceptedAnswer,
   });
 
-  factory DiscoursePost.fromJson(Map<String, dynamic> json,
-      {int topicIsarID = 0}) {
-    if (topicIsarID == 0) {
-      throw _NoPostIdException();
-    }
-
-    var t = _$DiscoursePostFromJson(json);
-    t.isarID = localHash("$topicIsarID${t.id}");
-
-    return t;
-  }
+  factory DiscoursePost.fromJson(Map<String, dynamic> json) =>
+      _$DiscoursePostFromJson(json);
 }
 
 class _NoPostIdException implements Exception {

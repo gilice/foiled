@@ -38,6 +38,13 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     },
   );
 
+  static var apiKeyHeaderProvider = FutureProvider<Map<String, String>>(
+    (ref) async {
+      var apiKey = await ref.watch(apiKeyProvider.future);
+      return {"User-Api-Key": apiKey};
+    },
+  );
+
   @override
   FutureOr<AccountModel> build() async {
     var db = await ref.watch(dbProvider.future);

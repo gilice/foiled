@@ -39,7 +39,7 @@ Foiled is still in early development. A roadmap is coming soon here, or to the P
     - **Bundle stuff together**
 
 ## Useful stuff
-
+- Test coverage is underway. Mocking does not seem to be viable, so the next best thing is static optional function arguments to getters as overrides. 
 - [Discourse API Docs](https://docs.discourse.org/)
 - [User API key generation](https://meta.discourse.org/t/user-api-keys-specification/48536)
   - example auth URL can be found in `assets/test_keys/url.txt`
