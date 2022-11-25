@@ -63,45 +63,85 @@ class DiscourseServerBackend extends AsyncNotifier<DiscourseServerModel> {
   static var getServerInfo = _getServerInfoProvider;
   static var categoriesProvider = _getCategoriesProvider;
   static var getTopic = _getTopicProvider;
-  static var getPost = _getPostProvider;
+  // static var getPost = _getPostProvider;
 }
 
+// @riverpod
+// Future<DiscoursePost> _getPost(_GetPostRef ref, {required int postId}) async {
+//   talker.debug("getPost() called");
+//   var server = await ref.watch(DiscourseServer.provider.future);
+//   var baseUrl = server.baseUrl;
+//   var notifier = ref.watch(DiscourseServer.provider.notifier);
+//   var client = notifier.client;
+//   var apiKeyHeader =
+//       await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
+//   var db = await ref.watch(dbProvider.future);
+
+//   var uri = Uri.parse("$baseUrl/posts/$postId.json");
+//   try {
+//     var req = await client.get(uri, headers: apiKeyHeader);
+//     var decoded = json.decode(req.body);
+//     var parsed = DiscoursePost.fromJson(decoded)
+//       ..isarID = localHash(uri.toString());
+
+//     talker.debug("getPost server response: ${req.body}");
+
+//     db.writeTxn(() async {
+//       await db.discoursePosts.put(parsed);
+//     });
+
+//     return parsed;
+//   } on http.ClientException {
+//     try {
+//       var d = await db.discoursePosts.get(localHash(uri.toString()));
+//       return d!;
+//     } catch (e) {
+//       talker.error("getPost error: $e");
+//       return Future.error(e);
+//     }
+//   }
+// }
+
+/*
 @riverpod
-Future<DiscoursePost> _getPost(_GetPostRef ref, {required int postId}) async {
-  talker.debug("getPost() called");
-  var server = await ref.watch(DiscourseServer.provider.future);
-  var baseUrl = server.baseUrl;
-  var notifier = ref.watch(DiscourseServer.provider.notifier);
-  var client = notifier.client;
-  var apiKeyHeader =
-      await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
-  var db = await ref.watch(dbProvider.future);
+Future<DiscoursePost> _getMultiplePostsFromTopic(
+    _GetMultiplePostsFromTopicRef ref,
+    {required int topicId,
+    required List<int> postIds}) async {
+  // talker.debug("getMultiplePosts($topicId, $postIds) called");
+  // var server = await ref.watch(DiscourseServer.provider.future);
+  // var baseUrl = server.baseUrl;
+  // var notifier = ref.watch(DiscourseServer.provider.notifier);
+  // var client = notifier.client;
+  // var apiKeyHeader =
+  //     await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
+  // var db = await ref.watch(dbProvider.future);
 
-  var uri = Uri.parse("$baseUrl/posts/$postId.json");
-  try {
-    var req = await client.get(uri, headers: apiKeyHeader);
-    var decoded = json.decode(req.body);
-    var parsed = DiscoursePost.fromJson(decoded)
-      ..isarID = localHash(uri.toString());
+  // var uri = Uri.parse("$baseUrl/posts/$postId.json");
+  // try {
+  //   var req = await client.get(uri, headers: apiKeyHeader);
+  //   var decoded = json.decode(req.body);
+  //   var parsed = DiscoursePost.fromJson(decoded)
+  //     ..isarID = localHash(uri.toString());
 
-    talker.debug("getPost server response: ${req.body}");
+  //   talker.debug("getPost server response: ${req.body}");
 
-    db.writeTxn(() async {
-      await db.discoursePosts.put(parsed);
-    });
+  //   db.writeTxn(() async {
+  //     await db.discoursePosts.put(parsed);
+  //   });
 
-    return parsed;
-  } on http.ClientException {
-    try {
-      var d = await db.discoursePosts.get(localHash(uri.toString()));
-      return d!;
-    } catch (e) {
-      talker.error("getPost error: $e");
-      return Future.error(e);
-    }
-  }
+  //   return parsed;
+  // } on http.ClientException {
+  //   try {
+  //     var d = await db.discoursePosts.get(localHash(uri.toString()));
+  //     return d!;
+  //   } catch (e) {
+  //     talker.error("getPost error: $e");
+  //     return Future.error(e);
+  //   }
+  // }
 }
-
+*/
 @riverpod
 Future<DiscourseTopicModel> _getTopic(
   _GetTopicRef ref, {
@@ -135,6 +175,8 @@ Future<DiscourseTopicModel> _getTopic(
     });
 
     var posts = jsonDecoded["post_stream"]["posts"] as List<dynamic>;
+    talker.debug(
+        "getTopic response items: ${(jsonDecoded["post_stream"]["posts"] as List).length}");
     var decodedPosts = posts.map((e) {
       var parsed = DiscoursePost.fromJson(e);
       parsed.isarID = localHash("$baseUrl/posts/${parsed.id}");

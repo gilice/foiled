@@ -29,77 +29,7 @@ class _SystemHash {
   }
 }
 
-String $_getPostHash() => r'532aaa9b39c7321106182bd0d26380866ddef0eb';
-
-/// See also [_getPost].
-class _GetPostProvider extends AutoDisposeFutureProvider<DiscoursePost> {
-  _GetPostProvider({
-    required this.postId,
-  }) : super(
-          (ref) => _getPost(
-            ref,
-            postId: postId,
-          ),
-          from: _getPostProvider,
-          name: r'_getPostProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : $_getPostHash,
-        );
-
-  final int postId;
-
-  @override
-  bool operator ==(Object other) {
-    return other is _GetPostProvider && other.postId == postId;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, postId.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-typedef _GetPostRef = AutoDisposeFutureProviderRef<DiscoursePost>;
-
-/// See also [_getPost].
-final _getPostProvider = _GetPostFamily();
-
-class _GetPostFamily extends Family<AsyncValue<DiscoursePost>> {
-  _GetPostFamily();
-
-  _GetPostProvider call({
-    required int postId,
-  }) {
-    return _GetPostProvider(
-      postId: postId,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProvider<DiscoursePost> getProviderOverride(
-    covariant _GetPostProvider provider,
-  ) {
-    return call(
-      postId: provider.postId,
-    );
-  }
-
-  @override
-  List<ProviderOrFamily>? get allTransitiveDependencies => null;
-
-  @override
-  List<ProviderOrFamily>? get dependencies => null;
-
-  @override
-  String? get name => r'_getPostProvider';
-}
-
-String $_getTopicHash() => r'5df4a641fdafd7bed1a3a709d9aaf93160f17aad';
+String $_getTopicHash() => r'52275467c39d14851be7985f9d0793c1a635ff10';
 
 /// See also [_getTopic].
 class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
