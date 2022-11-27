@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -170,20 +171,21 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
     // this scaffold is required so that The background color doesn't turn white. I don't know why this happens
     return Scaffold(
       body: CustomScrollView(primary: true, slivers: [
-        SliverAppBar(
+        SliverAppBar.large(
           primary: true,
           //snap: true, // display immediately on scrolling up
-          floating: true,
+          // floating: true,
           stretch: true,
-          snap: true,
-          //expandedHeight: 100,
-          title: Text(
+
+          title: AutoSizeText(
             // We don't need complex logging here.
             tvalue.when(
                 data: (data) => data.title ?? '',
                 error: (_, __) => 'Error',
                 loading: () => ""),
-            overflow: TextOverflow.fade,
+            maxLines: 5,
+            minFontSize: 18,
+            overflow: TextOverflow.ellipsis,
           ),
 
           actions: [

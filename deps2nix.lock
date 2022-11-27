@@ -129,6 +129,12 @@
       "stripRoot": false,
       "sha256": "1jhc70ggshbd9a3kfkl5hkj3s6w8wnb0074qr9f4sw4v2jv8g1sy"
     },
+    "hosted/pub.dartlang.org/auto_size_text-3.0.0": {
+      "name": "pub-auto_size_text-3.0.0",
+      "url": "https://pub.dartlang.org/packages/auto_size_text/versions/3.0.0.tar.gz",
+      "stripRoot": false,
+      "sha256": "0n6cwqq8hcl50c4if7ib35chi4wxb95qa1w1y3585hpihrkhsavf"
+    },
     "hosted/pub.dartlang.org/boolean_selector-2.1.0": {
       "name": "pub-boolean_selector-2.1.0",
       "url": "https://pub.dartlang.org/packages/boolean_selector/versions/2.1.0.tar.gz",
