@@ -21,6 +21,7 @@ final talker = Talker(
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
 class FoiledApp extends StatelessWidget {
+  static final navigatorKey = GlobalKey<NavigatorState>();
   const FoiledApp({Key? key}) : super(key: key);
 
   @override
@@ -52,6 +53,7 @@ class FoiledApp extends StatelessWidget {
               builder: (BuildContext context, WidgetRef ref, Widget? child) =>
                   MaterialApp(
                 title: appDisplayName,
+                navigatorKey: navigatorKey,
                 themeMode: ref.watch(themeModeProvider),
                 theme: themeFromColorScheme(lightColorScheme),
                 darkTheme: themeFromColorScheme(darkColorScheme),
