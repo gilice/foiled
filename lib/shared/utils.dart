@@ -23,7 +23,6 @@ Future showModalPopUp(BuildContext context,
   }
   return showModalBottomSheet(
       context: context,
-      shape: StandardSheetBorder(multiplier: 2),
       builder: (context) => StandardPadding(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -56,6 +55,10 @@ ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
     scaffoldBackgroundColor: inp.background,
     brightness: inp.brightness,
     cardColor: inp.surface,
+    bottomSheetTheme: BottomSheetThemeData(
+        modalBackgroundColor: inp.surface,
+        shape: StandardSheetBorder(),
+        backgroundColor: inp.surface),
     dialogTheme: DialogTheme(
       backgroundColor: inp.surface,
     ),
