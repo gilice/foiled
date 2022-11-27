@@ -8,17 +8,21 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        with:
+          key: dep-cache
+          path: |
+            ~/.pub-cache
+            ~/.cache/flutter
+            /nix/store
+            ~/.gradle/caches
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v15
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - uses: actions/cache@v3
-        with:
-          key: dep-cache-${{ hashFiles ('*.lock') }}
-          path: |
-            ~/.pub-cache
-            ~/.cache/flutter
-      - run: nix develop -c "flutter build apk --split-per-abi"
+      
+
+      - run: nix develop -c flutter build apk --split-per-abi
       - uses: actions/upload-artifact@v3
         with:
           name: android
@@ -26,14 +30,18 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        with:
+          key: dep-cache
+          path: |
+            ~/.pub-cache
+            ~/.cache/flutter
+            /nix/store
+            ~/.gradle/caches
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v15
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - uses: actions/cache@v3
-        with:
-          key: dep-cache-${{ hashFiles ('*.lock') }}
-          path: ~/.pub-cache
 
       - run: nix build -v
       - uses: actions/upload-artifact@v3
@@ -49,3 +57,20 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - run: nix develop -c deps2nix
       - uses: EndBug/add-and-commit@v9.1.0
+  create-release:
+    needs: [build-android, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+      - run: ls -R
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          body: |
+           this is an automatic nightly release
+          files: |
+            android/*.apk
+            linux/
+          
