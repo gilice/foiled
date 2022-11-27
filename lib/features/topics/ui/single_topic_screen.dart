@@ -49,20 +49,27 @@ class _PostWidget extends StatelessWidget {
           builder: (context, ref, child) => LoggingFutureWidget(
             future: ref.watch(DiscourseServerBackend.imgUrlFromTemplate(
                 post.avatarTemplate!)),
-            onData: (String imgUrl) => Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, top: 8),
-                child: Wrap(
-                  spacing: 8,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    ClipOval(child: Image.network(imgUrl)),
-                    Text("${post.name} (${post.username})"),
-                  ],
+            onData: (String imgUrl) {
+              String displayUserName = post.username!;
+              if (post.name != null && post.name!.isNotEmpty) {
+                displayUserName = "${post.name} (${post.username})";
+              }
+
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, top: 8),
+                  child: Wrap(
+                    spacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      ClipOval(child: Image.network(imgUrl)),
+                      Text(displayUserName),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ),
         StandardPadding(
@@ -137,7 +144,7 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized()
         .addPostFrameCallback((timeStamp) async {
-      talker.error("FULL SINGLETOPICSCREEN REBUILD");
+      talker.debug("FULL SINGLETOPICSCREEN REBUILD");
       var top = ref.read(currentTopicProvider);
 
       if (top == const AsyncValue.loading() ||
