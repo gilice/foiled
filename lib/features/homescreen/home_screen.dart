@@ -4,7 +4,6 @@ import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/ui/account_manager_popup.dart';
 import 'package:foiled/features/categories/categories_ui.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
-import 'package:foiled/features/settings/settings_popup.dart';
 import 'package:foiled/shared/utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,12 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: BrandedAppBar(actions: [
-        IconButton(
-            onPressed: () => showSettingsPopup(context),
-            icon: const Icon(Icons.settings_outlined))
-      ]),
-      body: StandardPadding(
+          body: StandardPadding(
+        multiplier: 0.5,
         child: Consumer(
           builder: ((context, ref, child) =>
               // We can't use [LoggingFutureWidget] here, since we want more
