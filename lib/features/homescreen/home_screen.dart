@@ -22,106 +22,97 @@ final addAccountDialogOpen = StateProvider<bool>(
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: StandardPadding(
-          multiplier: 0.5,
-          child: CustomScrollView(
-            slivers: [
-              SliverSafeArea(
-                sliver: SliverPadding(
-                  padding: const EdgeInsets.all(8),
-                  sliver: SliverAppBar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surfaceVariant,
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Expanded(child: Text("Search")),
-                        IconButton(
-                            onPressed: () => showSettingsPopup(context),
-                            icon: const Icon(Icons.settings_outlined))
-                      ],
-                    ),
-                    primary: true,
-                    floating: true,
-                    elevation: 10,
-                    shadowColor: Theme.of(context).colorScheme.shadow,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                  ),
-                ),
-              ),
-              Consumer(
-                builder: (context, ref, child) => ref
-                    .watch(DiscourseServerBackend.categoriesProvider)
-                    .when(
-                        data: (categories) => SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                              childCount: categories.length,
-                              (context, index) {
-                                var tc = categories.elementAt(index);
-                                return ColorBorderCard(
-                                  onTap: (() async => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => TopicsScreen(
-                                          category: tc,
-                                        ),
-                                      ))),
-                                  color: harmonizeToColor(tc.color, context),
-                                  child: StandardPadding(
-                                    multiplier: 2,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          tc.name ?? 'No name',
-                                          style: titleTextStyle(context),
-                                        ),
-                                        Text(
-                                          tc.description ?? "No description",
-                                          overflow: TextOverflow.clip,
-                                        ),
-                                        SingleChildScrollView(
-                                          physics: const ScrollPhysics(),
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: tc.subcategories
-                                                .map((e) => Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 8, right: 8),
-                                                    child: SubcategoryChip(
-                                                      color: e.color,
-                                                      labelText: e.name,
-                                                    )))
-                                                .toList(),
-                                          ),
-                                        )
-                                      ],
+          body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Expanded(child: Text("Search")),
+                IconButton(
+                    onPressed: () => showSettingsPopup(context),
+                    icon: const Icon(Icons.settings_outlined))
+              ],
+            ),
+            primary: true,
+            floating: true,
+            elevation: 10,
+            shadowColor: Theme.of(context).colorScheme.shadow,
+            shape: const RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(12))),
+          ),
+          Consumer(
+            builder: (context, ref, child) => ref
+                .watch(DiscourseServerBackend.categoriesProvider)
+                .when(
+                    data: (categories) => SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                          childCount: categories.length,
+                          (context, index) {
+                            var tc = categories.elementAt(index);
+                            return ColorBorderCard(
+                              onTap: (() async => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TopicsScreen(
+                                      category: tc,
                                     ),
-                                  ),
-                                );
-                              },
-                            )),
-                        error: (error, stackTrace) {
-                          var dialogOpen = ref.watch(addAccountDialogOpen);
-                          if (!dialogOpen) {
-                            WidgetsFlutterBinding.ensureInitialized()
-                                .addPostFrameCallback((_) {
-                              showAddAccountDialog(context);
-                              ref
-                                  .read(addAccountDialogOpen.notifier)
-                                  .update((_) => true);
-                            });
-                          }
-                          return SliverToBoxAdapter(
-                              child: LoggingErrorWidget(
-                                  error: error, stackTrace: stackTrace));
-                        },
-                        loading: () => const SliverToBoxAdapter(
-                            child: LinearProgressIndicator())),
-              )
-            ],
-          )));
+                                  ))),
+                              color: harmonizeToColor(tc.color, context),
+                              child: StandardPadding(
+                                multiplier: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tc.name ?? 'No name',
+                                      style: titleTextStyle(context),
+                                    ),
+                                    Text(
+                                      tc.description ?? "No description",
+                                      overflow: TextOverflow.clip,
+                                    ),
+                                    SingleChildScrollView(
+                                      physics: const ScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: tc.subcategories
+                                            .map((e) => Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8, right: 8),
+                                                child: SubcategoryChip(
+                                                  color: e.color,
+                                                  labelText: e.name,
+                                                )))
+                                            .toList(),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        )),
+                    error: (error, stackTrace) {
+                      var dialogOpen = ref.watch(addAccountDialogOpen);
+                      if (!dialogOpen) {
+                        WidgetsFlutterBinding.ensureInitialized()
+                            .addPostFrameCallback((_) {
+                          showAddAccountDialog(context);
+                          ref
+                              .read(addAccountDialogOpen.notifier)
+                              .update((_) => true);
+                        });
+                      }
+                      return SliverToBoxAdapter(
+                          child: LoggingErrorWidget(
+                              error: error, stackTrace: stackTrace));
+                    },
+                    loading: () => const SliverToBoxAdapter(
+                        child: LinearProgressIndicator())),
+          )
+        ],
+      ));
 }
