@@ -26,25 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
           multiplier: 0.5,
           child: CustomScrollView(
             slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.all(8),
-                sliver: SliverAppBar(
-                  backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Expanded(child: Text("Search")),
-                      IconButton(
-                          onPressed: () => showSettingsPopup(context),
-                          icon: const Icon(Icons.settings_outlined))
-                    ],
+              SliverSafeArea(
+                sliver: SliverPadding(
+                  padding: const EdgeInsets.all(8),
+                  sliver: SliverAppBar(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.surfaceVariant,
+                    title: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Expanded(child: Text("Search")),
+                        IconButton(
+                            onPressed: () => showSettingsPopup(context),
+                            icon: const Icon(Icons.settings_outlined))
+                      ],
+                    ),
+                    primary: true,
+                    floating: true,
+                    elevation: 10,
+                    shadowColor: Theme.of(context).colorScheme.shadow,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                   ),
-                  primary: true,
-                  floating: true,
-                  elevation: 10,
-                  shadowColor: Theme.of(context).colorScheme.shadow,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
                 ),
               ),
               Consumer(
