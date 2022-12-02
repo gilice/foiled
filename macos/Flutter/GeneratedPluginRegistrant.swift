@@ -10,7 +10,7 @@ import dynamic_color
 import isar_flutter_libs
 import just_audio
 import path_provider_macos
-import share_plus_macos
+import share_plus
 import sqflite
 import url_launcher_macos
 import wakelock_macos
