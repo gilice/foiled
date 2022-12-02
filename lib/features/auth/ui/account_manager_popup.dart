@@ -35,7 +35,7 @@ class _AccountManagerPopup extends StatelessWidget {
                   return Consumer(
                     builder: (context, ref, child) {
                       var selectedID =
-                          ref.watch(Account.provider.notifier).getSelectedID();
+                          ref.watch(AccountBackend.selectedIDProvider);
                       double elevation = 1;
                       if (selectedID == ta.id) {
                         elevation = 3;
@@ -46,8 +46,9 @@ class _AccountManagerPopup extends StatelessWidget {
                           type: MaterialType.transparency,
                           child: InkWell(
                             onTap: () => ref
-                                .watch(Account.provider.notifier)
-                                .setSelectedID(ta.id),
+                                .watch(
+                                    AccountBackend.selectedIDProvider.notifier)
+                                .state = ta.id,
                             onLongPress: () {
                               talker.debug(
                                   "Account with id ${ta.id} long pressed");

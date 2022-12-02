@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// This class houses most code related to account management and authentication
 class AccountBackend extends AsyncNotifier<AccountModel> {
-  int? _selectedID;
+  static var selectedIDProvider = StateProvider<int?>((ref) => null);
 
   static var allAccountUpdatesProvider = StreamProvider<List<AccountModel>>(
     (ref) async* {
@@ -49,14 +49,23 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
   FutureOr<AccountModel> build() async {
     var db = await ref.watch(dbProvider.future);
     var first = await db.accountModels.where().findFirst();
-    if (first != null) {
-      _selectedID = first.id;
-      return first;
-    } else {
+    var selected = ref.watch(selectedIDProvider);
+
+    if (first == null) {
       state =
           AsyncValue.error(NoAccountsConfiguredException(), StackTrace.current);
       return Future.error(NoAccountsConfiguredException());
     }
+
+    if (selected == null) {
+      ref.read(selectedIDProvider.notifier).state = first.id;
+    }
+
+    return first;
+    // if (first != null) {
+    //   ref.watch(selectedIDProvider.notifier).state = first.id;
+    //   return first;
+    // } else {
   }
 
   /// Authenticate the user.
@@ -136,7 +145,8 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
 
   Future<void> deleteAccount({int? id}) async {
     var db = await ref.watch(dbProvider.future);
-    id = id ?? _selectedID;
+    var selectedID = ref.watch(selectedIDProvider);
+    id = id ?? selectedID;
     if (id != null) {
       await db.writeTxn(() async {
         await db.accountModels.delete(id!);
@@ -146,18 +156,4 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     talker.debug("Deleted account. Re-emitting account...");
     build();
   }
-
-  void setSelectedID(int newID) async {
-    state = const AsyncValue.loading();
-    _selectedID = newID;
-    var db = await ref.watch(dbProvider.future);
-    var newAcc = await db.accountModels.get(newID);
-    if (newAcc == null) {
-      state = AsyncValue.error(AccountNotFoundException(), StackTrace.current);
-    }
-
-    state = AsyncValue.data(newAcc!);
-  }
-
-  int? getSelectedID() => _selectedID;
 }
