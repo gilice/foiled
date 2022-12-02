@@ -111,11 +111,11 @@
       "stripRoot": false,
       "sha256": "0c78zkzg2d2kzw1qrpiyrj1qvm4pr0yhnzapbqk347m780ha408g"
     },
-    "hosted/pub.dartlang.org/asn1lib-1.2.2": {
-      "name": "pub-asn1lib-1.2.2",
-      "url": "https://pub.dartlang.org/packages/asn1lib/versions/1.2.2.tar.gz",
+    "hosted/pub.dartlang.org/asn1lib-1.4.0": {
+      "name": "pub-asn1lib-1.4.0",
+      "url": "https://pub.dartlang.org/packages/asn1lib/versions/1.4.0.tar.gz",
       "stripRoot": false,
-      "sha256": "0nyr0yh9hnlpqbs9aqq1vxn11zim4548zfvz0f8sfiilxmsci07n"
+      "sha256": "0vq7p95qjc6v0i1kp6d4crchhpjf3wwwha5lwjqnnfjri1q08rva"
     },
     "hosted/pub.dartlang.org/async-2.9.0": {
       "name": "pub-async-2.9.0",
@@ -123,11 +123,11 @@
       "stripRoot": false,
       "sha256": "04pic2ss16ni8b1bnk7450hrq1391zbl93dlhd2a4na3cgwd65b3"
     },
-    "hosted/pub.dartlang.org/audio_session-0.1.10": {
-      "name": "pub-audio_session-0.1.10",
-      "url": "https://pub.dartlang.org/packages/audio_session/versions/0.1.10.tar.gz",
+    "hosted/pub.dartlang.org/audio_session-0.1.11": {
+      "name": "pub-audio_session-0.1.11",
+      "url": "https://pub.dartlang.org/packages/audio_session/versions/0.1.11.tar.gz",
       "stripRoot": false,
-      "sha256": "1jhc70ggshbd9a3kfkl5hkj3s6w8wnb0074qr9f4sw4v2jv8g1sy"
+      "sha256": "1grnbl24924l4lnwyqcmh5dqxmrnvlf6byh3z4xap1a94p0ss3rg"
     },
     "hosted/pub.dartlang.org/auto_size_text-3.0.0": {
       "name": "pub-auto_size_text-3.0.0",
@@ -189,11 +189,11 @@
       "stripRoot": false,
       "sha256": "0sslr4258snvcj8qhbdk6wapka174als0viyxddwqlnhs7dlci8i"
     },
-    "hosted/pub.dartlang.org/cached_network_image-3.2.2": {
-      "name": "pub-cached_network_image-3.2.2",
-      "url": "https://pub.dartlang.org/packages/cached_network_image/versions/3.2.2.tar.gz",
+    "hosted/pub.dartlang.org/cached_network_image-3.2.3": {
+      "name": "pub-cached_network_image-3.2.3",
+      "url": "https://pub.dartlang.org/packages/cached_network_image/versions/3.2.3.tar.gz",
       "stripRoot": false,
-      "sha256": "1m3hf5a5mk7q81wrzbh8mkygjc7gsbk9k87mrzbzdfx3d8zd8b5v"
+      "sha256": "00rbg4dfxnrlfllxd32pc577hy5xx5y02bb8h9jk3jshk552sssh"
     },
     "hosted/pub.dartlang.org/cached_network_image_platform_interface-2.0.0": {
       "name": "pub-cached_network_image_platform_interface-2.0.0",
@@ -219,11 +219,11 @@
       "stripRoot": false,
       "sha256": "1gf7ankc5jb7mk17br87ajv05pfg6vb8nf35ay6c35w8jp70ra7k"
     },
-    "hosted/pub.dartlang.org/chewie-1.3.5": {
-      "name": "pub-chewie-1.3.5",
-      "url": "https://pub.dartlang.org/packages/chewie/versions/1.3.5.tar.gz",
+    "hosted/pub.dartlang.org/chewie-1.3.6": {
+      "name": "pub-chewie-1.3.6",
+      "url": "https://pub.dartlang.org/packages/chewie/versions/1.3.6.tar.gz",
       "stripRoot": false,
-      "sha256": "00cj7bappfkz7n7z4wi0g6vm6gnd6v0k8ai32ry7g9iv1h4wdhki"
+      "sha256": "11v902fdy3vqx4aaj9zbm692h6hw27l4g082nwqgji3bjzgpp3yd"
     },
     "hosted/pub.dartlang.org/clock-1.1.1": {
       "name": "pub-clock-1.1.1",
@@ -375,17 +375,17 @@
       "stripRoot": false,
       "sha256": "0qq4nb28z9aysnq1zqbfrjkvqzp8aj9jyjbh70jbyiyzf87srrzx"
     },
-    "hosted/pub.dartlang.org/flutter_widget_from_html-0.8.5": {
-      "name": "pub-flutter_widget_from_html-0.8.5",
-      "url": "https://pub.dartlang.org/packages/flutter_widget_from_html/versions/0.8.5.tar.gz",
+    "hosted/pub.dartlang.org/flutter_widget_from_html-0.9.0+1": {
+      "name": "pub-flutter_widget_from_html-0.9.0+1",
+      "url": "https://pub.dartlang.org/packages/flutter_widget_from_html/versions/0.9.0+1.tar.gz",
       "stripRoot": false,
-      "sha256": "1ijg8vnfy0rzvvmk2mx92k8yc3gsbssyw0v06zsny3v0186cp3jf"
+      "sha256": "1allcmlk7zaafz2v59r4rr9ayy47lfb4bf6vh5br8q94qsr60qz6"
     },
-    "hosted/pub.dartlang.org/flutter_widget_from_html_core-0.8.5+3": {
-      "name": "pub-flutter_widget_from_html_core-0.8.5+3",
-      "url": "https://pub.dartlang.org/packages/flutter_widget_from_html_core/versions/0.8.5+3.tar.gz",
+    "hosted/pub.dartlang.org/flutter_widget_from_html_core-0.9.0+2": {
+      "name": "pub-flutter_widget_from_html_core-0.9.0+2",
+      "url": "https://pub.dartlang.org/packages/flutter_widget_from_html_core/versions/0.9.0+2.tar.gz",
       "stripRoot": false,
-      "sha256": "19jnb902cqpm30jm23cpg53b8w88y5gc648a3qhzs87n2dsikz6r"
+      "sha256": "1rxlz7y5rqn4nwq9nxa2i0qs8sa3hizdzvj56qym6s977dfj58b3"
     },
     "hosted/pub.dartlang.org/freezed_annotation-2.2.0": {
       "name": "pub-freezed_annotation-2.2.0",
@@ -393,11 +393,11 @@
       "stripRoot": false,
       "sha256": "1rh91zdadvy9x7zaf79h7kg5z5d8f6pqmrmbma870rnhq1wfyw60"
     },
-    "hosted/pub.dartlang.org/frontend_server_client-3.1.0": {
-      "name": "pub-frontend_server_client-3.1.0",
-      "url": "https://pub.dartlang.org/packages/frontend_server_client/versions/3.1.0.tar.gz",
+    "hosted/pub.dartlang.org/frontend_server_client-3.2.0": {
+      "name": "pub-frontend_server_client-3.2.0",
+      "url": "https://pub.dartlang.org/packages/frontend_server_client/versions/3.2.0.tar.gz",
       "stripRoot": false,
-      "sha256": "0nv4avkv2if9hdcfzckz36f3mclv7vxchivrg8j3miaqhnjvv4bj"
+      "sha256": "096v7ycix5hgnk750s1qgykyghl2mymhdkg39jrlk3kbj6xygq5b"
     },
     "hosted/pub.dartlang.org/fwfh_cached_network_image-0.7.0+3": {
       "name": "pub-fwfh_cached_network_image-0.7.0+3",
@@ -405,23 +405,17 @@
       "stripRoot": false,
       "sha256": "10bxvl4r4mvqss8qlsznb89y9l2nppp74qpi6abvn79sv0v105xh"
     },
-    "hosted/pub.dartlang.org/fwfh_chewie-0.7.0+2": {
-      "name": "pub-fwfh_chewie-0.7.0+2",
-      "url": "https://pub.dartlang.org/packages/fwfh_chewie/versions/0.7.0+2.tar.gz",
+    "hosted/pub.dartlang.org/fwfh_chewie-0.7.0+3": {
+      "name": "pub-fwfh_chewie-0.7.0+3",
+      "url": "https://pub.dartlang.org/packages/fwfh_chewie/versions/0.7.0+3.tar.gz",
       "stripRoot": false,
-      "sha256": "01h09x13zhffx7xlkpp15mlk4dnb7nf3lb3swski3hyywv9247jc"
+      "sha256": "0jfab7vzjycx9g0ppbcp81vmscvynms5x5qi1gj6gjq66qjqknkx"
     },
-    "hosted/pub.dartlang.org/fwfh_just_audio-0.6.2+2": {
-      "name": "pub-fwfh_just_audio-0.6.2+2",
-      "url": "https://pub.dartlang.org/packages/fwfh_just_audio/versions/0.6.2+2.tar.gz",
+    "hosted/pub.dartlang.org/fwfh_just_audio-0.9.0": {
+      "name": "pub-fwfh_just_audio-0.9.0",
+      "url": "https://pub.dartlang.org/packages/fwfh_just_audio/versions/0.9.0.tar.gz",
       "stripRoot": false,
-      "sha256": "140wzws196v36v37d13290mpcp3cl6q2c932daqscpss4hbgdj7r"
-    },
-    "hosted/pub.dartlang.org/fwfh_selectable_text-0.8.3+1": {
-      "name": "pub-fwfh_selectable_text-0.8.3+1",
-      "url": "https://pub.dartlang.org/packages/fwfh_selectable_text/versions/0.8.3+1.tar.gz",
-      "stripRoot": false,
-      "sha256": "02hvv7s2d08hv5nnrp9r0j5x3h9h9lqc94yhy0hf3y1jb3crs038"
+      "sha256": "0gaxmqd7s2jk7c1kp6v879p9vlfwwl3s2xfy1q1cbzkl1hyj8d8z"
     },
     "hosted/pub.dartlang.org/fwfh_svg-0.7.2+1": {
       "name": "pub-fwfh_svg-0.7.2+1",
@@ -435,17 +429,17 @@
       "stripRoot": false,
       "sha256": "10czbqlpjw49rcnqha27w4kq7f841105vms3laxk90bfmcbra83i"
     },
-    "hosted/pub.dartlang.org/fwfh_url_launcher-0.6.1+3": {
-      "name": "pub-fwfh_url_launcher-0.6.1+3",
-      "url": "https://pub.dartlang.org/packages/fwfh_url_launcher/versions/0.6.1+3.tar.gz",
+    "hosted/pub.dartlang.org/fwfh_url_launcher-0.9.0": {
+      "name": "pub-fwfh_url_launcher-0.9.0",
+      "url": "https://pub.dartlang.org/packages/fwfh_url_launcher/versions/0.9.0.tar.gz",
       "stripRoot": false,
-      "sha256": "0gnxisxa6fbavsjnwniqgy8dxd9spf0655z3qpprnp03ginwis82"
+      "sha256": "0aiwk7l7krwgxznxmnsnja4gcnaz075j63fvnwrw0dwmvkm2vks5"
     },
-    "hosted/pub.dartlang.org/fwfh_webview-0.6.2+4": {
-      "name": "pub-fwfh_webview-0.6.2+4",
-      "url": "https://pub.dartlang.org/packages/fwfh_webview/versions/0.6.2+4.tar.gz",
+    "hosted/pub.dartlang.org/fwfh_webview-0.6.2+5": {
+      "name": "pub-fwfh_webview-0.6.2+5",
+      "url": "https://pub.dartlang.org/packages/fwfh_webview/versions/0.6.2+5.tar.gz",
       "stripRoot": false,
-      "sha256": "1inr3mjl9kqdc2pfws01whhckrhdrfnxrfczvkbs5qsm6mdgw4ih"
+      "sha256": "19wb35syg1nyfcjkiz5q6ibs8p776w4bj46d4add92pd8m81zp00"
     },
     "hosted/pub.dartlang.org/get_it-7.2.0": {
       "name": "pub-get_it-7.2.0",
@@ -489,11 +483,11 @@
       "stripRoot": false,
       "sha256": "0zpbyqbh4zdcg66ik4l0ijd3hlv9zwcyah4hrf9nkfh6sgsgpy92"
     },
-    "hosted/pub.dartlang.org/hexcolor-2.0.7": {
-      "name": "pub-hexcolor-2.0.7",
-      "url": "https://pub.dartlang.org/packages/hexcolor/versions/2.0.7.tar.gz",
+    "hosted/pub.dartlang.org/hexcolor-3.0.1": {
+      "name": "pub-hexcolor-3.0.1",
+      "url": "https://pub.dartlang.org/packages/hexcolor/versions/3.0.1.tar.gz",
       "stripRoot": false,
-      "sha256": "0a1gzsvxy7basfj765xari3xiafy2di74dw59iymq50a5c0gmw8i"
+      "sha256": "0cp1jfj743gjpg2gidyqys6chyqb82w11lcjg65bfl9syl167255"
     },
     "hosted/pub.dartlang.org/html-0.15.1": {
       "name": "pub-html-0.15.1",
@@ -543,23 +537,23 @@
       "stripRoot": false,
       "sha256": "1bp5l8hkrp6fjj7zw9af51hxyp52sjspc5558lq0lmi453l0czni"
     },
-    "hosted/pub.dartlang.org/isar-3.0.2": {
-      "name": "pub-isar-3.0.2",
-      "url": "https://pub.dartlang.org/packages/isar/versions/3.0.2.tar.gz",
+    "hosted/pub.dartlang.org/isar-3.0.5": {
+      "name": "pub-isar-3.0.5",
+      "url": "https://pub.dartlang.org/packages/isar/versions/3.0.5.tar.gz",
       "stripRoot": false,
-      "sha256": "1g9yjg8xpjr29q189yvwkxm8wnjzwypwdvh3dwzhw8hniidg7q02"
+      "sha256": "14cl8gf7r801l2ddp4vjn9fnsr3rlpz4vb622l74ci0bbaa81z9x"
     },
-    "hosted/pub.dartlang.org/isar_flutter_libs-3.0.2": {
-      "name": "pub-isar_flutter_libs-3.0.2",
-      "url": "https://pub.dartlang.org/packages/isar_flutter_libs/versions/3.0.2.tar.gz",
+    "hosted/pub.dartlang.org/isar_flutter_libs-3.0.5": {
+      "name": "pub-isar_flutter_libs-3.0.5",
+      "url": "https://pub.dartlang.org/packages/isar_flutter_libs/versions/3.0.5.tar.gz",
       "stripRoot": false,
-      "sha256": "0ryrvvr1q94wi26zld3p0zj6agfrgsv6gdplrs9bk6h9wwaxcchc"
+      "sha256": "0x1vcj8vcfdcdhbx26zw8sargv11wb9gj6hhx8b6r607zxcnq74m"
     },
-    "hosted/pub.dartlang.org/isar_generator-3.0.2": {
-      "name": "pub-isar_generator-3.0.2",
-      "url": "https://pub.dartlang.org/packages/isar_generator/versions/3.0.2.tar.gz",
+    "hosted/pub.dartlang.org/isar_generator-3.0.5": {
+      "name": "pub-isar_generator-3.0.5",
+      "url": "https://pub.dartlang.org/packages/isar_generator/versions/3.0.5.tar.gz",
       "stripRoot": false,
-      "sha256": "1h64dpi9xp7im2v8v995fwn8iwbrl3p5k5i3vfiyygffg4dy0apy"
+      "sha256": "1n20h7afnhhpvpzrdavlp8hczf74p63qxd5wvjy5flw0gjagcng8"
     },
     "hosted/pub.dartlang.org/js-0.6.4": {
       "name": "pub-js-0.6.4",
@@ -633,11 +627,11 @@
       "stripRoot": false,
       "sha256": "01kqdd25nln5a219pr94s66p27m0kpqz0wpmwnm24kdy3ngif1v5"
     },
-    "hosted/pub.dartlang.org/mime-1.0.2": {
-      "name": "pub-mime-1.0.2",
-      "url": "https://pub.dartlang.org/packages/mime/versions/1.0.2.tar.gz",
+    "hosted/pub.dartlang.org/mime-1.0.3": {
+      "name": "pub-mime-1.0.3",
+      "url": "https://pub.dartlang.org/packages/mime/versions/1.0.3.tar.gz",
       "stripRoot": false,
-      "sha256": "1dr3qikzvp10q1saka7azki5gk2kkf2v7k9wfqjsyxmza2zlv896"
+      "sha256": "0j51jpcpf9hs45wb5sgp8igii3qkqpgav7s7fwcdmblxj121kiv4"
     },
     "hosted/pub.dartlang.org/mobx-2.1.3": {
       "name": "pub-mobx-2.1.3",
@@ -687,11 +681,11 @@
       "stripRoot": false,
       "sha256": "159f4qylk3vals2vlq1fk97kns6l1xhl9xyvxmgbmqfp71z4bfn9"
     },
-    "hosted/pub.dartlang.org/path_provider_android-2.0.21": {
-      "name": "pub-path_provider_android-2.0.21",
-      "url": "https://pub.dartlang.org/packages/path_provider_android/versions/2.0.21.tar.gz",
+    "hosted/pub.dartlang.org/path_provider_android-2.0.22": {
+      "name": "pub-path_provider_android-2.0.22",
+      "url": "https://pub.dartlang.org/packages/path_provider_android/versions/2.0.22.tar.gz",
       "stripRoot": false,
-      "sha256": "0b2bzpb48d5g223kp8gxgxxq38sflc8yahbaj0pa6q1znk6rp17k"
+      "sha256": "1cn3lzcxsw54fdhkynfh25vl85zh4arh6wa71bc9c1qpjf2mrgzf"
     },
     "hosted/pub.dartlang.org/path_provider_ios-2.0.11": {
       "name": "pub-path_provider_ios-2.0.11",
@@ -819,47 +813,23 @@
       "stripRoot": false,
       "sha256": "03bzb3cj2p36lv8qims06kp08g1sw5l8glnjxh93vhf8nf7d98sz"
     },
-    "hosted/pub.dartlang.org/rxdart-0.27.6": {
-      "name": "pub-rxdart-0.27.6",
-      "url": "https://pub.dartlang.org/packages/rxdart/versions/0.27.6.tar.gz",
+    "hosted/pub.dartlang.org/rxdart-0.27.7": {
+      "name": "pub-rxdart-0.27.7",
+      "url": "https://pub.dartlang.org/packages/rxdart/versions/0.27.7.tar.gz",
       "stripRoot": false,
-      "sha256": "1900r138374bvfy8ikw6ly92d19pslwnknm89hirmmccvjf9sai2"
+      "sha256": "0i8m70xsn2jl1vsplbh4zc7gzbhw1zb031rq52gf0gv2alj6by43"
     },
-    "hosted/pub.dartlang.org/share_plus-4.5.3": {
-      "name": "pub-share_plus-4.5.3",
-      "url": "https://pub.dartlang.org/packages/share_plus/versions/4.5.3.tar.gz",
+    "hosted/pub.dartlang.org/share_plus-6.3.0": {
+      "name": "pub-share_plus-6.3.0",
+      "url": "https://pub.dartlang.org/packages/share_plus/versions/6.3.0.tar.gz",
       "stripRoot": false,
-      "sha256": "1kj3mf2xzhdc66sin59y8ajabhlw5jhxmchcd7nydmv9rajkss29"
-    },
-    "hosted/pub.dartlang.org/share_plus_linux-3.0.1": {
-      "name": "pub-share_plus_linux-3.0.1",
-      "url": "https://pub.dartlang.org/packages/share_plus_linux/versions/3.0.1.tar.gz",
-      "stripRoot": false,
-      "sha256": "19llynl8imvzjx6jbrsp8lipdckg9b09gp7sywm7x2575fv1zzaa"
-    },
-    "hosted/pub.dartlang.org/share_plus_macos-3.0.1": {
-      "name": "pub-share_plus_macos-3.0.1",
-      "url": "https://pub.dartlang.org/packages/share_plus_macos/versions/3.0.1.tar.gz",
-      "stripRoot": false,
-      "sha256": "12ib2lphs57s16ahfg6g0xm909wfyfcwd2r3wka1cp6xhinw868p"
+      "sha256": "13jypsmgrbxfwr4pw4ivk2w7lhyi4fq43ap9i9v9gbh1gpll6rdj"
     },
     "hosted/pub.dartlang.org/share_plus_platform_interface-3.2.0": {
       "name": "pub-share_plus_platform_interface-3.2.0",
       "url": "https://pub.dartlang.org/packages/share_plus_platform_interface/versions/3.2.0.tar.gz",
       "stripRoot": false,
       "sha256": "0zi2bb0cxh237wdfnzgv7l7ip157yy5v21ajwqkkfch0h4642wym"
-    },
-    "hosted/pub.dartlang.org/share_plus_web-3.1.0": {
-      "name": "pub-share_plus_web-3.1.0",
-      "url": "https://pub.dartlang.org/packages/share_plus_web/versions/3.1.0.tar.gz",
-      "stripRoot": false,
-      "sha256": "0kcpv67j23w1qbargn44jyh7kn50mh1hg526xgcacj8prwagmwwj"
-    },
-    "hosted/pub.dartlang.org/share_plus_windows-3.0.1": {
-      "name": "pub-share_plus_windows-3.0.1",
-      "url": "https://pub.dartlang.org/packages/share_plus_windows/versions/3.0.1.tar.gz",
-      "stripRoot": false,
-      "sha256": "03c8cdi08i18azxci6phzgw0rcb5pk483kyv335zibanl268qs08"
     },
     "hosted/pub.dartlang.org/shelf-1.4.0": {
       "name": "pub-shelf-1.4.0",
@@ -891,11 +861,11 @@
       "stripRoot": false,
       "sha256": "0j64s4vc22mzx8zw35lyd1q76phh84bsc5arsawcfkxa76l06542"
     },
-    "hosted/pub.dartlang.org/sqflite-2.2.0+3": {
-      "name": "pub-sqflite-2.2.0+3",
-      "url": "https://pub.dartlang.org/packages/sqflite/versions/2.2.0+3.tar.gz",
+    "hosted/pub.dartlang.org/sqflite-2.2.1": {
+      "name": "pub-sqflite-2.2.1",
+      "url": "https://pub.dartlang.org/packages/sqflite/versions/2.2.1.tar.gz",
       "stripRoot": false,
-      "sha256": "0nxlnk5fgsrgh5x63scvs5i706bdybp1ya3q2lvj9v1zi2nl965s"
+      "sha256": "0mikx75vdky13x6wjn01fibh5brys1lr7qps6zjqwvijz9zg0yvd"
     },
     "hosted/pub.dartlang.org/sqflite_common-2.4.0+2": {
       "name": "pub-sqflite_common-2.4.0+2",
@@ -945,23 +915,23 @@
       "stripRoot": false,
       "sha256": "1npmnf2q4r6vjb7xvnbg6168hsvqf31r2yzvjp2fzpdz3xa3y9z0"
     },
-    "hosted/pub.dartlang.org/talker-2.0.0+1": {
-      "name": "pub-talker-2.0.0+1",
-      "url": "https://pub.dartlang.org/packages/talker/versions/2.0.0+1.tar.gz",
+    "hosted/pub.dartlang.org/talker-2.1.0": {
+      "name": "pub-talker-2.1.0",
+      "url": "https://pub.dartlang.org/packages/talker/versions/2.1.0.tar.gz",
       "stripRoot": false,
-      "sha256": "1k6h6js92zvr1xb2m3jhqyy6iw8gwihgzn3yi3l7diy0fqdv9vj1"
+      "sha256": "1vwl3s5kr4p41lsq1mgqyyyvgx6pf58wq707qn6c1ydax1sm9f53"
     },
-    "hosted/pub.dartlang.org/talker_flutter-2.0.5": {
-      "name": "pub-talker_flutter-2.0.5",
-      "url": "https://pub.dartlang.org/packages/talker_flutter/versions/2.0.5.tar.gz",
+    "hosted/pub.dartlang.org/talker_flutter-2.1.0": {
+      "name": "pub-talker_flutter-2.1.0",
+      "url": "https://pub.dartlang.org/packages/talker_flutter/versions/2.1.0.tar.gz",
       "stripRoot": false,
-      "sha256": "1a870hffrp7cc2k5i3dyf95f04lgfkhqdd550niswc08bmvpfbbc"
+      "sha256": "14fzsnqixvsmwsyyhg1r7148v0yklkjznycnyxha19hn1yvmx113"
     },
-    "hosted/pub.dartlang.org/talker_logger-2.0.0": {
-      "name": "pub-talker_logger-2.0.0",
-      "url": "https://pub.dartlang.org/packages/talker_logger/versions/2.0.0.tar.gz",
+    "hosted/pub.dartlang.org/talker_logger-2.1.0": {
+      "name": "pub-talker_logger-2.1.0",
+      "url": "https://pub.dartlang.org/packages/talker_logger/versions/2.1.0.tar.gz",
       "stripRoot": false,
-      "sha256": "0nc2nxkrbjln8akfpg4f68p6a79pjqdabijad54jx5861vspkx1m"
+      "sha256": "01pi5zv76jxi9c8xpj5i4b7zqmxavw4254svn3bc4nqip8hx5x60"
     },
     "hosted/pub.dartlang.org/term_glyph-1.2.1": {
       "name": "pub-term_glyph-1.2.1",
@@ -999,17 +969,17 @@
       "stripRoot": false,
       "sha256": "1x402bvyzdmdvmyqhyfamjxf54p9j8sa8ns2n5dwsdhnfqbw859g"
     },
-    "hosted/pub.dartlang.org/url_launcher-6.1.6": {
-      "name": "pub-url_launcher-6.1.6",
-      "url": "https://pub.dartlang.org/packages/url_launcher/versions/6.1.6.tar.gz",
+    "hosted/pub.dartlang.org/url_launcher-6.1.7": {
+      "name": "pub-url_launcher-6.1.7",
+      "url": "https://pub.dartlang.org/packages/url_launcher/versions/6.1.7.tar.gz",
       "stripRoot": false,
-      "sha256": "1p2pnabw1k1pqwssk7i8xf6h5dlbmr7h5hf9r2nvq1vlhcxg4vhp"
+      "sha256": "1h2w5805yf23zf1wif8apvzkysrfr0v8ghysd5il1hwr9vp4vmdl"
     },
-    "hosted/pub.dartlang.org/url_launcher_android-6.0.21": {
-      "name": "pub-url_launcher_android-6.0.21",
-      "url": "https://pub.dartlang.org/packages/url_launcher_android/versions/6.0.21.tar.gz",
+    "hosted/pub.dartlang.org/url_launcher_android-6.0.22": {
+      "name": "pub-url_launcher_android-6.0.22",
+      "url": "https://pub.dartlang.org/packages/url_launcher_android/versions/6.0.22.tar.gz",
       "stripRoot": false,
-      "sha256": "0x7kjv26j1b6m65yd2kixz2vgxcdrnwmm3smncrngsr2miql5bh2"
+      "sha256": "05vnl6hc1sq3cmxgjwcw7c0j0yqgcam61hqgcxnbypycbfybbvvh"
     },
     "hosted/pub.dartlang.org/url_launcher_ios-6.0.17": {
       "name": "pub-url_launcher_ios-6.0.17",
@@ -1059,11 +1029,11 @@
       "stripRoot": false,
       "sha256": "1mn527mwk6qc8xhdmksh2ggjx27rg4l4pn8p4l6zx6g6hd6k0adc"
     },
-    "hosted/pub.dartlang.org/video_player-2.4.7": {
-      "name": "pub-video_player-2.4.7",
-      "url": "https://pub.dartlang.org/packages/video_player/versions/2.4.7.tar.gz",
+    "hosted/pub.dartlang.org/video_player-2.4.8": {
+      "name": "pub-video_player-2.4.8",
+      "url": "https://pub.dartlang.org/packages/video_player/versions/2.4.8.tar.gz",
       "stripRoot": false,
-      "sha256": "1qb7lr5mhsipq2sq4kpsq43svwmarflp4hrj6mgymm9w2dmbxkc6"
+      "sha256": "0b3w6jnf7s7gy16a27nrgrccfzxmdzkpimhj8732avrk6j2h0nlv"
     },
     "hosted/pub.dartlang.org/video_player_android-2.3.9": {
       "name": "pub-video_player_android-2.3.9",
@@ -1167,11 +1137,11 @@
       "stripRoot": false,
       "sha256": "04l8qz8knxskpj32v6g3wb2mb12lmzbl8kk7gvvz1xbw1wqaf6x7"
     },
-    "hosted/pub.dartlang.org/win32-3.1.1": {
-      "name": "pub-win32-3.1.1",
-      "url": "https://pub.dartlang.org/packages/win32/versions/3.1.1.tar.gz",
+    "hosted/pub.dartlang.org/win32-3.1.2": {
+      "name": "pub-win32-3.1.2",
+      "url": "https://pub.dartlang.org/packages/win32/versions/3.1.2.tar.gz",
       "stripRoot": false,
-      "sha256": "0yrk18ib0i5lnmvr7rzvjyvhd3lcbkffkphsg9f6wjhwywfn5798"
+      "sha256": "0nq4bfcw1vgjl28m4j17m7j3xkjc8a2xdpw0n08jzi6wz91mgxj2"
     },
     "hosted/pub.dartlang.org/xdg_directories-0.2.0+2": {
       "name": "pub-xdg_directories-0.2.0+2",
