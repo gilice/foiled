@@ -269,7 +269,7 @@ const DiscoursePostSchema = CollectionSchema(
   getId: _discoursePostGetId,
   getLinks: _discoursePostGetLinks,
   attach: _discoursePostAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _discoursePostEstimateSize(

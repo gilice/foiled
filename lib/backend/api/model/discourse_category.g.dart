@@ -232,7 +232,7 @@ const DiscourseCategorySchema = CollectionSchema(
   getId: _discourseCategoryGetId,
   getLinks: _discourseCategoryGetLinks,
   attach: _discourseCategoryAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _discourseCategoryEstimateSize(

@@ -90,7 +90,7 @@ const DiscourseServerInfoSchema = CollectionSchema(
   getId: _discourseServerInfoGetId,
   getLinks: _discourseServerInfoGetLinks,
   attach: _discourseServerInfoAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _discourseServerInfoEstimateSize(

@@ -56,7 +56,7 @@ const AccountModelSchema = CollectionSchema(
   getId: _accountModelGetId,
   getLinks: _accountModelGetLinks,
   attach: _accountModelAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _accountModelEstimateSize(

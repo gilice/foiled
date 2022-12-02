@@ -258,7 +258,7 @@ const DiscourseTopicModelSchema = CollectionSchema(
   getId: _discourseTopicModelGetId,
   getLinks: _discourseTopicModelGetLinks,
   attach: _discourseTopicModelAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _discourseTopicModelEstimateSize(

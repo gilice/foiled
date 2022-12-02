@@ -10,6 +10,7 @@ import 'package:foiled/features/topics/ui/topic_more_popup.dart';
 import 'package:foiled/features/topics/ui/topics_screen.dart';
 import 'package:foiled/main.dart';
 import 'package:foiled/shared/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final currentTopicProvider =
     StateProvider.autoDispose<AsyncValue<DiscourseTopicModel>>(
@@ -81,7 +82,13 @@ class _PostWidget extends StatelessWidget {
                   children: [
                 HtmlWidget(
                   post.cooked ?? 'No text in post',
-                  isSelectable: true,
+                  onTapUrl: (String? url) {
+                    if (url != null) {
+                      return launchUrl(Uri.parse(url),
+                          mode: LaunchMode.externalApplication);
+                    }
+                    return false;
+                  },
                   // For some reason, images were loading forever on the default settings.
                   // Filter by element?
                   onErrorBuilder: (context, element, error) {

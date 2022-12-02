@@ -48,7 +48,7 @@ const DiscourseServerModelSchema = CollectionSchema(
   getId: _discourseServerModelGetId,
   getLinks: _discourseServerModelGetLinks,
   attach: _discourseServerModelAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _discourseServerModelEstimateSize(
