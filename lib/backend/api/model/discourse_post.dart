@@ -1,23 +1,54 @@
+// ignore_for_file: overridden_fields
+
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'discourse_post.g.dart';
 
-@JsonSerializable()
-@collection
-class DiscoursePost {
-  @JsonKey(ignore: true)
-  late Id isarID;
+abstract class DiscourseAbstractPost {
   int? id;
   String? name;
   String? username;
-  @JsonKey(name: "avatar_template")
   String? avatarTemplate;
   DateTime? createdAt;
+  int? likeCount;
+  String? blurb;
   String? cooked;
+  int? postNumber;
+  String? topicTitleHeadline;
+  int? topicId;
+  int? replyCount;
+}
+
+@JsonSerializable()
+@collection
+class DiscoursePost extends DiscourseAbstractPost {
+  @JsonKey(ignore: true)
+  late Id isarID;
+
+  @override
+  int? id;
+
+  @override
+  String? name;
+
+  @override
+  String? username;
+
+  @override
+  @JsonKey(name: "avatar_template")
+  String? avatarTemplate;
+
+  @override
+  DateTime? createdAt;
+  @override
+  String? cooked;
+
+  @override
   int? postNumber;
   int? postType;
   DateTime? updatedAt;
+  @override
   int? replyCount;
   // // dynamic replyToPostNumber;
   int? quoteCount;
@@ -26,6 +57,8 @@ class DiscoursePost {
   int? readersCount;
   double? score;
   bool? yours;
+
+  @override
   int? topicId;
   String? topicSlug;
   String? displayUsername;
@@ -122,10 +155,4 @@ class DiscoursePost {
 
   factory DiscoursePost.fromJson(Map<String, dynamic> json) =>
       _$DiscoursePostFromJson(json);
-}
-
-class _NoPostIdException implements Exception {
-  @override
-  String toString() =>
-      "DiscourseTopic.fromJson was called without a given IsarID.";
 }

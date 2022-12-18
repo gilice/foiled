@@ -8,6 +8,7 @@ import 'package:foiled/features/auth/account.dart';
 import 'package:foiled/features/auth/account_backend.dart';
 import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/model/account_model.dart';
+import 'package:foiled/features/search/discourse_search_result.dart';
 import 'package:foiled/features/server/discourse_server.dart';
 import 'package:foiled/features/server/exceptions.dart';
 import 'package:foiled/features/server/model/discourse_server_model.dart';
@@ -63,85 +64,44 @@ class DiscourseServerBackend extends AsyncNotifier<DiscourseServerModel> {
   static var getServerInfo = _getServerInfoProvider;
   static var categoriesProvider = _getCategoriesProvider;
   static var getTopic = _getTopicProvider;
+  static var search = _searchProvider;
+  static var getSingleCategory = _getSingleCategoryProvider;
   // static var getPost = _getPostProvider;
 }
 
-// @riverpod
-// Future<DiscoursePost> _getPost(_GetPostRef ref, {required int postId}) async {
-//   talker.debug("getPost() called");
-//   var server = await ref.watch(DiscourseServer.provider.future);
-//   var baseUrl = server.baseUrl;
-//   var notifier = ref.watch(DiscourseServer.provider.notifier);
-//   var client = notifier.client;
-//   var apiKeyHeader =
-//       await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
-//   var db = await ref.watch(dbProvider.future);
+class NoSearchResultsException implements Exception {}
 
-//   var uri = Uri.parse("$baseUrl/posts/$postId.json");
-//   try {
-//     var req = await client.get(uri, headers: apiKeyHeader);
-//     var decoded = json.decode(req.body);
-//     var parsed = DiscoursePost.fromJson(decoded)
-//       ..isarID = localHash(uri.toString());
-
-//     talker.debug("getPost server response: ${req.body}");
-
-//     db.writeTxn(() async {
-//       await db.discoursePosts.put(parsed);
-//     });
-
-//     return parsed;
-//   } on http.ClientException {
-//     try {
-//       var d = await db.discoursePosts.get(localHash(uri.toString()));
-//       return d!;
-//     } catch (e) {
-//       talker.error("getPost error: $e");
-//       return Future.error(e);
-//     }
-//   }
-// }
-
-/*
 @riverpod
-Future<DiscoursePost> _getMultiplePostsFromTopic(
-    _GetMultiplePostsFromTopicRef ref,
-    {required int topicId,
-    required List<int> postIds}) async {
-  // talker.debug("getMultiplePosts($topicId, $postIds) called");
-  // var server = await ref.watch(DiscourseServer.provider.future);
-  // var baseUrl = server.baseUrl;
-  // var notifier = ref.watch(DiscourseServer.provider.notifier);
-  // var client = notifier.client;
-  // var apiKeyHeader =
-  //     await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
-  // var db = await ref.watch(dbProvider.future);
+Future<DiscourseSearch> _search(_SearchRef ref, String searchQuery,
+    {int? page}) async {
+  talker.debug("searchProvider called");
+  var server = await ref.watch(DiscourseServer.provider.future);
 
-  // var uri = Uri.parse("$baseUrl/posts/$postId.json");
-  // try {
-  //   var req = await client.get(uri, headers: apiKeyHeader);
-  //   var decoded = json.decode(req.body);
-  //   var parsed = DiscoursePost.fromJson(decoded)
-  //     ..isarID = localHash(uri.toString());
+  var apiKeyHeader =
+      await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
+  try {
+    var url = Uri.parse("${server.baseUrl}/search.json").replace(
+      queryParameters: {
+        "q": searchQuery,
+      },
+    );
 
-  //   talker.debug("getPost server response: ${req.body}");
+    if (page != null) {
+      url.queryParameters.addAll({
+        "page": page.toString(),
+      });
+    }
 
-  //   db.writeTxn(() async {
-  //     await db.discoursePosts.put(parsed);
-  //   });
-
-  //   return parsed;
-  // } on http.ClientException {
-  //   try {
-  //     var d = await db.discoursePosts.get(localHash(uri.toString()));
-  //     return d!;
-  //   } catch (e) {
-  //     talker.error("getPost error: $e");
-  //     return Future.error(e);
-  //   }
-  // }
+    var res = await http.get(url, headers: apiKeyHeader);
+    var decoded = json.decode(res.body);
+    var parsed = DiscourseSearch.fromJson(decoded)
+      ..id = localHash(url.toString());
+    return parsed;
+  } on http.ClientException {
+    return Future.error(NoSearchResultsException);
+  }
 }
-*/
+
 @riverpod
 Future<DiscourseTopicModel> _getTopic(
   _GetTopicRef ref, {
@@ -163,6 +123,7 @@ Future<DiscourseTopicModel> _getTopic(
     var parsed = DiscourseTopicModel.fromJson(
       jsonDecoded,
     );
+
     parsed.isarId = localHash(uri.toString());
 
     await db.writeTxn(() async {
@@ -254,6 +215,38 @@ Future<String> _getImgUrlFromTemplate(
   return baseUrl + template.replaceAll("{size}", size.toString());
 }
 
+
+@riverpod
+Future<DiscourseCategory> _getSingleCategory(_GetSingleCategoryRef ref, int categoryID) async {
+  var server = await ref.watch(DiscourseServer.provider.future);
+  var notifier = ref.watch(DiscourseServer.provider.notifier);
+  var client = notifier.client;
+  var headers = await ref.watch(AccountBackend.apiKeyHeaderProvider.future);
+  var db = await ref.watch(dbProvider.future);
+
+  var url = Uri.parse("${server.baseUrl}/c/$categoryID/show.json");
+  try {
+    var req = await client.get(url, headers: headers);
+    var decoded = json.decode(req.body);
+
+    var parsed = DiscourseCategory.fromJson(decoded, url.toString());
+
+    await db.writeTxn(() async {
+      await db.discourseCategorys.put(parsed);
+      server.cachedCategories.add(parsed);
+      await server.cachedCategories.save();
+    });
+
+    return parsed;
+  } on http.ClientException {
+    try {
+      return (await db.discourseCategorys.where().isarIdEqualTo(localHash(url.toString())).findFirst())!;
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+}
+
 @riverpod
 Future<List<DiscourseCategory>> _getCategories(_GetCategoriesRef ref) async {
   DiscourseServerModel server;
@@ -302,6 +295,8 @@ Future<List<DiscourseCategory>> _getCategories(_GetCategoriesRef ref) async {
 
     db.writeTxn(() async {
       await db.discourseCategorys.putAll(aCG);
+      server.cachedCategories.addAll(genCat);
+      await server.cachedCategories.save();
     });
 
     var needParse = await db.discourseCategorys

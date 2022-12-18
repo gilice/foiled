@@ -414,7 +414,7 @@ DiscourseCategory _discourseCategoryDeserialize(
     descriptionExcerpt: reader.readStringOrNull(offsets[6]),
     descriptionText: reader.readStringOrNull(offsets[7]),
     hasChildren: reader.readBoolOrNull(offsets[9]),
-    id: reader.readLong(offsets[10]),
+    id: reader.readLongOrNull(offsets[10]),
     isUncategorized: reader.readBoolOrNull(offsets[11]),
     minimumRequiredTags: reader.readLongOrNull(offsets[12]),
     name: reader.readStringOrNull(offsets[13]),
@@ -476,7 +476,7 @@ P _discourseCategoryDeserializeProp<P>(
     case 9:
       return (reader.readBoolOrNull(offset)) as P;
     case 10:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 11:
       return (reader.readBoolOrNull(offset)) as P;
     case 12:
@@ -1845,7 +1845,25 @@ extension DiscourseCategoryQueryFilter
   }
 
   QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
-      idEqualTo(int value) {
+      idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
+      idEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -1856,7 +1874,7 @@ extension DiscourseCategoryQueryFilter
 
   QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
       idGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1870,7 +1888,7 @@ extension DiscourseCategoryQueryFilter
 
   QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
       idLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1884,8 +1902,8 @@ extension DiscourseCategoryQueryFilter
 
   QueryBuilder<DiscourseCategory, DiscourseCategory, QAfterFilterCondition>
       idBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -6194,7 +6212,7 @@ extension DiscourseCategoryQueryProperty
     });
   }
 
-  QueryBuilder<DiscourseCategory, int, QQueryOperations> idProperty() {
+  QueryBuilder<DiscourseCategory, int?, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
@@ -6387,7 +6405,7 @@ extension DiscourseCategoryQueryProperty
 
 DiscourseCategory _$DiscourseCategoryFromJson(Map<String, dynamic> json) =>
     DiscourseCategory(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       name: json['name'] as String?,
       color: json['color'] as String?,
       slug: json['slug'] as String?,

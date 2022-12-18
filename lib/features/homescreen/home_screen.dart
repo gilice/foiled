@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/auth/ui/add_account_popup.dart';
 import 'package:foiled/features/homescreen/color_border_card.dart';
 import 'package:foiled/features/homescreen/subcategory_chip.dart';
+import 'package:foiled/features/search/ui/search_screen.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
-import 'package:foiled/features/settings/settings_popup.dart';
 import 'package:foiled/features/topics/ui/topics_screen.dart';
+import 'package:foiled/shared/home_app_bar.dart';
 import 'package:foiled/shared/utils.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,24 +25,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => Scaffold(
           body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Expanded(child: Text("Search")),
-                IconButton(
-                    onPressed: () => showSettingsPopup(context),
-                    icon: const Icon(Icons.settings_outlined))
-              ],
-            ),
-            primary: true,
-            floating: true,
-            elevation: 10,
-            shadowColor: Theme.of(context).colorScheme.shadow,
-            shape: const RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(12))),
+          HomeAppBar(
+            child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const SearchScreen()));
+                  // ref.watch(DiscourseServerBackend.search("asd"));
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Expanded(child: Text("Search")),
+                  ],
+                )),
           ),
           Consumer(
             builder: (context, ref, child) => ref
@@ -62,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ))),
                               color: harmonizeToColor(tc.color, context),
                               child: StandardPadding(
+                                
                                 multiplier: 2,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

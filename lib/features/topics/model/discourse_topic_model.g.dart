@@ -61,7 +61,7 @@ const DiscourseTopicModelSchema = CollectionSchema(
     r'createdAt': PropertySchema(
       id: 8,
       name: r'createdAt',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'currentPostNumber': PropertySchema(
       id: 9,
@@ -280,12 +280,6 @@ int _discourseTopicModelEstimateSize(
     }
   }
   {
-    final value = object.createdAt;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
     final value = object.draftKey;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -388,7 +382,7 @@ void _discourseTopicModelSerialize(
   writer.writeLong(offsets[5], object.categoryId);
   writer.writeLong(offsets[6], object.chunkSize);
   writer.writeBool(offsets[7], object.closed);
-  writer.writeString(offsets[8], object.createdAt);
+  writer.writeDateTime(offsets[8], object.createdAt);
   writer.writeLong(offsets[9], object.currentPostNumber);
   writer.writeString(offsets[10], object.draftKey);
   writer.writeLong(offsets[11], object.draftSequence);
@@ -446,7 +440,7 @@ DiscourseTopicModel _discourseTopicModelDeserialize(
     categoryId: reader.readLongOrNull(offsets[5]),
     chunkSize: reader.readLongOrNull(offsets[6]),
     closed: reader.readBoolOrNull(offsets[7]),
-    createdAt: reader.readStringOrNull(offsets[8]),
+    createdAt: reader.readDateTimeOrNull(offsets[8]),
     currentPostNumber: reader.readLongOrNull(offsets[9]),
     draftKey: reader.readStringOrNull(offsets[10]),
     draftSequence: reader.readLongOrNull(offsets[11]),
@@ -515,7 +509,7 @@ P _discourseTopicModelDeserializeProp<P>(
     case 7:
       return (reader.readBoolOrNull(offset)) as P;
     case 8:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 9:
       return (reader.readLongOrNull(offset)) as P;
     case 10:
@@ -1281,58 +1275,49 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      createdAtEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
       createdAtGreaterThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
       createdAtLessThan(
-    String? value, {
+    DateTime? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'createdAt',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
       createdAtBetween(
-    String? lower,
-    String? upper, {
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1341,77 +1326,6 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'createdAt',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'createdAt',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      createdAtIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdAt',
-        value: '',
       ));
     });
   }
@@ -6063,9 +5977,9 @@ extension DiscourseTopicModelQueryWhereDistinct
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QDistinct>
-      distinctByCreatedAt({bool caseSensitive = true}) {
+      distinctByCreatedAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdAt', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'createdAt');
     });
   }
 
@@ -6371,7 +6285,7 @@ extension DiscourseTopicModelQueryProperty
     });
   }
 
-  QueryBuilder<DiscourseTopicModel, String?, QQueryOperations>
+  QueryBuilder<DiscourseTopicModel, DateTime?, QQueryOperations>
       createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
@@ -6628,7 +6542,9 @@ DiscourseTopicModel _$DiscourseTopicModelFromJson(Map<String, dynamic> json) =>
       replyCount: json['replyCount'] as int?,
       highestPostNumber: json['highestPostNumber'] as int?,
       imageUrl: json['imageUrl'] as String?,
-      createdAt: json['created_at'] as String?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
       lastPostedAt: json['lastPostedAt'] as String?,
       bumped: json['bumped'] as bool?,
       bumpedAt: json['bumpedAt'] as String?,
@@ -6687,7 +6603,7 @@ Map<String, dynamic> _$DiscourseTopicModelToJson(
       'replyCount': instance.replyCount,
       'highestPostNumber': instance.highestPostNumber,
       'imageUrl': instance.imageUrl,
-      'created_at': instance.createdAt,
+      'created_at': instance.createdAt?.toIso8601String(),
       'lastPostedAt': instance.lastPostedAt,
       'bumped': instance.bumped,
       'bumpedAt': instance.bumpedAt,

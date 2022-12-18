@@ -18,7 +18,7 @@ class DiscourseCategory {
 
   @JsonKey(ignore: true)
   final subcategories = IsarLinks<DiscourseCategory>();
-  int id;
+  int? id;
 
   /// The display name of this category. For the one used in requests, see [slug]
   String? name;
@@ -74,7 +74,7 @@ class DiscourseCategory {
 
   DiscourseCategory({
     //this.isarId,
-    required this.id,
+    this.id,
     this.name,
     this.color,
     this.slug,

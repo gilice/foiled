@@ -281,6 +281,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.4"
+  expandable_sliver_list:
+    dependency: "direct main"
+    description:
+      name: expandable_sliver_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -397,6 +404,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  functional_widget:
+    dependency: "direct dev"
+    description:
+      name: functional_widget
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.1"
+  functional_widget_annotation:
+    dependency: "direct main"
+    description:
+      name: functional_widget_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0"
   fwfh_cached_network_image:
     dependency: transitive
     description:

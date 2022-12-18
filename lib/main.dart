@@ -48,6 +48,7 @@ class FoiledApp extends StatelessWidget {
           }
 
           return ProviderScope(
+
             observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) =>

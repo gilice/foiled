@@ -29,6 +29,85 @@ class _SystemHash {
   }
 }
 
+String $_searchHash() => r'c7a4169e462fe8ea5d085d53b3f16e0c36259f7d';
+
+/// See also [_search].
+class _SearchProvider extends AutoDisposeFutureProvider<DiscourseSearch> {
+  _SearchProvider(
+    this.searchQuery, {
+    this.page,
+  }) : super(
+          (ref) => _search(
+            ref,
+            searchQuery,
+            page: page,
+          ),
+          from: _searchProvider,
+          name: r'_searchProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : $_searchHash,
+        );
+
+  final String searchQuery;
+  final int? page;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _SearchProvider &&
+        other.searchQuery == searchQuery &&
+        other.page == page;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, searchQuery.hashCode);
+    hash = _SystemHash.combine(hash, page.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+typedef _SearchRef = AutoDisposeFutureProviderRef<DiscourseSearch>;
+
+/// See also [_search].
+final _searchProvider = _SearchFamily();
+
+class _SearchFamily extends Family<AsyncValue<DiscourseSearch>> {
+  _SearchFamily();
+
+  _SearchProvider call(
+    String searchQuery, {
+    int? page,
+  }) {
+    return _SearchProvider(
+      searchQuery,
+      page: page,
+    );
+  }
+
+  @override
+  AutoDisposeFutureProvider<DiscourseSearch> getProviderOverride(
+    covariant _SearchProvider provider,
+  ) {
+    return call(
+      provider.searchQuery,
+      page: provider.page,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'_searchProvider';
+}
+
 String $_getTopicHash() => r'52275467c39d14851be7985f9d0793c1a635ff10';
 
 /// See also [_getTopic].
@@ -199,7 +278,79 @@ class _GetImgUrlFromTemplateFamily extends Family<AsyncValue<String>> {
   String? get name => r'_getImgUrlFromTemplateProvider';
 }
 
-String $_getCategoriesHash() => r'c0953c65f81082a7fba2ecd321c51acfd91f0e47';
+String $_getSingleCategoryHash() => r'7463dd39f3ceb89b3cb89ed02b6f4c1f7e9aa7ca';
+
+/// See also [_getSingleCategory].
+class _GetSingleCategoryProvider
+    extends AutoDisposeFutureProvider<DiscourseCategory> {
+  _GetSingleCategoryProvider(
+    this.categoryID,
+  ) : super(
+          (ref) => _getSingleCategory(
+            ref,
+            categoryID,
+          ),
+          from: _getSingleCategoryProvider,
+          name: r'_getSingleCategoryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : $_getSingleCategoryHash,
+        );
+
+  final int categoryID;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _GetSingleCategoryProvider &&
+        other.categoryID == categoryID;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, categoryID.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+typedef _GetSingleCategoryRef = AutoDisposeFutureProviderRef<DiscourseCategory>;
+
+/// See also [_getSingleCategory].
+final _getSingleCategoryProvider = _GetSingleCategoryFamily();
+
+class _GetSingleCategoryFamily extends Family<AsyncValue<DiscourseCategory>> {
+  _GetSingleCategoryFamily();
+
+  _GetSingleCategoryProvider call(
+    int categoryID,
+  ) {
+    return _GetSingleCategoryProvider(
+      categoryID,
+    );
+  }
+
+  @override
+  AutoDisposeFutureProvider<DiscourseCategory> getProviderOverride(
+    covariant _GetSingleCategoryProvider provider,
+  ) {
+    return call(
+      provider.categoryID,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'_getSingleCategoryProvider';
+}
+
+String $_getCategoriesHash() => r'20462e63cebf1292917f531a476c6d01d600c00f';
 
 /// See also [_getCategories].
 final _getCategoriesProvider =

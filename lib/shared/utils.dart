@@ -65,10 +65,15 @@ ThemeData themeFromColorScheme(ColorScheme inp) => ThemeData(
     textTheme: GoogleFonts.dmSansTextTheme(inp.brightness == Brightness.light
         ? ThemeData.light().textTheme
         : ThemeData.dark().textTheme));
-TextStyle titleTextStyle(BuildContext context) => Theme.of(context)
-    .textTheme
-    .titleMedium!
-    .copyWith(fontWeight: FontWeight.bold);
+
+TextStyle titleTextStyle(BuildContext context, {bold = true}) {
+  var t = Theme.of(context).textTheme.titleMedium!;
+
+  if (bold) {
+    t = t.copyWith(fontWeight: FontWeight.bold);
+  }
+  return t;
+}
 
 class BrandedAppBar extends AppBar {
   @override

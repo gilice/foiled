@@ -32,228 +32,243 @@ const DiscoursePostSchema = CollectionSchema(
       name: r'avatarTemplate',
       type: IsarType.string,
     ),
-    r'bookmarked': PropertySchema(
+    r'blurb': PropertySchema(
       id: 3,
+      name: r'blurb',
+      type: IsarType.string,
+    ),
+    r'bookmarked': PropertySchema(
+      id: 4,
       name: r'bookmarked',
       type: IsarType.bool,
     ),
     r'canAcceptAnswer': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'canAcceptAnswer',
       type: IsarType.bool,
     ),
     r'canDelete': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'canDelete',
       type: IsarType.bool,
     ),
     r'canEdit': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'canEdit',
       type: IsarType.bool,
     ),
     r'canRecover': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'canRecover',
       type: IsarType.bool,
     ),
     r'canUnacceptAnswer': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'canUnacceptAnswer',
       type: IsarType.bool,
     ),
     r'canViewEditHistory': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'canViewEditHistory',
       type: IsarType.bool,
     ),
     r'canWiki': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'canWiki',
       type: IsarType.bool,
     ),
     r'cooked': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'cooked',
       type: IsarType.string,
     ),
     r'createdAt': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'createdAt',
       type: IsarType.dateTime,
     ),
     r'displayUsername': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'displayUsername',
       type: IsarType.string,
     ),
     r'flairBgColor': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'flairBgColor',
       type: IsarType.string,
     ),
     r'flairColor': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'flairColor',
       type: IsarType.string,
     ),
     r'flairName': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'flairName',
       type: IsarType.string,
     ),
     r'flairUrl': PropertySchema(
-      id: 17,
+      id: 18,
       name: r'flairUrl',
       type: IsarType.string,
     ),
     r'hidden': PropertySchema(
-      id: 18,
+      id: 19,
       name: r'hidden',
       type: IsarType.bool,
     ),
     r'id': PropertySchema(
-      id: 19,
+      id: 20,
       name: r'id',
       type: IsarType.long,
     ),
     r'incomingLinkCount': PropertySchema(
-      id: 20,
+      id: 21,
       name: r'incomingLinkCount',
       type: IsarType.long,
     ),
     r'lastWikiEdit': PropertySchema(
-      id: 21,
+      id: 22,
       name: r'lastWikiEdit',
       type: IsarType.dateTime,
     ),
+    r'likeCount': PropertySchema(
+      id: 23,
+      name: r'likeCount',
+      type: IsarType.long,
+    ),
     r'moderator': PropertySchema(
-      id: 22,
+      id: 24,
       name: r'moderator',
       type: IsarType.bool,
     ),
     r'name': PropertySchema(
-      id: 23,
+      id: 25,
       name: r'name',
       type: IsarType.string,
     ),
     r'postNumber': PropertySchema(
-      id: 24,
+      id: 26,
       name: r'postNumber',
       type: IsarType.long,
     ),
     r'postType': PropertySchema(
-      id: 25,
+      id: 27,
       name: r'postType',
       type: IsarType.long,
     ),
     r'primaryGroupName': PropertySchema(
-      id: 26,
+      id: 28,
       name: r'primaryGroupName',
       type: IsarType.string,
     ),
     r'quoteCount': PropertySchema(
-      id: 27,
+      id: 29,
       name: r'quoteCount',
       type: IsarType.long,
     ),
     r'read': PropertySchema(
-      id: 28,
+      id: 30,
       name: r'read',
       type: IsarType.bool,
     ),
     r'readersCount': PropertySchema(
-      id: 29,
+      id: 31,
       name: r'readersCount',
       type: IsarType.long,
     ),
     r'reads': PropertySchema(
-      id: 30,
+      id: 32,
       name: r'reads',
       type: IsarType.long,
     ),
     r'replyCount': PropertySchema(
-      id: 31,
+      id: 33,
       name: r'replyCount',
       type: IsarType.long,
     ),
     r'score': PropertySchema(
-      id: 32,
+      id: 34,
       name: r'score',
       type: IsarType.double,
     ),
     r'staff': PropertySchema(
-      id: 33,
+      id: 35,
       name: r'staff',
       type: IsarType.bool,
     ),
     r'titleIsGroup': PropertySchema(
-      id: 34,
+      id: 36,
       name: r'titleIsGroup',
       type: IsarType.bool,
     ),
     r'topicId': PropertySchema(
-      id: 35,
+      id: 37,
       name: r'topicId',
       type: IsarType.long,
     ),
     r'topicSlug': PropertySchema(
-      id: 36,
+      id: 38,
       name: r'topicSlug',
       type: IsarType.string,
     ),
+    r'topicTitleHeadline': PropertySchema(
+      id: 39,
+      name: r'topicTitleHeadline',
+      type: IsarType.string,
+    ),
     r'trustLevel': PropertySchema(
-      id: 37,
+      id: 40,
       name: r'trustLevel',
       type: IsarType.long,
     ),
     r'updatedAt': PropertySchema(
-      id: 38,
+      id: 41,
       name: r'updatedAt',
       type: IsarType.dateTime,
     ),
     r'userCreatedAt': PropertySchema(
-      id: 39,
+      id: 42,
       name: r'userCreatedAt',
       type: IsarType.dateTime,
     ),
     r'userDateOfBirth': PropertySchema(
-      id: 40,
+      id: 43,
       name: r'userDateOfBirth',
       type: IsarType.dateTime,
     ),
     r'userDeleted': PropertySchema(
-      id: 41,
+      id: 44,
       name: r'userDeleted',
       type: IsarType.bool,
     ),
     r'userId': PropertySchema(
-      id: 42,
+      id: 45,
       name: r'userId',
       type: IsarType.long,
     ),
     r'userTitle': PropertySchema(
-      id: 43,
+      id: 46,
       name: r'userTitle',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 44,
+      id: 47,
       name: r'username',
       type: IsarType.string,
     ),
     r'version': PropertySchema(
-      id: 45,
+      id: 48,
       name: r'version',
       type: IsarType.long,
     ),
     r'wiki': PropertySchema(
-      id: 46,
+      id: 49,
       name: r'wiki',
       type: IsarType.bool,
     ),
     r'yours': PropertySchema(
-      id: 47,
+      id: 50,
       name: r'yours',
       type: IsarType.bool,
     )
@@ -280,6 +295,12 @@ int _discoursePostEstimateSize(
   var bytesCount = offsets.last;
   {
     final value = object.avatarTemplate;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.blurb;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -339,6 +360,12 @@ int _discoursePostEstimateSize(
     }
   }
   {
+    final value = object.topicTitleHeadline;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.userTitle;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -362,51 +389,54 @@ void _discoursePostSerialize(
   writer.writeBool(offsets[0], object.acceptedAnswer);
   writer.writeBool(offsets[1], object.admin);
   writer.writeString(offsets[2], object.avatarTemplate);
-  writer.writeBool(offsets[3], object.bookmarked);
-  writer.writeBool(offsets[4], object.canAcceptAnswer);
-  writer.writeBool(offsets[5], object.canDelete);
-  writer.writeBool(offsets[6], object.canEdit);
-  writer.writeBool(offsets[7], object.canRecover);
-  writer.writeBool(offsets[8], object.canUnacceptAnswer);
-  writer.writeBool(offsets[9], object.canViewEditHistory);
-  writer.writeBool(offsets[10], object.canWiki);
-  writer.writeString(offsets[11], object.cooked);
-  writer.writeDateTime(offsets[12], object.createdAt);
-  writer.writeString(offsets[13], object.displayUsername);
-  writer.writeString(offsets[14], object.flairBgColor);
-  writer.writeString(offsets[15], object.flairColor);
-  writer.writeString(offsets[16], object.flairName);
-  writer.writeString(offsets[17], object.flairUrl);
-  writer.writeBool(offsets[18], object.hidden);
-  writer.writeLong(offsets[19], object.id);
-  writer.writeLong(offsets[20], object.incomingLinkCount);
-  writer.writeDateTime(offsets[21], object.lastWikiEdit);
-  writer.writeBool(offsets[22], object.moderator);
-  writer.writeString(offsets[23], object.name);
-  writer.writeLong(offsets[24], object.postNumber);
-  writer.writeLong(offsets[25], object.postType);
-  writer.writeString(offsets[26], object.primaryGroupName);
-  writer.writeLong(offsets[27], object.quoteCount);
-  writer.writeBool(offsets[28], object.read);
-  writer.writeLong(offsets[29], object.readersCount);
-  writer.writeLong(offsets[30], object.reads);
-  writer.writeLong(offsets[31], object.replyCount);
-  writer.writeDouble(offsets[32], object.score);
-  writer.writeBool(offsets[33], object.staff);
-  writer.writeBool(offsets[34], object.titleIsGroup);
-  writer.writeLong(offsets[35], object.topicId);
-  writer.writeString(offsets[36], object.topicSlug);
-  writer.writeLong(offsets[37], object.trustLevel);
-  writer.writeDateTime(offsets[38], object.updatedAt);
-  writer.writeDateTime(offsets[39], object.userCreatedAt);
-  writer.writeDateTime(offsets[40], object.userDateOfBirth);
-  writer.writeBool(offsets[41], object.userDeleted);
-  writer.writeLong(offsets[42], object.userId);
-  writer.writeString(offsets[43], object.userTitle);
-  writer.writeString(offsets[44], object.username);
-  writer.writeLong(offsets[45], object.version);
-  writer.writeBool(offsets[46], object.wiki);
-  writer.writeBool(offsets[47], object.yours);
+  writer.writeString(offsets[3], object.blurb);
+  writer.writeBool(offsets[4], object.bookmarked);
+  writer.writeBool(offsets[5], object.canAcceptAnswer);
+  writer.writeBool(offsets[6], object.canDelete);
+  writer.writeBool(offsets[7], object.canEdit);
+  writer.writeBool(offsets[8], object.canRecover);
+  writer.writeBool(offsets[9], object.canUnacceptAnswer);
+  writer.writeBool(offsets[10], object.canViewEditHistory);
+  writer.writeBool(offsets[11], object.canWiki);
+  writer.writeString(offsets[12], object.cooked);
+  writer.writeDateTime(offsets[13], object.createdAt);
+  writer.writeString(offsets[14], object.displayUsername);
+  writer.writeString(offsets[15], object.flairBgColor);
+  writer.writeString(offsets[16], object.flairColor);
+  writer.writeString(offsets[17], object.flairName);
+  writer.writeString(offsets[18], object.flairUrl);
+  writer.writeBool(offsets[19], object.hidden);
+  writer.writeLong(offsets[20], object.id);
+  writer.writeLong(offsets[21], object.incomingLinkCount);
+  writer.writeDateTime(offsets[22], object.lastWikiEdit);
+  writer.writeLong(offsets[23], object.likeCount);
+  writer.writeBool(offsets[24], object.moderator);
+  writer.writeString(offsets[25], object.name);
+  writer.writeLong(offsets[26], object.postNumber);
+  writer.writeLong(offsets[27], object.postType);
+  writer.writeString(offsets[28], object.primaryGroupName);
+  writer.writeLong(offsets[29], object.quoteCount);
+  writer.writeBool(offsets[30], object.read);
+  writer.writeLong(offsets[31], object.readersCount);
+  writer.writeLong(offsets[32], object.reads);
+  writer.writeLong(offsets[33], object.replyCount);
+  writer.writeDouble(offsets[34], object.score);
+  writer.writeBool(offsets[35], object.staff);
+  writer.writeBool(offsets[36], object.titleIsGroup);
+  writer.writeLong(offsets[37], object.topicId);
+  writer.writeString(offsets[38], object.topicSlug);
+  writer.writeString(offsets[39], object.topicTitleHeadline);
+  writer.writeLong(offsets[40], object.trustLevel);
+  writer.writeDateTime(offsets[41], object.updatedAt);
+  writer.writeDateTime(offsets[42], object.userCreatedAt);
+  writer.writeDateTime(offsets[43], object.userDateOfBirth);
+  writer.writeBool(offsets[44], object.userDeleted);
+  writer.writeLong(offsets[45], object.userId);
+  writer.writeString(offsets[46], object.userTitle);
+  writer.writeString(offsets[47], object.username);
+  writer.writeLong(offsets[48], object.version);
+  writer.writeBool(offsets[49], object.wiki);
+  writer.writeBool(offsets[50], object.yours);
 }
 
 DiscoursePost _discoursePostDeserialize(
@@ -419,53 +449,56 @@ DiscoursePost _discoursePostDeserialize(
     acceptedAnswer: reader.readBoolOrNull(offsets[0]),
     admin: reader.readBoolOrNull(offsets[1]),
     avatarTemplate: reader.readStringOrNull(offsets[2]),
-    bookmarked: reader.readBoolOrNull(offsets[3]),
-    canAcceptAnswer: reader.readBoolOrNull(offsets[4]),
-    canDelete: reader.readBoolOrNull(offsets[5]),
-    canEdit: reader.readBoolOrNull(offsets[6]),
-    canRecover: reader.readBoolOrNull(offsets[7]),
-    canUnacceptAnswer: reader.readBoolOrNull(offsets[8]),
-    canViewEditHistory: reader.readBoolOrNull(offsets[9]),
-    canWiki: reader.readBoolOrNull(offsets[10]),
-    cooked: reader.readStringOrNull(offsets[11]),
-    createdAt: reader.readDateTimeOrNull(offsets[12]),
-    displayUsername: reader.readStringOrNull(offsets[13]),
-    flairBgColor: reader.readStringOrNull(offsets[14]),
-    flairColor: reader.readStringOrNull(offsets[15]),
-    flairName: reader.readStringOrNull(offsets[16]),
-    flairUrl: reader.readStringOrNull(offsets[17]),
-    hidden: reader.readBoolOrNull(offsets[18]),
-    id: reader.readLongOrNull(offsets[19]),
-    incomingLinkCount: reader.readLongOrNull(offsets[20]),
-    lastWikiEdit: reader.readDateTimeOrNull(offsets[21]),
-    moderator: reader.readBoolOrNull(offsets[22]),
-    name: reader.readStringOrNull(offsets[23]),
-    postNumber: reader.readLongOrNull(offsets[24]),
-    postType: reader.readLongOrNull(offsets[25]),
-    primaryGroupName: reader.readStringOrNull(offsets[26]),
-    quoteCount: reader.readLongOrNull(offsets[27]),
-    read: reader.readBoolOrNull(offsets[28]),
-    readersCount: reader.readLongOrNull(offsets[29]),
-    reads: reader.readLongOrNull(offsets[30]),
-    replyCount: reader.readLongOrNull(offsets[31]),
-    score: reader.readDoubleOrNull(offsets[32]),
-    staff: reader.readBoolOrNull(offsets[33]),
-    titleIsGroup: reader.readBoolOrNull(offsets[34]),
-    topicId: reader.readLongOrNull(offsets[35]),
-    topicSlug: reader.readStringOrNull(offsets[36]),
-    trustLevel: reader.readLongOrNull(offsets[37]),
-    updatedAt: reader.readDateTimeOrNull(offsets[38]),
-    userCreatedAt: reader.readDateTimeOrNull(offsets[39]),
-    userDateOfBirth: reader.readDateTimeOrNull(offsets[40]),
-    userDeleted: reader.readBoolOrNull(offsets[41]),
-    userId: reader.readLongOrNull(offsets[42]),
-    userTitle: reader.readStringOrNull(offsets[43]),
-    username: reader.readStringOrNull(offsets[44]),
-    version: reader.readLongOrNull(offsets[45]),
-    wiki: reader.readBoolOrNull(offsets[46]),
-    yours: reader.readBoolOrNull(offsets[47]),
+    bookmarked: reader.readBoolOrNull(offsets[4]),
+    canAcceptAnswer: reader.readBoolOrNull(offsets[5]),
+    canDelete: reader.readBoolOrNull(offsets[6]),
+    canEdit: reader.readBoolOrNull(offsets[7]),
+    canRecover: reader.readBoolOrNull(offsets[8]),
+    canUnacceptAnswer: reader.readBoolOrNull(offsets[9]),
+    canViewEditHistory: reader.readBoolOrNull(offsets[10]),
+    canWiki: reader.readBoolOrNull(offsets[11]),
+    cooked: reader.readStringOrNull(offsets[12]),
+    createdAt: reader.readDateTimeOrNull(offsets[13]),
+    displayUsername: reader.readStringOrNull(offsets[14]),
+    flairBgColor: reader.readStringOrNull(offsets[15]),
+    flairColor: reader.readStringOrNull(offsets[16]),
+    flairName: reader.readStringOrNull(offsets[17]),
+    flairUrl: reader.readStringOrNull(offsets[18]),
+    hidden: reader.readBoolOrNull(offsets[19]),
+    id: reader.readLongOrNull(offsets[20]),
+    incomingLinkCount: reader.readLongOrNull(offsets[21]),
+    lastWikiEdit: reader.readDateTimeOrNull(offsets[22]),
+    moderator: reader.readBoolOrNull(offsets[24]),
+    name: reader.readStringOrNull(offsets[25]),
+    postNumber: reader.readLongOrNull(offsets[26]),
+    postType: reader.readLongOrNull(offsets[27]),
+    primaryGroupName: reader.readStringOrNull(offsets[28]),
+    quoteCount: reader.readLongOrNull(offsets[29]),
+    read: reader.readBoolOrNull(offsets[30]),
+    readersCount: reader.readLongOrNull(offsets[31]),
+    reads: reader.readLongOrNull(offsets[32]),
+    replyCount: reader.readLongOrNull(offsets[33]),
+    score: reader.readDoubleOrNull(offsets[34]),
+    staff: reader.readBoolOrNull(offsets[35]),
+    titleIsGroup: reader.readBoolOrNull(offsets[36]),
+    topicId: reader.readLongOrNull(offsets[37]),
+    topicSlug: reader.readStringOrNull(offsets[38]),
+    trustLevel: reader.readLongOrNull(offsets[40]),
+    updatedAt: reader.readDateTimeOrNull(offsets[41]),
+    userCreatedAt: reader.readDateTimeOrNull(offsets[42]),
+    userDateOfBirth: reader.readDateTimeOrNull(offsets[43]),
+    userDeleted: reader.readBoolOrNull(offsets[44]),
+    userId: reader.readLongOrNull(offsets[45]),
+    userTitle: reader.readStringOrNull(offsets[46]),
+    username: reader.readStringOrNull(offsets[47]),
+    version: reader.readLongOrNull(offsets[48]),
+    wiki: reader.readBoolOrNull(offsets[49]),
+    yours: reader.readBoolOrNull(offsets[50]),
   );
+  object.blurb = reader.readStringOrNull(offsets[3]);
   object.isarID = id;
+  object.likeCount = reader.readLongOrNull(offsets[23]);
+  object.topicTitleHeadline = reader.readStringOrNull(offsets[39]);
   return object;
 }
 
@@ -483,7 +516,7 @@ P _discoursePostDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readBoolOrNull(offset)) as P;
     case 5:
@@ -499,11 +532,11 @@ P _discoursePostDeserializeProp<P>(
     case 10:
       return (reader.readBoolOrNull(offset)) as P;
     case 11:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 12:
-      return (reader.readDateTimeOrNull(offset)) as P;
-    case 13:
       return (reader.readStringOrNull(offset)) as P;
+    case 13:
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 14:
       return (reader.readStringOrNull(offset)) as P;
     case 15:
@@ -513,64 +546,70 @@ P _discoursePostDeserializeProp<P>(
     case 17:
       return (reader.readStringOrNull(offset)) as P;
     case 18:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 19:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 20:
       return (reader.readLongOrNull(offset)) as P;
     case 21:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 22:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 23:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 24:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 25:
-      return (reader.readLongOrNull(offset)) as P;
-    case 26:
       return (reader.readStringOrNull(offset)) as P;
+    case 26:
+      return (reader.readLongOrNull(offset)) as P;
     case 27:
       return (reader.readLongOrNull(offset)) as P;
     case 28:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 29:
       return (reader.readLongOrNull(offset)) as P;
     case 30:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 31:
       return (reader.readLongOrNull(offset)) as P;
     case 32:
-      return (reader.readDoubleOrNull(offset)) as P;
-    case 33:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 34:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 35:
       return (reader.readLongOrNull(offset)) as P;
+    case 33:
+      return (reader.readLongOrNull(offset)) as P;
+    case 34:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 35:
+      return (reader.readBoolOrNull(offset)) as P;
     case 36:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 37:
       return (reader.readLongOrNull(offset)) as P;
     case 38:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 39:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 40:
-      return (reader.readDateTimeOrNull(offset)) as P;
-    case 41:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 42:
       return (reader.readLongOrNull(offset)) as P;
+    case 41:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 42:
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 43:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 44:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 45:
       return (reader.readLongOrNull(offset)) as P;
     case 46:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 47:
+      return (reader.readStringOrNull(offset)) as P;
+    case 48:
+      return (reader.readLongOrNull(offset)) as P;
+    case 49:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 50:
       return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -877,6 +916,160 @@ extension DiscoursePostQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'avatarTemplate',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'blurb',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'blurb',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'blurb',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'blurb',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'blurb',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'blurb',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      blurbIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'blurb',
         value: '',
       ));
     });
@@ -2408,6 +2601,80 @@ extension DiscoursePostQueryFilter
   }
 
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'likeCount',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'likeCount',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountEqualTo(int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'likeCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'likeCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'likeCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      likeCountBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'likeCount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
       moderatorIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3583,6 +3850,160 @@ extension DiscoursePostQueryFilter
   }
 
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'topicTitleHeadline',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'topicTitleHeadline',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'topicTitleHeadline',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'topicTitleHeadline',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'topicTitleHeadline',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'topicTitleHeadline',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      topicTitleHeadlineIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'topicTitleHeadline',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
       trustLevelIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -4467,6 +4888,18 @@ extension DiscoursePostQuerySortBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByBlurb() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'blurb', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByBlurbDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'blurb', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByBookmarked() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'bookmarked', Sort.asc);
@@ -4716,6 +5149,19 @@ extension DiscoursePostQuerySortBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByLikeCount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'likeCount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      sortByLikeCountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'likeCount', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByModerator() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'moderator', Sort.asc);
@@ -4908,6 +5354,20 @@ extension DiscoursePostQuerySortBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      sortByTopicTitleHeadline() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'topicTitleHeadline', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      sortByTopicTitleHeadlineDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'topicTitleHeadline', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByTrustLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'trustLevel', Sort.asc);
@@ -5089,6 +5549,18 @@ extension DiscoursePostQuerySortThenBy
       thenByAvatarTemplateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'avatarTemplate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByBlurb() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'blurb', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByBlurbDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'blurb', Sort.desc);
     });
   }
 
@@ -5353,6 +5825,19 @@ extension DiscoursePostQuerySortThenBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByLikeCount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'likeCount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      thenByLikeCountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'likeCount', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByModerator() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'moderator', Sort.asc);
@@ -5545,6 +6030,20 @@ extension DiscoursePostQuerySortThenBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      thenByTopicTitleHeadline() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'topicTitleHeadline', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      thenByTopicTitleHeadlineDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'topicTitleHeadline', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByTrustLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'trustLevel', Sort.asc);
@@ -5710,6 +6209,13 @@ extension DiscoursePostQueryWhereDistinct
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctByBlurb(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'blurb', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctByBookmarked() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'bookmarked');
@@ -5836,6 +6342,12 @@ extension DiscoursePostQueryWhereDistinct
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctByLikeCount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'likeCount');
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctByModerator() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'moderator');
@@ -5929,6 +6441,14 @@ extension DiscoursePostQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'topicSlug', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QDistinct>
+      distinctByTopicTitleHeadline({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'topicTitleHeadline',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -6029,6 +6549,12 @@ extension DiscoursePostQueryProperty
       avatarTemplateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'avatarTemplate');
+    });
+  }
+
+  QueryBuilder<DiscoursePost, String?, QQueryOperations> blurbProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'blurb');
     });
   }
 
@@ -6153,6 +6679,12 @@ extension DiscoursePostQueryProperty
     });
   }
 
+  QueryBuilder<DiscoursePost, int?, QQueryOperations> likeCountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'likeCount');
+    });
+  }
+
   QueryBuilder<DiscoursePost, bool?, QQueryOperations> moderatorProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'moderator');
@@ -6241,6 +6773,13 @@ extension DiscoursePostQueryProperty
   QueryBuilder<DiscoursePost, String?, QQueryOperations> topicSlugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'topicSlug');
+    });
+  }
+
+  QueryBuilder<DiscoursePost, String?, QQueryOperations>
+      topicTitleHeadlineProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'topicTitleHeadline');
     });
   }
 
@@ -6377,10 +6916,16 @@ DiscoursePost _$DiscoursePostFromJson(Map<String, dynamic> json) =>
       canAcceptAnswer: json['canAcceptAnswer'] as bool?,
       canUnacceptAnswer: json['canUnacceptAnswer'] as bool?,
       acceptedAnswer: json['acceptedAnswer'] as bool?,
-    );
+    )
+      ..likeCount = json['likeCount'] as int?
+      ..blurb = json['blurb'] as String?
+      ..topicTitleHeadline = json['topicTitleHeadline'] as String?;
 
 Map<String, dynamic> _$DiscoursePostToJson(DiscoursePost instance) =>
     <String, dynamic>{
+      'likeCount': instance.likeCount,
+      'blurb': instance.blurb,
+      'topicTitleHeadline': instance.topicTitleHeadline,
       'id': instance.id,
       'name': instance.name,
       'username': instance.username,

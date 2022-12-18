@@ -48,6 +48,7 @@ dependencies:
   riverpod_annotation: ^1.0.6
   convenient_test: ^1.2.1
   auto_size_text: ^3.0.0
+  functional_widget_annotation: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ dev_dependencies:
   json_serializable: ^6.0.5
   riverpod_generator: ^1.0.4
   convenient_test_dev: ^1.2.1
+  functional_widget: ^0.10.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

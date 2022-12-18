@@ -5,32 +5,51 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'discourse_topic_model.g.dart';
 
+abstract class DiscourseAbstractTopic {
+  String? title;
+  String? slug;
+  int? postsCount;
+  DateTime? createdAt;
+  List<String>? tags;
+  bool? pinned;
+  bool? pinnedGlobally;
+  String? excerpt;
+  int? id;
+}
+
 @collection
 @JsonSerializable()
-class DiscourseTopicModel {
+class DiscourseTopicModel implements DiscourseAbstractTopic {
   @JsonKey(ignore: true)
   late Id isarId;
   final cachedPosts = IsarLinks<DiscoursePost>();
 
+  @override
   int? id;
+  @override
   String? title;
   String? fancyTitle;
+  @override
   String? slug;
+  @override
   int? postsCount;
 
   int? replyCount;
   int? highestPostNumber;
   String? imageUrl;
 
+  @override
   @JsonKey(name: "created_at")
-  String? createdAt;
+  DateTime? createdAt;
   String? lastPostedAt;
   bool? bumped;
   String? bumpedAt;
   String? archetype;
   bool? unseen;
+  @override
   bool? pinned;
   String? unpinned;
+  @override
   String? excerpt;
   bool? visible;
   bool? closed;
@@ -44,6 +63,7 @@ class DiscourseTopicModel {
   bool? hasSummary;
   String? lastPosterUsername;
   int? categoryId;
+  @override
   bool? pinnedGlobally;
   String? featuredLink;
   @JsonKey(name: "post_stream")
@@ -52,6 +72,7 @@ class DiscourseTopicModel {
   List<List<int>>? timelineLookup;
   @ignore
   List<DiscourseTopicModel>? suggestedTopics;
+  @override
   List<String>? tags;
   @ignore
   Map<dynamic, dynamic>? tagsDescriptions;
