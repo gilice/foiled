@@ -399,6 +399,18 @@
       "stripRoot": false,
       "sha256": "096v7ycix5hgnk750s1qgykyghl2mymhdkg39jrlk3kbj6xygq5b"
     },
+    "hosted/pub.dartlang.org/functional_widget-0.10.1": {
+      "name": "pub-functional_widget-0.10.1",
+      "url": "https://pub.dartlang.org/packages/functional_widget/versions/0.10.1.tar.gz",
+      "stripRoot": false,
+      "sha256": "0zjgj4jzar50flyihyf4adfdjdyhvvscc3caa035szl0abfbllm2"
+    },
+    "hosted/pub.dartlang.org/functional_widget_annotation-0.10.0": {
+      "name": "pub-functional_widget_annotation-0.10.0",
+      "url": "https://pub.dartlang.org/packages/functional_widget_annotation/versions/0.10.0.tar.gz",
+      "stripRoot": false,
+      "sha256": "0ww4h6w8yfywn82my3rlg4z9kpb4s9x3xyj6sb3bmdj6w3wsrglk"
+    },
     "hosted/pub.dartlang.org/fwfh_cached_network_image-0.7.0+3": {
       "name": "pub-fwfh_cached_network_image-0.7.0+3",
       "url": "https://pub.dartlang.org/packages/fwfh_cached_network_image/versions/0.7.0+3.tar.gz",
