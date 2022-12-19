@@ -50,7 +50,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     var db = await ref.watch(dbProvider.future);
     var first = await db.accountModels.where().findFirst();
     var selected = ref.watch(selectedIDProvider);
-
+    talker.error("rebuilding AccountBackend. Selected: ${selected}");
     if (first == null) {
       state =
           AsyncValue.error(NoAccountsConfiguredException(), StackTrace.current);
@@ -59,9 +59,16 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
 
     if (selected == null) {
       ref.read(selectedIDProvider.notifier).state = first.id;
+      return first;
     }
 
-    return first;
+    AccountModel? selectedAcc =
+        await db.accountModels.where().idEqualTo(selected).findFirst();
+    if (selectedAcc != null) {
+      return selectedAcc;
+    } else {
+      return Future.error(AccountNotFoundException());
+    }
     // if (first != null) {
     //   ref.watch(selectedIDProvider.notifier).state = first.id;
     //   return first;

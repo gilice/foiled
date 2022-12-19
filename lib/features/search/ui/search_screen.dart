@@ -66,7 +66,10 @@ Widget searchScreen(BuildContext context) => Scaffold(
                 sliver: true,
                 future: ref.watch(_searchTopicsProvider),
                 onData: (List<DiscourseSearchTopic>? p0) {
-                  if (p0 == null) return SliverToBoxAdapter(child: Container());
+                  if (p0 == null || p0.isEmpty) {
+                    return const SliverToBoxAdapter(
+                        child: Text("No topic results"));
+                  }
                   return SearchCategoryWidget(
                     name: "Topics",
                     itemCount: p0.length,
@@ -84,7 +87,9 @@ Widget searchScreen(BuildContext context) => Scaffold(
                 sliver: true,
                 future: ref.watch(_searchPostsProvider),
                 onData: (List<DiscourseSearchPost>? p0) {
-                  if (p0 == null) return SliverToBoxAdapter(child: Container());
+                  if (p0 == null || p0.isEmpty)
+                    return const SliverToBoxAdapter(
+                        child: Text("No comment results"));
                   return SearchCategoryWidget(
                     name: "Comments",
                     itemCount: p0.length,
