@@ -32,12 +32,14 @@ final allCommentsProvider =
   return a.whenData((value) => value.cachedPosts.toList());
 }, name: 'allCommentsProvider');
 
-
 class SingleTopicScreen extends ConsumerStatefulWidget {
   final int topicID;
   final int? categoryID;
   final DiscourseCategory? category;
-  const SingleTopicScreen({Key? key, required this.topicID,  this.category, this.categoryID}) : super(key: key);
+
+  const SingleTopicScreen(
+      {Key? key, required this.topicID, this.category, this.categoryID})
+      : super(key: key);
 
   @override
   ConsumerState<SingleTopicScreen> createState() => _SingleTopicScreenState();
@@ -58,12 +60,16 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
         ref.read(currentTopicProvider.notifier).state =
             const AsyncValue.loading();
         var mainCategoryProv = ref.watch(selectedCategoryProvider);
-        var categoryP = await ref.watch(DiscourseServerBackend.getSingleCategory(widget.categoryID!).future);
+        var categoryP = widget.categoryID != null
+            ? await ref.watch(
+                DiscourseServerBackend.getSingleCategory(widget.categoryID!)
+                    .future)
+            : null;
 
-        DiscourseCategory tc = mainCategoryProv ??  widget.category ?? categoryP;
+        DiscourseCategory tc =
+            mainCategoryProv ?? widget.category ?? categoryP!;
         var gT = DiscourseServerBackend.getTopic(
-            topicId: widget.topicID,
-            parentCategory: tc);
+            topicId: widget.topicID, parentCategory: tc);
         var t = await ref.read(gT.future);
         ref.read(currentTopicProvider.notifier).state = AsyncValue.data(t);
       }
@@ -74,9 +80,13 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
   Widget build(
     BuildContext context,
   ) {
-
-    if(widget.category == null && widget.categoryID == null) {
-      return LoggingErrorWidget(error: const SignalException("All of {selectedCategoryProvider,category,categoryID}, given to singleTopicScreen, were null"), stackTrace: StackTrace.current);
+    if (widget.category == null &&
+        widget.categoryID == null &&
+        ref.read(selectedCategoryProvider) == null) {
+      return LoggingErrorWidget(
+          error: const SignalException(
+              "All of {selectedCategoryProvider,category,categoryID}, given to singleTopicScreen, were null"),
+          stackTrace: StackTrace.current);
     }
 
     var tvalue = ref.watch(currentTopicProvider);
