@@ -50,7 +50,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     var db = await ref.watch(dbProvider.future);
     var first = await db.accountModels.where().findFirst();
     var selected = ref.watch(selectedIDProvider);
-    talker.error("rebuilding AccountBackend. Selected: ${selected}");
+    talker.debug("rebuilding AccountBackend. Selected: ${selected}");
     if (first == null) {
       state =
           AsyncValue.error(NoAccountsConfiguredException(), StackTrace.current);
