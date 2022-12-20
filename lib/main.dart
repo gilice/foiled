@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/homescreen/home_screen.dart';
 import 'package:foiled/shared/constants.dart';
@@ -8,9 +9,11 @@ import 'package:foiled/shared/log_all_observer.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:talker/talker.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
+
   runApp(const FoiledApp());
 }
 
@@ -48,7 +51,6 @@ class FoiledApp extends StatelessWidget {
           }
 
           return ProviderScope(
-
             observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) =>
@@ -58,7 +60,7 @@ class FoiledApp extends StatelessWidget {
                 themeMode: ref.watch(themeModeProvider),
                 theme: themeFromColorScheme(lightColorScheme),
                 darkTheme: themeFromColorScheme(darkColorScheme),
-                home: const HomeScreen(),
+                home: TalkerWrapper(talker: talker, child: const HomeScreen()),
               ),
             ),
           );

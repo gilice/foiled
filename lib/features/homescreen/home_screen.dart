@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ))),
                               color: harmonizeToColor(tc.color, context),
                               child: StandardPadding(
-                                
                                 multiplier: 2,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

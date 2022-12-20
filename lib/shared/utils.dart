@@ -22,22 +22,31 @@ Future showModalPopUp(BuildContext context,
     contentList = (content as Column).children;
   }
   return showModalBottomSheet(
+      isScrollControlled: true,
+      useRootNavigator: true,
       context: context,
-      builder: (context) => StandardPadding(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              StandardPadding(
-                  child: Text(
-                title,
-                style: titleTextStyle(context),
-              )),
-              if (contentList != null)
-                ...contentList
-              else if (content != null) ...[content]
-            ],
-          )));
+      builder: (context) => SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.only(
+                    left: 8,
+                    right: 8,
+                    top: 8,
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    StandardPadding(
+                        child: Text(
+                      title,
+                      style: titleTextStyle(context),
+                    )),
+                    if (contentList != null)
+                      ...contentList
+                    else if (content != null) ...[content]
+                  ],
+                )),
+          ));
 }
 
 TalkerScreenTheme talkerScreenThemeFromContext(BuildContext context) =>

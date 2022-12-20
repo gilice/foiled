@@ -3,6 +3,9 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     prefer_expression_function_bodies: true
+    prefer_const_declarations: true
+    prefer_final_locals: true
+    avoid_slow_async_io: true
 
 analyzer:
   exclude:
