@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String $_searchHash() => r'c7a4169e462fe8ea5d085d53b3f16e0c36259f7d';
+String _$_searchHash() => r'c7a4169e462fe8ea5d085d53b3f16e0c36259f7d';
 
 /// See also [_search].
 class _SearchProvider extends AutoDisposeFutureProvider<DiscourseSearch> {
@@ -47,7 +47,7 @@ class _SearchProvider extends AutoDisposeFutureProvider<DiscourseSearch> {
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : $_searchHash,
+                  : _$_searchHash,
         );
 
   final String searchQuery;
@@ -108,7 +108,7 @@ class _SearchFamily extends Family<AsyncValue<DiscourseSearch>> {
   String? get name => r'_searchProvider';
 }
 
-String $_getTopicHash() => r'52275467c39d14851be7985f9d0793c1a635ff10';
+String _$_getTopicHash() => r'52275467c39d14851be7985f9d0793c1a635ff10';
 
 /// See also [_getTopic].
 class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
@@ -126,7 +126,7 @@ class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : $_getTopicHash,
+                  : _$_getTopicHash,
         );
 
   final int topicId;
@@ -187,7 +187,7 @@ class _GetTopicFamily extends Family<AsyncValue<DiscourseTopicModel>> {
   String? get name => r'_getTopicProvider';
 }
 
-String $_getServerInfoHash() => r'6c753d148ea86424dbb5e0c07206d0dcfe30ae03';
+String _$_getServerInfoHash() => r'6c753d148ea86424dbb5e0c07206d0dcfe30ae03';
 
 /// See also [_getServerInfo].
 final _getServerInfoProvider = AutoDisposeFutureProvider<DiscourseServerInfo>(
@@ -195,10 +195,10 @@ final _getServerInfoProvider = AutoDisposeFutureProvider<DiscourseServerInfo>(
   name: r'_getServerInfoProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : $_getServerInfoHash,
+      : _$_getServerInfoHash,
 );
 typedef _GetServerInfoRef = AutoDisposeFutureProviderRef<DiscourseServerInfo>;
-String $_getImgUrlFromTemplateHash() =>
+String _$_getImgUrlFromTemplateHash() =>
     r'06f58cc3d12d56e606f92acb91a13e1798cc2281';
 
 /// See also [_getImgUrlFromTemplate].
@@ -217,7 +217,7 @@ class _GetImgUrlFromTemplateProvider extends AutoDisposeFutureProvider<String> {
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : $_getImgUrlFromTemplateHash,
+                  : _$_getImgUrlFromTemplateHash,
         );
 
   final String template;
@@ -278,7 +278,8 @@ class _GetImgUrlFromTemplateFamily extends Family<AsyncValue<String>> {
   String? get name => r'_getImgUrlFromTemplateProvider';
 }
 
-String $_getSingleCategoryHash() => r'7463dd39f3ceb89b3cb89ed02b6f4c1f7e9aa7ca';
+String _$_getSingleCategoryHash() =>
+    r'7463dd39f3ceb89b3cb89ed02b6f4c1f7e9aa7ca';
 
 /// See also [_getSingleCategory].
 class _GetSingleCategoryProvider
@@ -295,7 +296,7 @@ class _GetSingleCategoryProvider
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : $_getSingleCategoryHash,
+                  : _$_getSingleCategoryHash,
         );
 
   final int categoryID;
@@ -350,7 +351,7 @@ class _GetSingleCategoryFamily extends Family<AsyncValue<DiscourseCategory>> {
   String? get name => r'_getSingleCategoryProvider';
 }
 
-String $_getCategoriesHash() => r'20462e63cebf1292917f531a476c6d01d600c00f';
+String _$_getCategoriesHash() => r'20462e63cebf1292917f531a476c6d01d600c00f';
 
 /// See also [_getCategories].
 final _getCategoriesProvider =
@@ -359,7 +360,7 @@ final _getCategoriesProvider =
   name: r'_getCategoriesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : $_getCategoriesHash,
+      : _$_getCategoriesHash,
 );
 typedef _GetCategoriesRef
     = AutoDisposeFutureProviderRef<List<DiscourseCategory>>;
