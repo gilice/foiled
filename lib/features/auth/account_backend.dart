@@ -18,7 +18,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// This class houses most code related to account management and authentication
 class AccountBackend extends AsyncNotifier<AccountModel> {
-  static var selectedIDProvider = StateProvider<int?>((ref) => null);
+  static var selectedIDProvider = StateProvider<int?>((ref) => null,
+      name: "AccountBackend.selectedIDProvider");
 
   static var allAccountUpdatesProvider = StreamProvider<List<AccountModel>>(
     (ref) async* {
@@ -161,7 +162,9 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
       });
     }
 
-    talker.debug("Deleted account. Re-emitting account...");
+    talker.debug("Deleted account. Resetting selected");
+    ref.read(selectedIDProvider.notifier).state = null;
+
     build();
   }
 }

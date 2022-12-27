@@ -6,7 +6,8 @@ import 'package:foiled/features/search/discourse_search_result.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/topics/ui/post_widget.dart';
 import 'package:foiled/features/topics/ui/topic_widget.dart';
-import 'package:foiled/shared/home_app_bar.dart';
+import 'package:foiled/shared/ui/home_app_bar.dart';
+import 'package:foiled/shared/ui/info_card.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
@@ -42,9 +43,8 @@ class _SearchResultNotifier extends AutoDisposeAsyncNotifier<DiscourseSearch?> {
   }
 }
 
-final _searchInputProvider = StateProvider.autoDispose<String>(
-  (ref) => "",
-);
+final _searchInputProvider = StateProvider.autoDispose<String>((ref) => "",
+    name: "SearchScreen._searchInputProvider");
 
 @swidget
 Widget searchScreen(BuildContext context) => Scaffold(
@@ -68,7 +68,7 @@ Widget searchScreen(BuildContext context) => Scaffold(
                 onData: (List<DiscourseSearchTopic>? p0) {
                   if (p0 == null || p0.isEmpty) {
                     return const SliverToBoxAdapter(
-                        child: Text("No topic results"));
+                        child: InfoCard(message: "No topic results"));
                   }
                   return SearchCategoryWidget(
                     name: "Topics",
@@ -89,7 +89,7 @@ Widget searchScreen(BuildContext context) => Scaffold(
                 onData: (List<DiscourseSearchPost>? p0) {
                   if (p0 == null || p0.isEmpty) {
                     return const SliverToBoxAdapter(
-                        child: Text("No comment results"));
+                        child: InfoCard(message: "No comment results"));
                   }
 
                   return SearchCategoryWidget(
@@ -151,8 +151,6 @@ class SearchCategoryWidget extends StatelessWidget {
                 onTap: () {
                   if (expanded) {
                     while (cic > 2) {
-                      // talker.debug("removing, cCIC: $cic, ln: ${p0.length}");
-
                       key.currentState?.removeItem(
                           cic, (context, animation) => Container());
                       cic--;
@@ -164,7 +162,6 @@ class SearchCategoryWidget extends StatelessWidget {
                           duration: const Duration(seconds: 0));
                       cic++;
                     }
-
                     expanded = true;
                   }
                 },

@@ -25,28 +25,32 @@ Future showModalPopUp(BuildContext context,
       isScrollControlled: true,
       useRootNavigator: true,
       context: context,
-      builder: (context) => SingleChildScrollView(
-            child: Padding(
-                padding: EdgeInsets.only(
-                    left: 8,
-                    right: 8,
-                    top: 8,
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    StandardPadding(
-                        child: Text(
-                      title,
-                      style: titleTextStyle(context),
-                    )),
-                    if (contentList != null)
-                      ...contentList
-                    else if (content != null) ...[content]
-                  ],
-                )),
-          ));
+      builder: (context) {
+        var bottomPadding = MediaQuery.of(context).viewInsets.bottom;
+        if (bottomPadding < 8) {
+          bottomPadding = 8;
+        }
+
+        return SingleChildScrollView(
+          child: Padding(
+              padding: EdgeInsets.only(
+                  left: 8, right: 8, top: 8, bottom: bottomPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  StandardPadding(
+                      child: Text(
+                    title,
+                    style: titleTextStyle(context),
+                  )),
+                  if (contentList != null)
+                    ...contentList
+                  else if (content != null) ...[content]
+                ],
+              )),
+        );
+      });
 }
 
 TalkerScreenTheme talkerScreenThemeFromContext(BuildContext context) =>

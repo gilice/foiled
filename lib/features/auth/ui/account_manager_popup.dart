@@ -59,6 +59,8 @@ class _AccountManagerPopup extends StatelessWidget {
                                           ListTile(
                                         title: const Text("Delete account"),
                                         onTap: () async {
+                                          talker.debug(
+                                              "delete button pressed on account $ta");
                                           ref
                                               .watch(Account.provider.notifier)
                                               .deleteAccount(id: ta.id);

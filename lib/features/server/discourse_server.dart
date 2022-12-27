@@ -5,7 +5,8 @@ import 'package:foiled/features/server/model/discourse_server_model.dart';
 class DiscourseServer {
   static var provider =
       AsyncNotifierProvider<DiscourseServerBackend, DiscourseServerModel>(
-          DiscourseServerBackend.new);
+          DiscourseServerBackend.new,
+          name: "DiscourseServer.provider");
 
   static var model = DiscourseServerModel;
 }

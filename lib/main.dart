@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/homescreen/home_screen.dart';
 import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/log_all_observer.dart';
-import 'package:foiled/shared/mono_text.dart';
+import 'package:foiled/shared/ui/mono_text.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -53,7 +53,7 @@ class FoiledApp extends StatelessWidget {
             observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                var theme = ref.watch(themeModeProvider);
+                final theme = ref.watch(themeModeProvider);
                 ErrorWidget.builder = (details) => Container(
                     color: (theme == ThemeMode.dark
                         ? Colors.red[700]
@@ -80,7 +80,8 @@ class FoiledApp extends StatelessWidget {
                                       details.exception.toString(),
                                     ),
                                     ExpansionTile(
-                                      childrenPadding: EdgeInsets.only(left: 4),
+                                      childrenPadding:
+                                          const EdgeInsets.only(left: 4),
                                       expandedCrossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       title: const Text("More details"),

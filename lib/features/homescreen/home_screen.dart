@@ -6,7 +6,7 @@ import 'package:foiled/features/homescreen/subcategory_chip.dart';
 import 'package:foiled/features/search/ui/search_screen.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/topics/ui/topics_screen.dart';
-import 'package:foiled/shared/home_app_bar.dart';
+import 'package:foiled/shared/ui/home_app_bar.dart';
 import 'package:foiled/shared/utils.dart';
 
 class HomeScreen extends StatefulWidget {

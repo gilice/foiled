@@ -4,8 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class Account {
   static var provider = AsyncNotifierProvider<AccountBackend, AccountModel>(
-    () => AccountBackend(),
-  );
+      () => AccountBackend(),
+      name: "Account.provider");
 
   static var model = AccountModel;
 }

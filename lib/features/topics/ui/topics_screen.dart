@@ -11,38 +11,39 @@ import 'package:foiled/shared/utils.dart';
 import 'package:isar/isar.dart';
 
 final selectedCategoryProvider = StateProvider.autoDispose<DiscourseCategory?>(
-  (ref) => null,
-);
+    (ref) => null,
+    name: "selectedCategoryProvider");
 
-final topicsProvider = FutureProvider.autoDispose<List<DiscourseTopicModel>>(
-  (ref) async {
-    final category = ref.watch(selectedCategoryProvider);
-    if (category != null) {
-      final futures = await Future.wait([
-        ref.watch(dbProvider.future),
-        ref.watch(DiscourseServer.provider.future)
-      ]);
+final topicsProvider =
+    FutureProvider.autoDispose<List<DiscourseTopicModel>>((ref) async {
+  final category = ref.watch(selectedCategoryProvider);
 
-      final db = futures[0] as Isar;
-      final baseUrl = (futures[1] as DiscourseServerModel).baseUrl;
+  if (category == null) {
+    return Future.error(
+      FlutterError(
+          "selectedCategoryProvider was null while loading topicsProvider"),
+    );
+  }
 
-      try {
-        final ret = (await category.getTopics(db, baseUrl)).toList();
-        return ret;
-      } catch (e) {
-        return Future.error(FlutterError(e.toString()));
-      }
-    } else {
-      return Future.error(
-        FlutterError(
-            "selectedCategoryProvider was null when topicsScreen was called"),
-      );
-    }
-  },
-);
+  final futures = await Future.wait([
+    ref.watch(dbProvider.future),
+    ref.watch(DiscourseServer.provider.future)
+  ]);
+
+  final db = futures[0] as Isar;
+  final baseUrl = (futures[1] as DiscourseServerModel).baseUrl;
+
+  try {
+    final ret = (await category.getTopics(db, baseUrl)).toList();
+    return ret;
+  } catch (e) {
+    return Future.error(FlutterError(e.toString()));
+  }
+}, name: "topicsProvider");
 
 class TopicsScreen extends ConsumerWidget {
   final DiscourseCategory category;
+
   const TopicsScreen({Key? key, required this.category}) : super(key: key);
 
   @override
