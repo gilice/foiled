@@ -1,0 +1,10 @@
+Foiled is a modern mobile client for forums using the Discourse platform.
+
+<strong>Features</strong>:
+<ul>
+    <li>sign into any forum</li>
+    <li>read posts and comments</li>
+    <li>search content</li>
+    <li>enjoy both light and dark themes</li>
+    <li>dynamic theme colors</li>
+</ul>

@@ -19,7 +19,13 @@ jobs:
       - uses: cachix/install-nix-action@v15
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-
+      - name: Write secrets 4 droid
+        env:
+          KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
+          KEY_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEY_PROPERTIES" > android/key.properties
+          echo "$KEY_BASE64" | base64 -d > keystore.jks
       - run: nix develop -c flutter build apk --split-per-abi
       - uses: actions/upload-artifact@v3
         with:

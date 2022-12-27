@@ -50,6 +50,5 @@ app.*.map.json
 result/*
 result
 
-# only for now
-android/fastlane
-fastlane
+keystore.jks
+android/key.properties
