@@ -16,18 +16,18 @@ final selectedCategoryProvider = StateProvider.autoDispose<DiscourseCategory?>(
 
 final topicsProvider = FutureProvider.autoDispose<List<DiscourseTopicModel>>(
   (ref) async {
-    var category = ref.watch(selectedCategoryProvider);
+    final category = ref.watch(selectedCategoryProvider);
     if (category != null) {
-      var futures = await Future.wait([
+      final futures = await Future.wait([
         ref.watch(dbProvider.future),
         ref.watch(DiscourseServer.provider.future)
       ]);
 
-      var db = futures[0] as Isar;
-      var baseUrl = (futures[1] as DiscourseServerModel).baseUrl;
+      final db = futures[0] as Isar;
+      final baseUrl = (futures[1] as DiscourseServerModel).baseUrl;
 
       try {
-        var ret = (await category.getTopics(db, baseUrl)).toList();
+        final ret = (await category.getTopics(db, baseUrl)).toList();
         return ret;
       } catch (e) {
         return Future.error(FlutterError(e.toString()));
@@ -48,7 +48,7 @@ class TopicsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
-      var cat = ref.read(selectedCategoryProvider);
+      final cat = ref.read(selectedCategoryProvider);
       if (cat == null || cat.isarId != category.isarId) {
         ref.read(selectedCategoryProvider.notifier).state = category;
       }

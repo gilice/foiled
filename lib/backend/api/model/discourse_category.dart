@@ -119,21 +119,21 @@ class DiscourseCategory {
   /// factory.
   factory DiscourseCategory.fromJson(
       Map<String, dynamic> json, String baseUrl) {
-    var t = _$DiscourseCategoryFromJson(json);
+    final t = _$DiscourseCategoryFromJson(json);
     t.isarId = localHash(baseUrl + t.id.toString());
     return t;
   }
 
   Future<List<DiscourseTopicModel>> getTopics(Isar db, String baseUrl) async {
     try {
-      var req = await (http.get(Uri.parse("$baseUrl/c/$slug/$id.json")));
-      var reqjson = json.decode(req.body)["topic_list"]["topics"];
-      var topics = <DiscourseTopicModel>[];
+      final req = await (http.get(Uri.parse("$baseUrl/c/$slug/$id.json")));
+      final reqjson = json.decode(req.body)["topic_list"]["topics"];
+      final topics = <DiscourseTopicModel>[];
 
       for (var topic in reqjson) {
-        var thisTopic = DiscourseTopicModel.fromJson(topic);
+        final thisTopic = DiscourseTopicModel.fromJson(topic);
 
-        var topicIid =
+        final topicIid =
             localHash(Uri.parse("$baseUrl/t/${thisTopic.id}.json").toString());
         topics.add(thisTopic..isarId = topicIid);
       }

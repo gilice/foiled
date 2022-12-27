@@ -130,7 +130,7 @@ class LoggingFutureWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) => future.when(
         data: onData,
         error: (error, stackTrace) {
-          var err = LoggingErrorWidget(error: error, stackTrace: stackTrace);
+          final err = LoggingErrorWidget(error: error, stackTrace: stackTrace);
 
           Widget errUpd = err;
 
@@ -145,8 +145,7 @@ class LoggingFutureWidget<T> extends StatelessWidget {
           return errUpd;
         },
         loading: () {
-          var progress = const LinearProgressIndicator();
-          Widget progUpd = progress;
+          Widget progUpd = const LinearProgressIndicator();
 
           if (intrinsic) {
             progUpd = IntrinsicWidth(child: progUpd);

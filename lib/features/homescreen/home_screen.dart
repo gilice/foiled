@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             delegate: SliverChildBuilderDelegate(
                           childCount: categories.length,
                           (context, index) {
-                            var tc = categories.elementAt(index);
+                            final tc = categories.elementAt(index);
                             return ColorBorderCard(
                               onTap: (() async => Navigator.push(
                                   context,
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         )),
                     error: (error, stackTrace) {
-                      var dialogOpen = ref.watch(addAccountDialogOpen);
+                      final dialogOpen = ref.watch(addAccountDialogOpen);
                       if (!dialogOpen) {
                         WidgetsFlutterBinding.ensureInitialized()
                             .addPostFrameCallback((_) {

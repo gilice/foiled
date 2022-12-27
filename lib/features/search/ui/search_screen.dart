@@ -20,7 +20,7 @@ final _searchResultsProvider =
 final _searchTopicsProvider =
     FutureProvider.autoDispose<List<DiscourseSearchTopic>?>(
   (ref) async {
-    var res = await ref.watch(_searchResultsProvider.future);
+    final res = await ref.watch(_searchResultsProvider.future);
     return res?.topics;
   },
 );
@@ -28,7 +28,7 @@ final _searchTopicsProvider =
 final _searchPostsProvider =
     FutureProvider.autoDispose<List<DiscourseSearchPost>?>(
   (ref) async {
-    var res = await ref.watch(_searchResultsProvider.future);
+    final res = await ref.watch(_searchResultsProvider.future);
     return res?.posts;
   },
 );
@@ -36,7 +36,7 @@ final _searchPostsProvider =
 class _SearchResultNotifier extends AutoDisposeAsyncNotifier<DiscourseSearch?> {
   @override
   FutureOr<DiscourseSearch?> build() {
-    var searchIn = ref.watch(_searchInputProvider);
+    final searchIn = ref.watch(_searchInputProvider);
     if (searchIn.isEmpty) return null;
     return ref.read(DiscourseServerBackend.search(searchIn).future);
   }
@@ -96,7 +96,7 @@ Widget searchScreen(BuildContext context) => Scaffold(
                     name: "Comments",
                     itemCount: p0.length,
                     childBuilder: (context, index) {
-                      var thisPost = p0[index];
+                      final thisPost = p0[index];
 
                       return SizedBox(
                         width: double.infinity,
@@ -125,7 +125,7 @@ class SearchCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var key = GlobalKey<SliverAnimatedListState>();
+    final key = GlobalKey<SliverAnimatedListState>();
     var expanded = false;
     var cic = 2;
     return SliverAnimatedList(

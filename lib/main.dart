@@ -1,14 +1,12 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/homescreen/home_screen.dart';
 import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/log_all_observer.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:talker/talker.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 void main() {
@@ -60,7 +58,14 @@ class FoiledApp extends StatelessWidget {
                 themeMode: ref.watch(themeModeProvider),
                 theme: themeFromColorScheme(lightColorScheme),
                 darkTheme: themeFromColorScheme(darkColorScheme),
-                home: TalkerWrapper(talker: talker, child: const HomeScreen()),
+                home: TalkerWrapper(
+                    talker: talker,
+                    options: const TalkerWrapperOptions(
+                        enableErrorAlerts: true,
+                        enableExceptionAlerts: true,
+                        errorTitle: "An error occurred.",
+                        exceptionTitle: "An exception occurred."),
+                    child: const HomeScreen()),
               ),
             ),
           );

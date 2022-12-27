@@ -31,10 +31,10 @@ class _AccountManagerPopup extends StatelessWidget {
                     ),
                   );
                 } else {
-                  var ta = data[index];
+                  final ta = data[index];
                   return Consumer(
                     builder: (context, ref, child) {
-                      var selectedID =
+                      final selectedID =
                           ref.watch(AccountBackend.selectedIDProvider);
                       double elevation = 1;
                       if (selectedID == ta.id) {

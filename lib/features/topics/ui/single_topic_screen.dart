@@ -22,13 +22,13 @@ final currentTopicProvider =
 
 final firstPostInTopicProvider =
     Provider.autoDispose<AsyncValue<DiscoursePost>>((ref) {
-  var a = ref.watch(currentTopicProvider);
+  final a = ref.watch(currentTopicProvider);
   return a.whenData((value) => value.cachedPosts.first);
 }, name: 'firstPostInTopicProvider');
 
 final allCommentsProvider =
     Provider.autoDispose<AsyncValue<List<DiscoursePost>>>((ref) {
-  var a = ref.watch(currentTopicProvider);
+  final a = ref.watch(currentTopicProvider);
   return a.whenData((value) => value.cachedPosts.toList());
 }, name: 'allCommentsProvider');
 
@@ -53,24 +53,24 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
         .addPostFrameCallback((timeStamp) async {
       talker.debug("FULL SINGLETOPICSCREEN REBUILD");
 
-      var top = ref.read(currentTopicProvider);
+      final top = ref.read(currentTopicProvider);
 
       if (top == const AsyncValue.loading() ||
           top.value?.id != widget.topicID) {
         ref.read(currentTopicProvider.notifier).state =
             const AsyncValue.loading();
-        var mainCategoryProv = ref.watch(selectedCategoryProvider);
-        var categoryP = widget.categoryID != null
+        final mainCategoryProv = ref.watch(selectedCategoryProvider);
+        final categoryP = widget.categoryID != null
             ? await ref.watch(
                 DiscourseServerBackend.getSingleCategory(widget.categoryID!)
                     .future)
             : null;
 
-        DiscourseCategory tc =
+        final DiscourseCategory tc =
             mainCategoryProv ?? widget.category ?? categoryP!;
-        var gT = DiscourseServerBackend.getTopic(
+        final gT = DiscourseServerBackend.getTopic(
             topicId: widget.topicID, parentCategory: tc);
-        var t = await ref.read(gT.future);
+        final t = await ref.read(gT.future);
         ref.read(currentTopicProvider.notifier).state = AsyncValue.data(t);
       }
     });
@@ -89,7 +89,7 @@ class _SingleTopicScreenState extends ConsumerState<SingleTopicScreen> {
           stackTrace: StackTrace.current);
     }
 
-    var tvalue = ref.watch(currentTopicProvider);
+    final tvalue = ref.watch(currentTopicProvider);
     // this scaffold is required so that The background color doesn't turn white. I don't know why this happens
     return Scaffold(
       body: CustomScrollView(primary: true, slivers: [

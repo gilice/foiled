@@ -14,9 +14,9 @@ class DiscourseTopicBackend extends AsyncNotifier<DiscourseTopicModel?> {
       int topicID, DiscourseCategory parentCategory) async {
     state = const AsyncValue.loading();
 
-    var top = DiscourseServerBackend.getTopic(
+    final top = DiscourseServerBackend.getTopic(
         parentCategory: parentCategory, topicId: topicID);
-    var res = await ref.read(top.future);
+    final res = await ref.read(top.future);
 
     topicStack.add(res);
     state = AsyncValue.data(res);

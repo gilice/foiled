@@ -71,7 +71,7 @@ class DiscourseServerInfo {
   /// Connect the generated [_$DiscourseServerInfo] function to the `fromJson`
   /// factory.
   factory DiscourseServerInfo.fromJson(Map<String, dynamic> json, int id) {
-    var gen = _$DiscourseServerInfoFromJson(json);
+    final gen = _$DiscourseServerInfoFromJson(json);
     gen.id = id;
     return gen;
   }

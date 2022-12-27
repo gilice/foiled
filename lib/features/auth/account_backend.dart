@@ -22,10 +22,10 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
 
   static var allAccountUpdatesProvider = StreamProvider<List<AccountModel>>(
     (ref) async* {
-      var db = await ref.watch(dbProvider.future);
-      var stream = db.accountModels.watchLazy(fireImmediately: true);
+      final db = await ref.watch(dbProvider.future);
+      final stream = db.accountModels.watchLazy(fireImmediately: true);
       await for (var _ in stream) {
-        var allAccounts = await db.accountModels.where().findAll();
+        final allAccounts = await db.accountModels.where().findAll();
         yield allAccounts;
       }
     },
@@ -33,23 +33,23 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
 
   static var apiKeyProvider = FutureProvider<String>(
     (ref) async {
-      var acc = await ref.watch(Account.provider.future);
+      final acc = await ref.watch(Account.provider.future);
       return acc.apiKey;
     },
   );
 
   static var apiKeyHeaderProvider = FutureProvider<Map<String, String>>(
     (ref) async {
-      var apiKey = await ref.watch(apiKeyProvider.future);
+      final apiKey = await ref.watch(apiKeyProvider.future);
       return {"User-Api-Key": apiKey};
     },
   );
 
   @override
   FutureOr<AccountModel> build() async {
-    var db = await ref.watch(dbProvider.future);
-    var first = await db.accountModels.where().findFirst();
-    var selected = ref.watch(selectedIDProvider);
+    final db = await ref.watch(dbProvider.future);
+    final first = await db.accountModels.where().findFirst();
+    final selected = ref.watch(selectedIDProvider);
     talker.debug("rebuilding AccountBackend. Selected: $selected");
     if (first == null) {
       state =
@@ -62,7 +62,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
       return first;
     }
 
-    AccountModel? selectedAcc =
+    final AccountModel? selectedAcc =
         await db.accountModels.where().idEqualTo(selected).findFirst();
     if (selectedAcc != null) {
       return selectedAcc;
@@ -83,9 +83,9 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     // Cleanup and format the base url given by the user
     serverBaseUrl = Uri.parse(serverBaseUrl).toString();
 
-    var authKeys = RSAKeypair.fromRandom();
+    final authKeys = RSAKeypair.fromRandom();
     var reqUri = Uri.parse(serverBaseUrl);
-    var nonce = DateTime.now().millisecondsSinceEpoch;
+    final nonce = DateTime.now().millisecondsSinceEpoch;
     reqUri = Uri.https(reqUri.authority, "user-api-key/new", {
       'application_name': 'foiled',
       'client_id': 'foiled_user_$appVersion${Platform.localHostname}',
@@ -100,9 +100,9 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     var receivedKey = await serverKey;
     receivedKey = receivedKey.replaceAll(RegExp(r"\s"), "");
 
-    var decrypted = authKeys.privateKey.decrypt(receivedKey);
-    var decoded = json.decode(decrypted);
-    String? apiKey = decoded["key"];
+    final decrypted = authKeys.privateKey.decrypt(receivedKey);
+    final decoded = json.decode(decrypted);
+    final String? apiKey = decoded["key"];
 
     if (apiKey == null) {
       return Future.error(NoApiKeyException);
@@ -110,22 +110,23 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
 
     // https://meta.discourse.org/t/endpoint-for-user-information/160145/5
     // This is an undocumented endpoint for getting who you are (username, etc)
-    var res = await http.get(Uri.parse("$serverBaseUrl/session/current.json"),
+    final res = await http.get(Uri.parse("$serverBaseUrl/session/current.json"),
         headers: {"User-Api-Key": apiKey});
-    var resDecoded = json.decode(res.body);
-    var cU = resDecoded["current_user"];
+    final resDecoded = json.decode(res.body);
+    final cU = resDecoded["current_user"];
     if (cU == null) {
       throw ServerWhoamiResponseInvalidException();
     }
 
     // write everything to database
-    var db = await ref.watch(dbProvider.future);
+    final db = await ref.watch(dbProvider.future);
     // Check if server exists
-    var existing = await db.discourseServerModels.get(localHash(serverBaseUrl));
-    DiscourseServerModel newServer =
+    final existing =
+        await db.discourseServerModels.get(localHash(serverBaseUrl));
+    final DiscourseServerModel newServer =
         existing ?? DiscourseServerModel(baseUrl: serverBaseUrl);
 
-    var a = AccountModel(
+    final a = AccountModel(
         apiKey: apiKey,
         avatarTemplate: cU["avatar_template"],
         discourseID: cU["id"],
@@ -151,8 +152,8 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
   }
 
   Future<void> deleteAccount({int? id}) async {
-    var db = await ref.watch(dbProvider.future);
-    var selectedID = ref.watch(selectedIDProvider);
+    final db = await ref.watch(dbProvider.future);
+    final selectedID = ref.watch(selectedIDProvider);
     id = id ?? selectedID;
     if (id != null) {
       await db.writeTxn(() async {

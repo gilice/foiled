@@ -70,11 +70,11 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
                 builder: (context, ref, child) => ElevatedButton.icon(
                   onPressed: () async {
                     talker.debug("Initiating auth");
-                    var url = _urlController.text.isEmpty && kDebugMode
+                    final url = _urlController.text.isEmpty && kDebugMode
                         ? "https://meta.discourse.org"
                         : _urlController.text;
 
-                    var accBackend = ref.watch(Account.provider.notifier);
+                    final accBackend = ref.watch(Account.provider.notifier);
                     accBackend.performAuth(url, serverKey.future);
 
                     // ignore: use_build_context_synchronously
