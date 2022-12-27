@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/homescreen/home_screen.dart';
 import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/log_all_observer.dart';
+import 'package:foiled/shared/mono_text.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -51,22 +52,59 @@ class FoiledApp extends StatelessWidget {
           return ProviderScope(
             observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-                  MaterialApp(
-                title: appDisplayName,
-                navigatorKey: navigatorKey,
-                themeMode: ref.watch(themeModeProvider),
-                theme: themeFromColorScheme(lightColorScheme),
-                darkTheme: themeFromColorScheme(darkColorScheme),
-                home: TalkerWrapper(
-                    talker: talker,
-                    options: const TalkerWrapperOptions(
-                        enableErrorAlerts: true,
-                        enableExceptionAlerts: true,
-                        errorTitle: "An error occurred.",
-                        exceptionTitle: "An exception occurred."),
-                    child: const HomeScreen()),
-              ),
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                var theme = ref.watch(themeModeProvider);
+                ErrorWidget.builder = (details) => Container(
+                    color: (theme == ThemeMode.dark
+                        ? Colors.red[700]
+                        : Colors.red[300]),
+                    child: StandardPadding(
+                      multiplier: 0.5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Icon(Icons.sentiment_dissatisfied_outlined,
+                              size: 64),
+                          const Text(
+                            "An error occurred.",
+                            textAlign: TextAlign.center,
+                          ),
+                          StandardPadding(
+                            multiplier: 0.5,
+                            child: Card(
+                              child: StandardPadding(
+                                multiplier: 0.5,
+                                child: Column(
+                                  children: [
+                                    MonoText(
+                                      details.exception.toString(),
+                                    ),
+                                    ExpansionTile(
+                                      childrenPadding: EdgeInsets.only(left: 4),
+                                      expandedCrossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      title: const Text("More details"),
+                                      children: [
+                                        MonoText(details.toString()),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ));
+                return MaterialApp(
+                  title: appDisplayName,
+                  navigatorKey: navigatorKey,
+                  themeMode: theme,
+                  theme: themeFromColorScheme(lightColorScheme),
+                  darkTheme: themeFromColorScheme(darkColorScheme),
+                  home: const HomeScreen(),
+                );
+              },
             ),
           );
         },

@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$_searchHash() => r'c7a4169e462fe8ea5d085d53b3f16e0c36259f7d';
+String _$_searchHash() => r'af7c51893ec0357b1b5459dbfa8c40cbba4151b3';
 
 /// See also [_search].
 class _SearchProvider extends AutoDisposeFutureProvider<DiscourseSearch> {
@@ -108,7 +108,7 @@ class _SearchFamily extends Family<AsyncValue<DiscourseSearch>> {
   String? get name => r'_searchProvider';
 }
 
-String _$_getTopicHash() => r'52275467c39d14851be7985f9d0793c1a635ff10';
+String _$_getTopicHash() => r'bf2b3190605fb09559a101559d929f4fe91b6547';
 
 /// See also [_getTopic].
 class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {
@@ -187,7 +187,7 @@ class _GetTopicFamily extends Family<AsyncValue<DiscourseTopicModel>> {
   String? get name => r'_getTopicProvider';
 }
 
-String _$_getServerInfoHash() => r'6c753d148ea86424dbb5e0c07206d0dcfe30ae03';
+String _$_getServerInfoHash() => r'455c22d713d423452e59febe01b4d9b450d67249';
 
 /// See also [_getServerInfo].
 final _getServerInfoProvider = AutoDisposeFutureProvider<DiscourseServerInfo>(
@@ -199,7 +199,7 @@ final _getServerInfoProvider = AutoDisposeFutureProvider<DiscourseServerInfo>(
 );
 typedef _GetServerInfoRef = AutoDisposeFutureProviderRef<DiscourseServerInfo>;
 String _$_getImgUrlFromTemplateHash() =>
-    r'06f58cc3d12d56e606f92acb91a13e1798cc2281';
+    r'809c1ca08b5ee06151013dd49aded40100906a05';
 
 /// See also [_getImgUrlFromTemplate].
 class _GetImgUrlFromTemplateProvider extends AutoDisposeFutureProvider<String> {
@@ -279,7 +279,7 @@ class _GetImgUrlFromTemplateFamily extends Family<AsyncValue<String>> {
 }
 
 String _$_getSingleCategoryHash() =>
-    r'7463dd39f3ceb89b3cb89ed02b6f4c1f7e9aa7ca';
+    r'd6e3094670fcf0537e029c7b5eea764fa15b05b2';
 
 /// See also [_getSingleCategory].
 class _GetSingleCategoryProvider
@@ -351,7 +351,7 @@ class _GetSingleCategoryFamily extends Family<AsyncValue<DiscourseCategory>> {
   String? get name => r'_getSingleCategoryProvider';
 }
 
-String _$_getCategoriesHash() => r'20462e63cebf1292917f531a476c6d01d600c00f';
+String _$_getCategoriesHash() => r'e02f72630c058a72d3a68133b4d1cd13c9c982ae';
 
 /// See also [_getCategories].
 final _getCategoriesProvider =

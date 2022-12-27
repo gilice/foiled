@@ -102,11 +102,8 @@ class LoggingErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     talker.error(error.toString(), stackTrace);
-    return ErrorWidget(
-      FlutterError(
-        error.toString(),
-      ),
-    );
+    return ErrorWidget.builder(FlutterErrorDetails(
+        exception: error, stack: stackTrace ?? StackTrace.current));
   }
 }
 
