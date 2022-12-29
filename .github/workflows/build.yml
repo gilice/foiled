@@ -8,17 +8,10 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
-        with:
-          key: dep-cache
-          path: |
-            ~/.pub-cache
-            ~/.cache/flutter
-            ~/.gradle/caches
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v15
+      - uses: nixbuild/nix-quick-install-action@v21
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+         nix_conf: experimental-features = nix-command flakes
       - name: Write secrets 4 droid
         env:
           KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
@@ -34,17 +27,10 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
-        with:
-          key: dep-cache
-          path: |
-            ~/.pub-cache
-            ~/.cache/flutter
-            ~/.gradle/caches
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v15
+      - uses: nixbuild/nix-quick-install-action@v21
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+         nix_conf: experimental-features = nix-command flakes
 
       - run: nix build -v
       - uses: actions/upload-artifact@v3
@@ -55,9 +41,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v15
+      - uses: nixbuild/nix-quick-install-action@v21
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+         nix_conf: experimental-features = nix-command flakes
       - run: nix develop -c flutter pub get
       - run: nix develop -c flutter pub run build_runner build -d
       - run: nix develop -c deps2nix
