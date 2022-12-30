@@ -120,18 +120,15 @@ Future<DiscourseTopicModel> _getTopic(
     final uri = Uri.parse("$baseUrl/t/$topicId.json");
     final req = await (client.get(uri, headers: apiKeyHeader));
     final jsonDecoded = json.decode(req.body);
-    final parsed = DiscourseTopicModel.fromJson(
-      jsonDecoded,
-    );
-
-    parsed.isarId = localHash(uri.toString());
+    final parsed =
+        DiscourseTopicModel.fromJson(jsonDecoded, sourceUrl: uri.toString());
 
     await db.writeTxn(() async {
       await db.discourseTopicModels.put(parsed);
       parentCategory.cachedTopics.add(parsed);
       await parentCategory.cachedTopics.save();
 
-      talker.debug("added cached topic ${parsed.isarId}");
+      talker.debug("added cached topic ${parsed.isarID}");
       talker.debug("all cached: ${parentCategory.cachedTopics}");
     });
 
@@ -139,8 +136,8 @@ Future<DiscourseTopicModel> _getTopic(
     talker.debug(
         "getTopic response items: ${(jsonDecoded["post_stream"]["posts"] as List).length}");
     final decodedPosts = posts.map((e) {
-      final parsed = DiscoursePost.fromJson(e);
-      parsed.isarID = localHash("$baseUrl/posts/${parsed.id}");
+      final parsed =
+          DiscoursePost.fromJson(e, sourceUrl: "$baseUrl/posts/${e['id']}");
       return parsed;
     }).toList();
 

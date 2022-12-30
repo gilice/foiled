@@ -108,7 +108,7 @@ class _SearchFamily extends Family<AsyncValue<DiscourseSearch>> {
   String? get name => r'_searchProvider';
 }
 
-String _$_getTopicHash() => r'bf2b3190605fb09559a101559d929f4fe91b6547';
+String _$_getTopicHash() => r'e9b4764f550c534c4481df08fad0f6868647099e';
 
 /// See also [_getTopic].
 class _GetTopicProvider extends AutoDisposeFutureProvider<DiscourseTopicModel> {

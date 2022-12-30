@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:foiled/features/topics/model/discourse_topic_model.dart';
+import 'package:foiled/main.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:isar/isar.dart';
@@ -126,16 +127,17 @@ class DiscourseCategory {
 
   Future<List<DiscourseTopicModel>> getTopics(Isar db, String baseUrl) async {
     try {
+      talker.debug(
+          "getTopics on $name, url to call is $baseUrl/c/$slug/$id.json");
       final req = await (http.get(Uri.parse("$baseUrl/c/$slug/$id.json")));
       final reqjson = json.decode(req.body)["topic_list"]["topics"];
       final topics = <DiscourseTopicModel>[];
-
+      talker.debug("getTopics, before parsing");
       for (var topic in reqjson) {
-        final thisTopic = DiscourseTopicModel.fromJson(topic);
+        final thisTopic = DiscourseTopicModel.fromJson(topic,
+            sourceUrl: "$baseUrl/t/${topic["id"]}.json");
 
-        final topicIid =
-            localHash(Uri.parse("$baseUrl/t/${thisTopic.id}.json").toString());
-        topics.add(thisTopic..isarId = topicIid);
+        topics.add(thisTopic);
       }
 
       await db.writeTxn(() async {
@@ -150,7 +152,7 @@ class DiscourseCategory {
       try {
         return cachedTopics.toList();
       } catch (e2) {
-        return Future.error(e2);
+        return Future.error(e2, StackTrace.current);
       }
     }
   }

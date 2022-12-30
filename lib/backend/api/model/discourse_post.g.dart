@@ -127,148 +127,158 @@ const DiscoursePostSchema = CollectionSchema(
       name: r'incomingLinkCount',
       type: IsarType.long,
     ),
-    r'lastWikiEdit': PropertySchema(
+    r'lastUpdated': PropertySchema(
       id: 22,
+      name: r'lastUpdated',
+      type: IsarType.dateTime,
+    ),
+    r'lastWikiEdit': PropertySchema(
+      id: 23,
       name: r'lastWikiEdit',
       type: IsarType.dateTime,
     ),
     r'likeCount': PropertySchema(
-      id: 23,
+      id: 24,
       name: r'likeCount',
       type: IsarType.long,
     ),
     r'moderator': PropertySchema(
-      id: 24,
+      id: 25,
       name: r'moderator',
       type: IsarType.bool,
     ),
     r'name': PropertySchema(
-      id: 25,
+      id: 26,
       name: r'name',
       type: IsarType.string,
     ),
     r'postNumber': PropertySchema(
-      id: 26,
+      id: 27,
       name: r'postNumber',
       type: IsarType.long,
     ),
     r'postType': PropertySchema(
-      id: 27,
+      id: 28,
       name: r'postType',
       type: IsarType.long,
     ),
     r'primaryGroupName': PropertySchema(
-      id: 28,
+      id: 29,
       name: r'primaryGroupName',
       type: IsarType.string,
     ),
     r'quoteCount': PropertySchema(
-      id: 29,
+      id: 30,
       name: r'quoteCount',
       type: IsarType.long,
     ),
     r'read': PropertySchema(
-      id: 30,
+      id: 31,
       name: r'read',
       type: IsarType.bool,
     ),
     r'readersCount': PropertySchema(
-      id: 31,
+      id: 32,
       name: r'readersCount',
       type: IsarType.long,
     ),
     r'reads': PropertySchema(
-      id: 32,
+      id: 33,
       name: r'reads',
       type: IsarType.long,
     ),
     r'replyCount': PropertySchema(
-      id: 33,
+      id: 34,
       name: r'replyCount',
       type: IsarType.long,
     ),
     r'score': PropertySchema(
-      id: 34,
+      id: 35,
       name: r'score',
       type: IsarType.double,
     ),
+    r'sourceUrl': PropertySchema(
+      id: 36,
+      name: r'sourceUrl',
+      type: IsarType.string,
+    ),
     r'staff': PropertySchema(
-      id: 35,
+      id: 37,
       name: r'staff',
       type: IsarType.bool,
     ),
     r'titleIsGroup': PropertySchema(
-      id: 36,
+      id: 38,
       name: r'titleIsGroup',
       type: IsarType.bool,
     ),
     r'topicId': PropertySchema(
-      id: 37,
+      id: 39,
       name: r'topicId',
       type: IsarType.long,
     ),
     r'topicSlug': PropertySchema(
-      id: 38,
+      id: 40,
       name: r'topicSlug',
       type: IsarType.string,
     ),
     r'topicTitleHeadline': PropertySchema(
-      id: 39,
+      id: 41,
       name: r'topicTitleHeadline',
       type: IsarType.string,
     ),
     r'trustLevel': PropertySchema(
-      id: 40,
+      id: 42,
       name: r'trustLevel',
       type: IsarType.long,
     ),
     r'updatedAt': PropertySchema(
-      id: 41,
+      id: 43,
       name: r'updatedAt',
       type: IsarType.dateTime,
     ),
     r'userCreatedAt': PropertySchema(
-      id: 42,
+      id: 44,
       name: r'userCreatedAt',
       type: IsarType.dateTime,
     ),
     r'userDateOfBirth': PropertySchema(
-      id: 43,
+      id: 45,
       name: r'userDateOfBirth',
       type: IsarType.dateTime,
     ),
     r'userDeleted': PropertySchema(
-      id: 44,
+      id: 46,
       name: r'userDeleted',
       type: IsarType.bool,
     ),
     r'userId': PropertySchema(
-      id: 45,
+      id: 47,
       name: r'userId',
       type: IsarType.long,
     ),
     r'userTitle': PropertySchema(
-      id: 46,
+      id: 48,
       name: r'userTitle',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 47,
+      id: 49,
       name: r'username',
       type: IsarType.string,
     ),
     r'version': PropertySchema(
-      id: 48,
+      id: 50,
       name: r'version',
       type: IsarType.long,
     ),
     r'wiki': PropertySchema(
-      id: 49,
+      id: 51,
       name: r'wiki',
       type: IsarType.bool,
     ),
     r'yours': PropertySchema(
-      id: 50,
+      id: 52,
       name: r'yours',
       type: IsarType.bool,
     )
@@ -353,6 +363,7 @@ int _discoursePostEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.sourceUrl.length * 3;
   {
     final value = object.topicSlug;
     if (value != null) {
@@ -408,35 +419,37 @@ void _discoursePostSerialize(
   writer.writeBool(offsets[19], object.hidden);
   writer.writeLong(offsets[20], object.id);
   writer.writeLong(offsets[21], object.incomingLinkCount);
-  writer.writeDateTime(offsets[22], object.lastWikiEdit);
-  writer.writeLong(offsets[23], object.likeCount);
-  writer.writeBool(offsets[24], object.moderator);
-  writer.writeString(offsets[25], object.name);
-  writer.writeLong(offsets[26], object.postNumber);
-  writer.writeLong(offsets[27], object.postType);
-  writer.writeString(offsets[28], object.primaryGroupName);
-  writer.writeLong(offsets[29], object.quoteCount);
-  writer.writeBool(offsets[30], object.read);
-  writer.writeLong(offsets[31], object.readersCount);
-  writer.writeLong(offsets[32], object.reads);
-  writer.writeLong(offsets[33], object.replyCount);
-  writer.writeDouble(offsets[34], object.score);
-  writer.writeBool(offsets[35], object.staff);
-  writer.writeBool(offsets[36], object.titleIsGroup);
-  writer.writeLong(offsets[37], object.topicId);
-  writer.writeString(offsets[38], object.topicSlug);
-  writer.writeString(offsets[39], object.topicTitleHeadline);
-  writer.writeLong(offsets[40], object.trustLevel);
-  writer.writeDateTime(offsets[41], object.updatedAt);
-  writer.writeDateTime(offsets[42], object.userCreatedAt);
-  writer.writeDateTime(offsets[43], object.userDateOfBirth);
-  writer.writeBool(offsets[44], object.userDeleted);
-  writer.writeLong(offsets[45], object.userId);
-  writer.writeString(offsets[46], object.userTitle);
-  writer.writeString(offsets[47], object.username);
-  writer.writeLong(offsets[48], object.version);
-  writer.writeBool(offsets[49], object.wiki);
-  writer.writeBool(offsets[50], object.yours);
+  writer.writeDateTime(offsets[22], object.lastUpdated);
+  writer.writeDateTime(offsets[23], object.lastWikiEdit);
+  writer.writeLong(offsets[24], object.likeCount);
+  writer.writeBool(offsets[25], object.moderator);
+  writer.writeString(offsets[26], object.name);
+  writer.writeLong(offsets[27], object.postNumber);
+  writer.writeLong(offsets[28], object.postType);
+  writer.writeString(offsets[29], object.primaryGroupName);
+  writer.writeLong(offsets[30], object.quoteCount);
+  writer.writeBool(offsets[31], object.read);
+  writer.writeLong(offsets[32], object.readersCount);
+  writer.writeLong(offsets[33], object.reads);
+  writer.writeLong(offsets[34], object.replyCount);
+  writer.writeDouble(offsets[35], object.score);
+  writer.writeString(offsets[36], object.sourceUrl);
+  writer.writeBool(offsets[37], object.staff);
+  writer.writeBool(offsets[38], object.titleIsGroup);
+  writer.writeLong(offsets[39], object.topicId);
+  writer.writeString(offsets[40], object.topicSlug);
+  writer.writeString(offsets[41], object.topicTitleHeadline);
+  writer.writeLong(offsets[42], object.trustLevel);
+  writer.writeDateTime(offsets[43], object.updatedAt);
+  writer.writeDateTime(offsets[44], object.userCreatedAt);
+  writer.writeDateTime(offsets[45], object.userDateOfBirth);
+  writer.writeBool(offsets[46], object.userDeleted);
+  writer.writeLong(offsets[47], object.userId);
+  writer.writeString(offsets[48], object.userTitle);
+  writer.writeString(offsets[49], object.username);
+  writer.writeLong(offsets[50], object.version);
+  writer.writeBool(offsets[51], object.wiki);
+  writer.writeBool(offsets[52], object.yours);
 }
 
 DiscoursePost _discoursePostDeserialize(
@@ -467,38 +480,40 @@ DiscoursePost _discoursePostDeserialize(
     hidden: reader.readBoolOrNull(offsets[19]),
     id: reader.readLongOrNull(offsets[20]),
     incomingLinkCount: reader.readLongOrNull(offsets[21]),
-    lastWikiEdit: reader.readDateTimeOrNull(offsets[22]),
-    moderator: reader.readBoolOrNull(offsets[24]),
-    name: reader.readStringOrNull(offsets[25]),
-    postNumber: reader.readLongOrNull(offsets[26]),
-    postType: reader.readLongOrNull(offsets[27]),
-    primaryGroupName: reader.readStringOrNull(offsets[28]),
-    quoteCount: reader.readLongOrNull(offsets[29]),
-    read: reader.readBoolOrNull(offsets[30]),
-    readersCount: reader.readLongOrNull(offsets[31]),
-    reads: reader.readLongOrNull(offsets[32]),
-    replyCount: reader.readLongOrNull(offsets[33]),
-    score: reader.readDoubleOrNull(offsets[34]),
-    staff: reader.readBoolOrNull(offsets[35]),
-    titleIsGroup: reader.readBoolOrNull(offsets[36]),
-    topicId: reader.readLongOrNull(offsets[37]),
-    topicSlug: reader.readStringOrNull(offsets[38]),
-    trustLevel: reader.readLongOrNull(offsets[40]),
-    updatedAt: reader.readDateTimeOrNull(offsets[41]),
-    userCreatedAt: reader.readDateTimeOrNull(offsets[42]),
-    userDateOfBirth: reader.readDateTimeOrNull(offsets[43]),
-    userDeleted: reader.readBoolOrNull(offsets[44]),
-    userId: reader.readLongOrNull(offsets[45]),
-    userTitle: reader.readStringOrNull(offsets[46]),
-    username: reader.readStringOrNull(offsets[47]),
-    version: reader.readLongOrNull(offsets[48]),
-    wiki: reader.readBoolOrNull(offsets[49]),
-    yours: reader.readBoolOrNull(offsets[50]),
+    lastWikiEdit: reader.readDateTimeOrNull(offsets[23]),
+    moderator: reader.readBoolOrNull(offsets[25]),
+    name: reader.readStringOrNull(offsets[26]),
+    postNumber: reader.readLongOrNull(offsets[27]),
+    postType: reader.readLongOrNull(offsets[28]),
+    primaryGroupName: reader.readStringOrNull(offsets[29]),
+    quoteCount: reader.readLongOrNull(offsets[30]),
+    read: reader.readBoolOrNull(offsets[31]),
+    readersCount: reader.readLongOrNull(offsets[32]),
+    reads: reader.readLongOrNull(offsets[33]),
+    replyCount: reader.readLongOrNull(offsets[34]),
+    score: reader.readDoubleOrNull(offsets[35]),
+    staff: reader.readBoolOrNull(offsets[37]),
+    titleIsGroup: reader.readBoolOrNull(offsets[38]),
+    topicId: reader.readLongOrNull(offsets[39]),
+    topicSlug: reader.readStringOrNull(offsets[40]),
+    trustLevel: reader.readLongOrNull(offsets[42]),
+    updatedAt: reader.readDateTimeOrNull(offsets[43]),
+    userCreatedAt: reader.readDateTimeOrNull(offsets[44]),
+    userDateOfBirth: reader.readDateTimeOrNull(offsets[45]),
+    userDeleted: reader.readBoolOrNull(offsets[46]),
+    userId: reader.readLongOrNull(offsets[47]),
+    userTitle: reader.readStringOrNull(offsets[48]),
+    username: reader.readStringOrNull(offsets[49]),
+    version: reader.readLongOrNull(offsets[50]),
+    wiki: reader.readBoolOrNull(offsets[51]),
+    yours: reader.readBoolOrNull(offsets[52]),
   );
   object.blurb = reader.readStringOrNull(offsets[3]);
   object.isarID = id;
-  object.likeCount = reader.readLongOrNull(offsets[23]);
-  object.topicTitleHeadline = reader.readStringOrNull(offsets[39]);
+  object.lastUpdated = reader.readDateTime(offsets[22]);
+  object.likeCount = reader.readLongOrNull(offsets[24]);
+  object.sourceUrl = reader.readString(offsets[36]);
+  object.topicTitleHeadline = reader.readStringOrNull(offsets[41]);
   return object;
 }
 
@@ -554,62 +569,66 @@ P _discoursePostDeserializeProp<P>(
     case 21:
       return (reader.readLongOrNull(offset)) as P;
     case 22:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 23:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 24:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 25:
-      return (reader.readStringOrNull(offset)) as P;
-    case 26:
       return (reader.readLongOrNull(offset)) as P;
+    case 25:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 26:
+      return (reader.readStringOrNull(offset)) as P;
     case 27:
       return (reader.readLongOrNull(offset)) as P;
     case 28:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 29:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 30:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 31:
       return (reader.readLongOrNull(offset)) as P;
+    case 31:
+      return (reader.readBoolOrNull(offset)) as P;
     case 32:
       return (reader.readLongOrNull(offset)) as P;
     case 33:
       return (reader.readLongOrNull(offset)) as P;
     case 34:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 35:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 36:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 37:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 38:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 39:
-      return (reader.readStringOrNull(offset)) as P;
-    case 40:
       return (reader.readLongOrNull(offset)) as P;
+    case 40:
+      return (reader.readStringOrNull(offset)) as P;
     case 41:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 42:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 43:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 44:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 45:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 46:
-      return (reader.readStringOrNull(offset)) as P;
-    case 47:
-      return (reader.readStringOrNull(offset)) as P;
-    case 48:
-      return (reader.readLongOrNull(offset)) as P;
-    case 49:
       return (reader.readBoolOrNull(offset)) as P;
+    case 47:
+      return (reader.readLongOrNull(offset)) as P;
+    case 48:
+      return (reader.readStringOrNull(offset)) as P;
+    case 49:
+      return (reader.readStringOrNull(offset)) as P;
     case 50:
+      return (reader.readLongOrNull(offset)) as P;
+    case 51:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 52:
       return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -2527,6 +2546,62 @@ extension DiscoursePostQueryFilter
   }
 
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      lastUpdatedEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      lastUpdatedGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      lastUpdatedLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      lastUpdatedBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastUpdated',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
       lastWikiEditIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3561,6 +3636,142 @@ extension DiscoursePostQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sourceUrl',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'sourceUrl',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sourceUrl',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterFilterCondition>
+      sourceUrlIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'sourceUrl',
+        value: '',
       ));
     });
   }
@@ -5135,6 +5346,19 @@ extension DiscoursePostQuerySortBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      sortByLastUpdatedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
       sortByLastWikiEdit() {
     return QueryBuilder.apply(this, (query) {
@@ -5300,6 +5524,19 @@ extension DiscoursePostQuerySortBy
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortByScoreDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'score', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> sortBySourceUrl() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      sortBySourceUrlDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.desc);
     });
   }
 
@@ -5811,6 +6048,19 @@ extension DiscoursePostQuerySortThenBy
     });
   }
 
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      thenByLastUpdatedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.desc);
+    });
+  }
+
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
       thenByLastWikiEdit() {
     return QueryBuilder.apply(this, (query) {
@@ -5976,6 +6226,19 @@ extension DiscoursePostQuerySortThenBy
   QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenByScoreDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'score', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy> thenBySourceUrl() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QAfterSortBy>
+      thenBySourceUrlDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.desc);
     });
   }
 
@@ -6336,6 +6599,13 @@ extension DiscoursePostQueryWhereDistinct
   }
 
   QueryBuilder<DiscoursePost, DiscoursePost, QDistinct>
+      distinctByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lastUpdated');
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QDistinct>
       distinctByLastWikiEdit() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'lastWikiEdit');
@@ -6415,6 +6685,13 @@ extension DiscoursePostQueryWhereDistinct
   QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctByScore() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'score');
+    });
+  }
+
+  QueryBuilder<DiscoursePost, DiscoursePost, QDistinct> distinctBySourceUrl(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sourceUrl', caseSensitive: caseSensitive);
     });
   }
 
@@ -6672,6 +6949,13 @@ extension DiscoursePostQueryProperty
     });
   }
 
+  QueryBuilder<DiscoursePost, DateTime, QQueryOperations>
+      lastUpdatedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lastUpdated');
+    });
+  }
+
   QueryBuilder<DiscoursePost, DateTime?, QQueryOperations>
       lastWikiEditProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -6749,6 +7033,12 @@ extension DiscoursePostQueryProperty
   QueryBuilder<DiscoursePost, double?, QQueryOperations> scoreProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'score');
+    });
+  }
+
+  QueryBuilder<DiscoursePost, String, QQueryOperations> sourceUrlProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sourceUrl');
     });
   }
 

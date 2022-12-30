@@ -1,5 +1,7 @@
 // ignore_for_file: overridden_fields
 
+import 'package:foiled/shared/foiled_data_store.dart';
+import 'package:foiled/shared/utils.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -22,10 +24,7 @@ abstract class DiscourseAbstractPost {
 
 @JsonSerializable()
 @collection
-class DiscoursePost extends DiscourseAbstractPost {
-  @JsonKey(ignore: true)
-  late Id isarID;
-
+class DiscoursePost extends DiscourseAbstractPost with FoiledDataStore {
   @override
   int? id;
 
@@ -153,6 +152,10 @@ class DiscoursePost extends DiscourseAbstractPost {
     this.acceptedAnswer,
   });
 
-  factory DiscoursePost.fromJson(Map<String, dynamic> json) =>
-      _$DiscoursePostFromJson(json);
+  factory DiscoursePost.fromJson(Map<String, dynamic> json,
+          {String? sourceUrl}) =>
+      _$DiscoursePostFromJson(json)
+        ..isarID = localHash(sourceUrl!)
+        ..sourceUrl = sourceUrl
+        ..lastUpdated = DateTime.now();
 }

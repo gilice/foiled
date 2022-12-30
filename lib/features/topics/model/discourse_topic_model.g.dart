@@ -133,109 +133,119 @@ const DiscourseTopicModelSchema = CollectionSchema(
       name: r'lastReadPostNumber',
       type: IsarType.long,
     ),
-    r'likeCount': PropertySchema(
+    r'lastUpdated': PropertySchema(
       id: 23,
+      name: r'lastUpdated',
+      type: IsarType.dateTime,
+    ),
+    r'likeCount': PropertySchema(
+      id: 24,
       name: r'likeCount',
       type: IsarType.long,
     ),
     r'liked': PropertySchema(
-      id: 24,
+      id: 25,
       name: r'liked',
       type: IsarType.string,
     ),
     r'messageBusLastId': PropertySchema(
-      id: 25,
+      id: 26,
       name: r'messageBusLastId',
       type: IsarType.long,
     ),
     r'participantCount': PropertySchema(
-      id: 26,
+      id: 27,
       name: r'participantCount',
       type: IsarType.long,
     ),
     r'pinned': PropertySchema(
-      id: 27,
+      id: 28,
       name: r'pinned',
       type: IsarType.bool,
     ),
     r'pinnedGlobally': PropertySchema(
-      id: 28,
+      id: 29,
       name: r'pinnedGlobally',
       type: IsarType.bool,
     ),
     r'postStream': PropertySchema(
-      id: 29,
+      id: 30,
       name: r'postStream',
       type: IsarType.object,
       target: r'DiscoursePostStream',
     ),
     r'posted': PropertySchema(
-      id: 30,
+      id: 31,
       name: r'posted',
       type: IsarType.bool,
     ),
     r'postsCount': PropertySchema(
-      id: 31,
+      id: 32,
       name: r'postsCount',
       type: IsarType.long,
     ),
     r'replyCount': PropertySchema(
-      id: 32,
+      id: 33,
       name: r'replyCount',
       type: IsarType.long,
     ),
     r'showReadIndicator': PropertySchema(
-      id: 33,
+      id: 34,
       name: r'showReadIndicator',
       type: IsarType.bool,
     ),
     r'slowModeSeconds': PropertySchema(
-      id: 34,
+      id: 35,
       name: r'slowModeSeconds',
       type: IsarType.long,
     ),
     r'slug': PropertySchema(
-      id: 35,
+      id: 36,
       name: r'slug',
       type: IsarType.string,
     ),
+    r'sourceUrl': PropertySchema(
+      id: 37,
+      name: r'sourceUrl',
+      type: IsarType.string,
+    ),
     r'tags': PropertySchema(
-      id: 36,
+      id: 38,
       name: r'tags',
       type: IsarType.stringList,
     ),
     r'title': PropertySchema(
-      id: 37,
+      id: 39,
       name: r'title',
       type: IsarType.string,
     ),
     r'unpinned': PropertySchema(
-      id: 38,
+      id: 40,
       name: r'unpinned',
       type: IsarType.string,
     ),
     r'unseen': PropertySchema(
-      id: 39,
+      id: 41,
       name: r'unseen',
       type: IsarType.bool,
     ),
     r'userId': PropertySchema(
-      id: 40,
+      id: 42,
       name: r'userId',
       type: IsarType.long,
     ),
     r'views': PropertySchema(
-      id: 41,
+      id: 43,
       name: r'views',
       type: IsarType.long,
     ),
     r'visible': PropertySchema(
-      id: 42,
+      id: 44,
       name: r'visible',
       type: IsarType.bool,
     ),
     r'wordCount': PropertySchema(
-      id: 43,
+      id: 45,
       name: r'wordCount',
       type: IsarType.long,
     )
@@ -244,7 +254,7 @@ const DiscourseTopicModelSchema = CollectionSchema(
   serialize: _discourseTopicModelSerialize,
   deserialize: _discourseTopicModelDeserialize,
   deserializeProp: _discourseTopicModelDeserializeProp,
-  idName: r'isarId',
+  idName: r'isarID',
   indexes: {},
   links: {
     r'cachedPosts': LinkSchema(
@@ -341,6 +351,7 @@ int _discourseTopicModelEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.sourceUrl.length * 3;
   {
     final list = object.tags;
     if (list != null) {
@@ -397,32 +408,34 @@ void _discourseTopicModelSerialize(
   writer.writeString(offsets[20], object.lastPosterUsername);
   writer.writeLong(offsets[21], object.lastReadPostId);
   writer.writeLong(offsets[22], object.lastReadPostNumber);
-  writer.writeLong(offsets[23], object.likeCount);
-  writer.writeString(offsets[24], object.liked);
-  writer.writeLong(offsets[25], object.messageBusLastId);
-  writer.writeLong(offsets[26], object.participantCount);
-  writer.writeBool(offsets[27], object.pinned);
-  writer.writeBool(offsets[28], object.pinnedGlobally);
+  writer.writeDateTime(offsets[23], object.lastUpdated);
+  writer.writeLong(offsets[24], object.likeCount);
+  writer.writeString(offsets[25], object.liked);
+  writer.writeLong(offsets[26], object.messageBusLastId);
+  writer.writeLong(offsets[27], object.participantCount);
+  writer.writeBool(offsets[28], object.pinned);
+  writer.writeBool(offsets[29], object.pinnedGlobally);
   writer.writeObject<DiscoursePostStream>(
-    offsets[29],
+    offsets[30],
     allOffsets,
     DiscoursePostStreamSchema.serialize,
     object.postStream,
   );
-  writer.writeBool(offsets[30], object.posted);
-  writer.writeLong(offsets[31], object.postsCount);
-  writer.writeLong(offsets[32], object.replyCount);
-  writer.writeBool(offsets[33], object.showReadIndicator);
-  writer.writeLong(offsets[34], object.slowModeSeconds);
-  writer.writeString(offsets[35], object.slug);
-  writer.writeStringList(offsets[36], object.tags);
-  writer.writeString(offsets[37], object.title);
-  writer.writeString(offsets[38], object.unpinned);
-  writer.writeBool(offsets[39], object.unseen);
-  writer.writeLong(offsets[40], object.userId);
-  writer.writeLong(offsets[41], object.views);
-  writer.writeBool(offsets[42], object.visible);
-  writer.writeLong(offsets[43], object.wordCount);
+  writer.writeBool(offsets[31], object.posted);
+  writer.writeLong(offsets[32], object.postsCount);
+  writer.writeLong(offsets[33], object.replyCount);
+  writer.writeBool(offsets[34], object.showReadIndicator);
+  writer.writeLong(offsets[35], object.slowModeSeconds);
+  writer.writeString(offsets[36], object.slug);
+  writer.writeString(offsets[37], object.sourceUrl);
+  writer.writeStringList(offsets[38], object.tags);
+  writer.writeString(offsets[39], object.title);
+  writer.writeString(offsets[40], object.unpinned);
+  writer.writeBool(offsets[41], object.unseen);
+  writer.writeLong(offsets[42], object.userId);
+  writer.writeLong(offsets[43], object.views);
+  writer.writeBool(offsets[44], object.visible);
+  writer.writeLong(offsets[45], object.wordCount);
 }
 
 DiscourseTopicModel _discourseTopicModelDeserialize(
@@ -455,33 +468,35 @@ DiscourseTopicModel _discourseTopicModelDeserialize(
     lastPosterUsername: reader.readStringOrNull(offsets[20]),
     lastReadPostId: reader.readLongOrNull(offsets[21]),
     lastReadPostNumber: reader.readLongOrNull(offsets[22]),
-    likeCount: reader.readLongOrNull(offsets[23]),
-    liked: reader.readStringOrNull(offsets[24]),
-    messageBusLastId: reader.readLongOrNull(offsets[25]),
-    participantCount: reader.readLongOrNull(offsets[26]),
-    pinned: reader.readBoolOrNull(offsets[27]),
-    pinnedGlobally: reader.readBoolOrNull(offsets[28]),
+    likeCount: reader.readLongOrNull(offsets[24]),
+    liked: reader.readStringOrNull(offsets[25]),
+    messageBusLastId: reader.readLongOrNull(offsets[26]),
+    participantCount: reader.readLongOrNull(offsets[27]),
+    pinned: reader.readBoolOrNull(offsets[28]),
+    pinnedGlobally: reader.readBoolOrNull(offsets[29]),
     postStream: reader.readObjectOrNull<DiscoursePostStream>(
-      offsets[29],
+      offsets[30],
       DiscoursePostStreamSchema.deserialize,
       allOffsets,
     ),
-    posted: reader.readBoolOrNull(offsets[30]),
-    postsCount: reader.readLongOrNull(offsets[31]),
-    replyCount: reader.readLongOrNull(offsets[32]),
-    showReadIndicator: reader.readBoolOrNull(offsets[33]),
-    slowModeSeconds: reader.readLongOrNull(offsets[34]),
-    slug: reader.readStringOrNull(offsets[35]),
-    tags: reader.readStringList(offsets[36]),
-    title: reader.readStringOrNull(offsets[37]),
-    unpinned: reader.readStringOrNull(offsets[38]),
-    unseen: reader.readBoolOrNull(offsets[39]),
-    userId: reader.readLongOrNull(offsets[40]),
-    views: reader.readLongOrNull(offsets[41]),
-    visible: reader.readBoolOrNull(offsets[42]),
-    wordCount: reader.readLongOrNull(offsets[43]),
+    posted: reader.readBoolOrNull(offsets[31]),
+    postsCount: reader.readLongOrNull(offsets[32]),
+    replyCount: reader.readLongOrNull(offsets[33]),
+    showReadIndicator: reader.readBoolOrNull(offsets[34]),
+    slowModeSeconds: reader.readLongOrNull(offsets[35]),
+    slug: reader.readStringOrNull(offsets[36]),
+    tags: reader.readStringList(offsets[38]),
+    title: reader.readStringOrNull(offsets[39]),
+    unpinned: reader.readStringOrNull(offsets[40]),
+    unseen: reader.readBoolOrNull(offsets[41]),
+    userId: reader.readLongOrNull(offsets[42]),
+    views: reader.readLongOrNull(offsets[43]),
+    visible: reader.readBoolOrNull(offsets[44]),
+    wordCount: reader.readLongOrNull(offsets[45]),
   );
-  object.isarId = id;
+  object.isarID = id;
+  object.lastUpdated = reader.readDateTime(offsets[23]);
+  object.sourceUrl = reader.readString(offsets[37]);
   return object;
 }
 
@@ -539,50 +554,54 @@ P _discourseTopicModelDeserializeProp<P>(
     case 22:
       return (reader.readLongOrNull(offset)) as P;
     case 23:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 24:
-      return (reader.readStringOrNull(offset)) as P;
-    case 25:
       return (reader.readLongOrNull(offset)) as P;
+    case 25:
+      return (reader.readStringOrNull(offset)) as P;
     case 26:
       return (reader.readLongOrNull(offset)) as P;
     case 27:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 28:
       return (reader.readBoolOrNull(offset)) as P;
     case 29:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 30:
       return (reader.readObjectOrNull<DiscoursePostStream>(
         offset,
         DiscoursePostStreamSchema.deserialize,
         allOffsets,
       )) as P;
-    case 30:
-      return (reader.readBoolOrNull(offset)) as P;
     case 31:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 32:
       return (reader.readLongOrNull(offset)) as P;
     case 33:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 34:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 35:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 36:
-      return (reader.readStringList(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 37:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 38:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readStringList(offset)) as P;
     case 39:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 40:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 41:
-      return (reader.readLongOrNull(offset)) as P;
-    case 42:
       return (reader.readBoolOrNull(offset)) as P;
+    case 42:
+      return (reader.readLongOrNull(offset)) as P;
     case 43:
+      return (reader.readLongOrNull(offset)) as P;
+    case 44:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 45:
       return (reader.readLongOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -590,7 +609,7 @@ P _discourseTopicModelDeserializeProp<P>(
 }
 
 Id _discourseTopicModelGetId(DiscourseTopicModel object) {
-  return object.isarId;
+  return object.isarID;
 }
 
 List<IsarLinkBase<dynamic>> _discourseTopicModelGetLinks(
@@ -600,7 +619,7 @@ List<IsarLinkBase<dynamic>> _discourseTopicModelGetLinks(
 
 void _discourseTopicModelAttach(
     IsarCollection<dynamic> col, Id id, DiscourseTopicModel object) {
-  object.isarId = id;
+  object.isarID = id;
   object.cachedPosts
       .attach(col, col.isar.collection<DiscoursePost>(), r'cachedPosts', id);
 }
@@ -608,7 +627,7 @@ void _discourseTopicModelAttach(
 extension DiscourseTopicModelQueryWhereSort
     on QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QWhere> {
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhere>
-      anyIsarId() {
+      anyIsarID() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
@@ -618,68 +637,68 @@ extension DiscourseTopicModelQueryWhereSort
 extension DiscourseTopicModelQueryWhere
     on QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QWhereClause> {
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhereClause>
-      isarIdEqualTo(Id isarId) {
+      isarIDEqualTo(Id isarID) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: isarId,
-        upper: isarId,
+        lower: isarID,
+        upper: isarID,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhereClause>
-      isarIdNotEqualTo(Id isarId) {
+      isarIDNotEqualTo(Id isarID) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(
-              IdWhereClause.lessThan(upper: isarId, includeUpper: false),
+              IdWhereClause.lessThan(upper: isarID, includeUpper: false),
             )
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: isarId, includeLower: false),
+              IdWhereClause.greaterThan(lower: isarID, includeLower: false),
             );
       } else {
         return query
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: isarId, includeLower: false),
+              IdWhereClause.greaterThan(lower: isarID, includeLower: false),
             )
             .addWhereClause(
-              IdWhereClause.lessThan(upper: isarId, includeUpper: false),
+              IdWhereClause.lessThan(upper: isarID, includeUpper: false),
             );
       }
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhereClause>
-      isarIdGreaterThan(Id isarId, {bool include = false}) {
+      isarIDGreaterThan(Id isarID, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.greaterThan(lower: isarId, includeLower: include),
+        IdWhereClause.greaterThan(lower: isarID, includeLower: include),
       );
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhereClause>
-      isarIdLessThan(Id isarId, {bool include = false}) {
+      isarIDLessThan(Id isarID, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.lessThan(upper: isarId, includeUpper: include),
+        IdWhereClause.lessThan(upper: isarID, includeUpper: include),
       );
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterWhereClause>
-      isarIdBetween(
-    Id lowerIsarId,
-    Id upperIsarId, {
+      isarIDBetween(
+    Id lowerIsarID,
+    Id upperIsarID, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: lowerIsarId,
+        lower: lowerIsarID,
         includeLower: includeLower,
-        upper: upperIsarId,
+        upper: upperIsarID,
         includeUpper: includeUpper,
       ));
     });
@@ -2425,45 +2444,45 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      isarIdEqualTo(Id value) {
+      isarIDEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isarId',
+        property: r'isarID',
         value: value,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      isarIdGreaterThan(
+      isarIDGreaterThan(
     Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'isarId',
+        property: r'isarID',
         value: value,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      isarIdLessThan(
+      isarIDLessThan(
     Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'isarId',
+        property: r'isarID',
         value: value,
       ));
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
-      isarIdBetween(
+      isarIDBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -2471,7 +2490,7 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'isarId',
+        property: r'isarID',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2928,6 +2947,62 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'lastReadPostNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      lastUpdatedEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      lastUpdatedGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      lastUpdatedLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      lastUpdatedBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastUpdated',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3813,6 +3888,142 @@ extension DiscourseTopicModelQueryFilter on QueryBuilder<DiscourseTopicModel,
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'slug',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sourceUrl',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'sourceUrl',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'sourceUrl',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sourceUrl',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterFilterCondition>
+      sourceUrlIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'sourceUrl',
         value: '',
       ));
     });
@@ -5047,6 +5258,20 @@ extension DiscourseTopicModelQuerySortBy
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      sortByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      sortByLastUpdatedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
       sortByLikeCount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'likeCount', Sort.asc);
@@ -5211,6 +5436,20 @@ extension DiscourseTopicModelQuerySortBy
       sortBySlugDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      sortBySourceUrl() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      sortBySourceUrlDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.desc);
     });
   }
 
@@ -5582,16 +5821,16 @@ extension DiscourseTopicModelQuerySortThenBy
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
-      thenByIsarId() {
+      thenByIsarID() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isarId', Sort.asc);
+      return query.addSortBy(r'isarID', Sort.asc);
     });
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
-      thenByIsarIdDesc() {
+      thenByIsarIDDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isarId', Sort.desc);
+      return query.addSortBy(r'isarID', Sort.desc);
     });
   }
 
@@ -5648,6 +5887,20 @@ extension DiscourseTopicModelQuerySortThenBy
       thenByLastReadPostNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lastReadPostNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      thenByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      thenByLastUpdatedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastUpdated', Sort.desc);
     });
   }
 
@@ -5816,6 +6069,20 @@ extension DiscourseTopicModelQuerySortThenBy
       thenBySlugDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.desc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      thenBySourceUrl() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.asc);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QAfterSortBy>
+      thenBySourceUrlDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sourceUrl', Sort.desc);
     });
   }
 
@@ -6083,6 +6350,13 @@ extension DiscourseTopicModelQueryWhereDistinct
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QDistinct>
+      distinctByLastUpdated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lastUpdated');
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QDistinct>
       distinctByLikeCount() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'likeCount');
@@ -6167,6 +6441,13 @@ extension DiscourseTopicModelQueryWhereDistinct
   }
 
   QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QDistinct>
+      distinctBySourceUrl({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sourceUrl', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QDistinct>
       distinctByTags() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tags');
@@ -6225,9 +6506,9 @@ extension DiscourseTopicModelQueryWhereDistinct
 
 extension DiscourseTopicModelQueryProperty
     on QueryBuilder<DiscourseTopicModel, DiscourseTopicModel, QQueryProperty> {
-  QueryBuilder<DiscourseTopicModel, int, QQueryOperations> isarIdProperty() {
+  QueryBuilder<DiscourseTopicModel, int, QQueryOperations> isarIDProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isarId');
+      return query.addPropertyName(r'isarID');
     });
   }
 
@@ -6389,6 +6670,13 @@ extension DiscourseTopicModelQueryProperty
     });
   }
 
+  QueryBuilder<DiscourseTopicModel, DateTime, QQueryOperations>
+      lastUpdatedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lastUpdated');
+    });
+  }
+
   QueryBuilder<DiscourseTopicModel, int?, QQueryOperations>
       likeCountProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -6473,6 +6761,13 @@ extension DiscourseTopicModelQueryProperty
   QueryBuilder<DiscourseTopicModel, String?, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
+    });
+  }
+
+  QueryBuilder<DiscourseTopicModel, String, QQueryOperations>
+      sourceUrlProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sourceUrl');
     });
   }
 

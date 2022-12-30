@@ -1,5 +1,8 @@
 import 'package:foiled/backend/api/model/discourse_post.dart';
 import 'package:foiled/backend/api/model/discourse_post_stream.dart';
+import 'package:foiled/main.dart';
+import 'package:foiled/shared/foiled_data_store.dart';
+import 'package:foiled/shared/utils.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,15 +16,20 @@ abstract class DiscourseAbstractTopic {
   List<String>? tags;
   bool? pinned;
   bool? pinnedGlobally;
+
+  /// A small part of the content, used for search. "Normal" navigated topics don't
+  /// contan this, and instead use [DiscoursePost]s [DiscoursePost.cooked]
   String? excerpt;
+
+  /// The server-side ID
   int? id;
 }
 
 @collection
 @JsonSerializable()
-class DiscourseTopicModel implements DiscourseAbstractTopic {
-  @JsonKey(ignore: true)
-  late Id isarId;
+class DiscourseTopicModel
+    with FoiledDataStore
+    implements DiscourseAbstractTopic {
   final cachedPosts = IsarLinks<DiscoursePost>();
 
   @override
@@ -163,8 +171,12 @@ class DiscourseTopicModel implements DiscourseAbstractTopic {
 
   //List<Poster> posters;
 
-  factory DiscourseTopicModel.fromJson(
-    Map<String, dynamic> json,
-  ) =>
-      _$DiscourseTopicModelFromJson(json);
+  factory DiscourseTopicModel.fromJson(Map<String, dynamic> json,
+      {DateTime? lastUpdated, String? sourceUrl}) {
+    talker.debug("DiscourseTopicModel.fromJson($json, $sourceUrl)");
+    return _$DiscourseTopicModelFromJson(json)
+      ..isarID = localHash(sourceUrl!)
+      ..sourceUrl = sourceUrl
+      ..lastUpdated = lastUpdated ?? DateTime.now();
+  }
 }

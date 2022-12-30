@@ -106,7 +106,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     final String? apiKey = decoded["key"];
 
     if (apiKey == null) {
-      return Future.error(NoApiKeyException);
+      return Future.error(NoApiKeyException());
     }
 
     // https://meta.discourse.org/t/endpoint-for-user-information/160145/5
@@ -116,7 +116,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     final resDecoded = json.decode(res.body);
     final cU = resDecoded["current_user"];
     if (cU == null) {
-      throw ServerWhoamiResponseInvalidException();
+      return Future.error(ServerWhoamiResponseInvalidException());
     }
 
     // write everything to database
@@ -145,6 +145,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     });
 
     talker.debug("finished writing account $a with server $newServer");
+    ref.read(selectedIDProvider.notifier).state = a.id;
 
     // since [DiscourseServerBackend] is `ref.watch()`ing this provider too
     // it'll automatically update

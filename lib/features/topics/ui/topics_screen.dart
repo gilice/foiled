@@ -37,7 +37,7 @@ final topicsProvider =
     final ret = (await category.getTopics(db, baseUrl)).toList();
     return ret;
   } catch (e) {
-    return Future.error(FlutterError(e.toString()));
+    return Future.error(FlutterError(e.toString()), StackTrace.current);
   }
 }, name: "topicsProvider");
 
