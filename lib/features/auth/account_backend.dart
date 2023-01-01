@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -80,29 +82,38 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
   ///
   /// Should be given a [serverKey], completed when the user submits the key received from the server
   Future<void> performAuth(
-      String serverBaseUrl, Future<String> serverKey) async {
+    String serverBaseUrl,
+    Future<String> serverKey,
+  ) async {
+    final testMode = accountTestOverride;
+    // const testMode = false;
     // Cleanup and format the base url given by the user
     serverBaseUrl = Uri.parse(serverBaseUrl).toString();
 
-    final authKeys = RSAKeypair.fromRandom();
-    var reqUri = Uri.parse(serverBaseUrl);
-    final nonce = DateTime.now().millisecondsSinceEpoch;
-    reqUri = Uri.https(reqUri.authority, "user-api-key/new", {
-      'application_name': 'foiled',
-      'client_id': 'foiled_user_$appVersion${Platform.localHostname}',
-      'scopes': 'read',
-      'public_key': authKeys.publicKey.toPEM(),
-      'nonce': nonce.toString()
-    });
+    final authKeys = testMode
+        ? RSAKeypair(RSAPrivateKey.fromString(testRSAKey))
+        : RSAKeypair.fromRandom();
 
-    await launchUrl(reqUri, mode: LaunchMode.externalApplication);
+    if (!testMode) {
+      final nonce = DateTime.now().millisecondsSinceEpoch;
+      final initUri = Uri.parse(serverBaseUrl);
+      final reqUri = Uri.https(initUri.authority, "user-api-key/new", {
+        'application_name': 'foiled',
+        'client_id': 'foiled_user_$appVersion${Platform.localHostname}',
+        'scopes': 'read',
+        'public_key': authKeys.publicKey.toPEM(),
+        'nonce': nonce.toString()
+      });
+      await launchUrl(reqUri, mode: LaunchMode.externalApplication);
+    }
 
-    // remove all spaces from the base64 response
     var receivedKey = await serverKey;
+    // remove all spaces from the base64 response
     receivedKey = receivedKey.replaceAll(RegExp(r"\s"), "");
 
     final decrypted = authKeys.privateKey.decrypt(receivedKey);
     final decoded = json.decode(decrypted);
+    talker.debug("auth response: $decoded");
     final String? apiKey = decoded["key"];
 
     if (apiKey == null) {
@@ -113,7 +124,9 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
     // This is an undocumented endpoint for getting who you are (username, etc)
     final res = await http.get(Uri.parse("$serverBaseUrl/session/current.json"),
         headers: {"User-Api-Key": apiKey});
-    final resDecoded = json.decode(res.body);
+    final resBody = testMode ? fakeWhoamiResponse : res.body;
+    talker.debug("server whoami response: $resBody");
+    final resDecoded = json.decode(resBody);
     final cU = resDecoded["current_user"];
     if (cU == null) {
       return Future.error(ServerWhoamiResponseInvalidException());
@@ -134,7 +147,7 @@ class AccountBackend extends AsyncNotifier<AccountModel> {
         username: cU["username"])
       ..id = localHash("$serverBaseUrl/u/${cU["username"]}.json");
 
-    db.writeTxn(() async {
+    await db.writeTxn(() async {
       await db.accountModels.put(a);
       if (existing == null) {
         await db.discourseServerModels.put(newServer);

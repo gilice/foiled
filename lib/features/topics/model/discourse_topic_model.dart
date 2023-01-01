@@ -1,6 +1,5 @@
 import 'package:foiled/backend/api/model/discourse_post.dart';
 import 'package:foiled/backend/api/model/discourse_post_stream.dart';
-import 'package:foiled/main.dart';
 import 'package:foiled/shared/foiled_data_store.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:isar/isar.dart';
@@ -171,9 +170,13 @@ class DiscourseTopicModel
 
   //List<Poster> posters;
 
-  factory DiscourseTopicModel.fromJson(Map<String, dynamic> json,
-      {DateTime? lastUpdated, String? sourceUrl}) {
-    talker.debug("DiscourseTopicModel.fromJson($json, $sourceUrl)");
+  factory DiscourseTopicModel.fromJson(
+    Map<String, dynamic> json, {
+    DateTime? lastUpdated,
+    String? sourceUrl,
+    // ignore: prefer_expression_function_bodies
+  }) {
+    // talker.debug("DiscourseTopicModel.fromJson($json, $sourceUrl)");
     return _$DiscourseTopicModelFromJson(json)
       ..isarID = localHash(sourceUrl!)
       ..sourceUrl = sourceUrl

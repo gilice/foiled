@@ -10,7 +10,7 @@ import 'package:foiled/shared/utils.dart';
 Future showAddAccountDialog(BuildContext context) => showModalPopUp(
       context,
       title: "Add new account",
-      content: const _AddAccountPopUp(),
+      content: const AddAccountPopUp(),
     );
 
 class _AccountPopupQuestion extends StatelessWidget {
@@ -42,19 +42,20 @@ class _AccountPopupQuestion extends StatelessWidget {
 
 enum _AddAccountAuthStatus { none, code, full }
 
-class _AddAccountPopUp extends StatefulWidget {
-  const _AddAccountPopUp({Key? key}) : super(key: key);
+class AddAccountPopUp extends StatefulWidget {
+  const AddAccountPopUp({Key? key}) : super(key: key);
 
   @override
-  State<_AddAccountPopUp> createState() => _AddAccountPopUpState();
+  State<AddAccountPopUp> createState() => _AddAccountPopUpState();
 }
 
-class _AddAccountPopUpState extends State<_AddAccountPopUp> {
+class _AddAccountPopUpState extends State<AddAccountPopUp> {
   final TextEditingController _urlController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
   Completer<String> serverKey = Completer<String>();
 
   _AddAccountAuthStatus isAuthenticated = _AddAccountAuthStatus.none;
+
   @override
   Widget build(BuildContext context) => Stack(children: [
         Column(
@@ -68,6 +69,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
             if (isAuthenticated == _AddAccountAuthStatus.none)
               Consumer(
                 builder: (context, ref, child) => ElevatedButton.icon(
+                  key: const Key("AddAccountAuthButton"),
                   onPressed: () async {
                     talker.debug("Initiating auth");
                     final url = _urlController.text.isEmpty && kDebugMode
@@ -97,6 +99,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
               ),
             if (isAuthenticated.index >= _AddAccountAuthStatus.code.index)
               _AccountPopupQuestion(
+                key: const ValueKey("AccountPopupCodeQuestion"),
                 controller: _codeController,
                 label: "Auth code",
                 defaults: "null",
@@ -112,6 +115,7 @@ class _AddAccountPopUpState extends State<_AddAccountPopUp> {
               child: Consumer(
                 builder: (BuildContext context, ref, child) =>
                     FloatingActionButton(
+                        key: const ValueKey("AddAccountAccountSubmitButton"),
                         onPressed: () async {
                           serverKey.complete(_codeController.text);
                           Navigator.of(context).pop();

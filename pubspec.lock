@@ -566,7 +566,7 @@ packages:
     source: hosted
     version: "3.2.2"
   integration_test:
-    dependency: transitive
+    dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -1304,7 +1304,7 @@ packages:
     source: hosted
     version: "3.1.3"
   xdg_directories:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: xdg_directories
       url: "https://pub.dartlang.org"

@@ -13,10 +13,10 @@ Future<dynamic> showSettingsPopup(BuildContext context) => showModalBottomSheet(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16), topRight: Radius.circular(16))),
     context: context,
-    builder: (context) => const _SettingsBottomSheet());
+    builder: (context) => const SettingsBottomSheet());
 
-class _SettingsBottomSheet extends StatelessWidget {
-  const _SettingsBottomSheet({Key? key}) : super(key: key);
+class SettingsBottomSheet extends StatelessWidget {
+  const SettingsBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => StandardPadding(
@@ -46,6 +46,7 @@ class _SettingsBottomSheet extends StatelessWidget {
                       )),
             ),
             ListTile(
+              key: ValueKey("SettingsPopUpAccountManager"),
               leading: const Icon(Icons.account_circle_outlined),
               title: const Text("Set up accounts"),
               onTap: () => showAccountManager(context),

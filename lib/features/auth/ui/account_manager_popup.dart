@@ -25,6 +25,7 @@ class _AccountManagerPopup extends StatelessWidget {
                   return StandardPadding(
                     child: Center(
                       child: ElevatedButton.icon(
+                          key: ValueKey("AccountManagerAddAccountButton"),
                           onPressed: () => showAddAccountDialog(context),
                           icon: const Icon(Icons.add_outlined),
                           label: const Text("Add new account")),

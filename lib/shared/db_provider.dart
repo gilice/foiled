@@ -8,12 +8,18 @@ import 'package:foiled/features/topics/model/discourse_topic_model.dart';
 import 'package:isar/isar.dart';
 
 final dbProvider = FutureProvider<Isar>(
-  (ref) => Isar.open([
-    AccountModelSchema,
-    DiscourseServerModelSchema,
-    DiscourseServerInfoSchema,
-    DiscourseCategorySchema,
-    DiscourseTopicModelSchema,
-    DiscoursePostSchema,
-  ]),
+  (ref) {
+    var inst = Isar.getInstance();
+    if (inst != null) {
+      return Future.value(inst);
+    }
+    return Isar.open([
+      AccountModelSchema,
+      DiscourseServerModelSchema,
+      DiscourseServerInfoSchema,
+      DiscourseCategorySchema,
+      DiscourseTopicModelSchema,
+      DiscoursePostSchema,
+    ]);
+  },
 );

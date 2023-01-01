@@ -10,6 +10,7 @@ Widget homeAppBar(BuildContext context, {required Widget child}) =>
     SliverAppBar(
       actions: [
         IconButton(
+            key: const ValueKey("HomeAppBarSettings"),
             onPressed: () => showSettingsPopup(context),
             icon: const Icon(Icons.settings_outlined))
       ],

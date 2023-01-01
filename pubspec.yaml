@@ -49,8 +49,11 @@ dependencies:
   convenient_test: ^1.2.1
   auto_size_text: ^3.0.0
   functional_widget_annotation: ^0.10.0
+  xdg_directories: ^0.2.0+2
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 

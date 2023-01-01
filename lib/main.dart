@@ -1,10 +1,9 @@
+import 'package:convenient_test/convenient_test.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foiled/features/homescreen/home_screen.dart';
 import 'package:foiled/shared/constants.dart';
-import 'package:foiled/shared/log_all_observer.dart';
 import 'package:foiled/shared/ui/mono_text.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +23,7 @@ final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
 
 class FoiledApp extends StatelessWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
+
   const FoiledApp({Key? key}) : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class FoiledApp extends StatelessWidget {
           }
 
           return ProviderScope(
-            observers: kDebugMode ? [LogAllObserver()] : null,
+            // observers: kDebugMode ? [LogAllObserver()] : null,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
                 final theme = ref.watch(themeModeProvider);
@@ -103,7 +103,8 @@ class FoiledApp extends StatelessWidget {
                   themeMode: theme,
                   theme: themeFromColorScheme(lightColorScheme),
                   darkTheme: themeFromColorScheme(darkColorScheme),
-                  home: const HomeScreen(),
+                  // TODO move this away from here
+                  home: const ConvenientTestWrapperWidget(child: HomeScreen()),
                 );
               },
             ),
