@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$_searchHash() => r'af7c51893ec0357b1b5459dbfa8c40cbba4151b3';
+String _$_searchHash() => r'd0e5d33f40b8ed39a48444f368e11cf5ce3c16ab';
 
 /// See also [_search].
 class _SearchProvider extends AutoDisposeFutureProvider<DiscourseSearch> {
