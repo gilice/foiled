@@ -14,6 +14,7 @@ import 'package:foiled/features/server/exceptions.dart';
 import 'package:foiled/features/server/model/discourse_server_model.dart';
 import 'package:foiled/features/topics/model/discourse_topic_model.dart';
 import 'package:foiled/main.dart';
+import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/db_provider.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:http/http.dart' as http;
@@ -91,9 +92,16 @@ Future<DiscourseSearch> _search(_SearchRef ref, String searchQuery,
         "page": page.toString(),
       });
     }
+    String resp;
+    if (!searchTestOverride) {
+      final res = await http.get(url, headers: apiKeyHeader);
+      talker.debug("search result:\n${res.body}");
+      resp = res.body;
+    } else {
+      resp = searchResponseOverride;
+    }
 
-    final res = await http.get(url, headers: apiKeyHeader);
-    final decoded = json.decode(res.body);
+    final decoded = json.decode(resp);
     final parsed = DiscourseSearch.fromJson(decoded)
       ..id = localHash(url.toString());
     return parsed;

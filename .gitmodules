@@ -4,3 +4,6 @@
 [submodule ".isar"]
 	path = .isar
 	url = https://github.com/isar/isar
+[submodule ".ctest"]
+	path = .ctest
+	url = https://github.com/fzyzcjy/flutter_convenient_test

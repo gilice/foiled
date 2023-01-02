@@ -6,6 +6,7 @@ import 'package:foiled/features/search/discourse_search_result.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/topics/ui/post_widget.dart';
 import 'package:foiled/features/topics/ui/topic_widget.dart';
+import 'package:foiled/main.dart';
 import 'package:foiled/shared/ui/home_app_bar.dart';
 import 'package:foiled/shared/ui/info_card.dart';
 import 'package:foiled/shared/utils.dart';
@@ -46,6 +47,8 @@ class _SearchResultNotifier extends AutoDisposeAsyncNotifier<DiscourseSearch?> {
 final _searchInputProvider = StateProvider.autoDispose<String>((ref) => "",
     name: "SearchScreen._searchInputProvider");
 
+const searchScreenInputKey = ValueKey("SearchScreenInput");
+
 @swidget
 Widget searchScreen(BuildContext context) => Scaffold(
         body: CustomScrollView(
@@ -53,6 +56,7 @@ Widget searchScreen(BuildContext context) => Scaffold(
         HomeAppBar(
             child: Consumer(
           builder: (context, ref, child) => TextField(
+            key: searchScreenInputKey,
             onSubmitted: (String value) {
               ref.read(_searchInputProvider.notifier).state = value;
             },
@@ -111,6 +115,8 @@ Widget searchScreen(BuildContext context) => Scaffold(
 typedef SearchCategoryChildBuilder = Widget Function(
     BuildContext context, int index);
 
+final searchCategoryExpandKey = ValueKey("SearchCategoryExpand");
+
 class SearchCategoryWidget extends StatelessWidget {
   final int itemCount;
   final SearchCategoryChildBuilder childBuilder;
@@ -127,11 +133,12 @@ class SearchCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final key = GlobalKey<SliverAnimatedListState>();
     var expanded = false;
-    var cic = 2;
+    var cic = itemCount > 2 ? 2 : itemCount;
     return SliverAnimatedList(
       key: key,
       initialItemCount: cic + 1,
       itemBuilder: (context, index, animation) {
+        talker.debug("building searchCategoryWidget@$index");
         if (index == 0) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -144,6 +151,7 @@ class SearchCategoryWidget extends StatelessWidget {
                 ),
               ),
               ListTile(
+                key: searchCategoryExpandKey,
                 trailing: Icon(expanded
                     ? Icons.keyboard_arrow_up_outlined
                     : Icons.keyboard_arrow_down_outlined),

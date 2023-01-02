@@ -49,64 +49,65 @@ class FoiledApp extends StatelessWidget {
             ).harmonized();
           }
 
-          return ProviderScope(
-            // observers: kDebugMode ? [LogAllObserver()] : null,
-            child: Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                final theme = ref.watch(themeModeProvider);
-                ErrorWidget.builder = (details) => Container(
-                    color: (theme == ThemeMode.dark
-                        ? Colors.red[700]
-                        : Colors.red[300]),
-                    child: StandardPadding(
-                      multiplier: 0.5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Icon(Icons.sentiment_dissatisfied_outlined,
-                              size: 64),
-                          const Text(
-                            "An error occurred.",
-                            textAlign: TextAlign.center,
-                          ),
-                          StandardPadding(
-                            multiplier: 0.5,
-                            child: Card(
-                              child: StandardPadding(
-                                multiplier: 0.5,
-                                child: Column(
-                                  children: [
-                                    MonoText(
-                                      details.exception.toString(),
-                                    ),
-                                    ExpansionTile(
-                                      childrenPadding:
-                                          const EdgeInsets.only(left: 4),
-                                      expandedCrossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      title: const Text("More details"),
-                                      children: [
-                                        MonoText(details.toString()),
-                                      ],
-                                    )
-                                  ],
+          return ConvenientTestWrapperWidget(
+            child: ProviderScope(
+              // observers: kDebugMode ? [LogAllObserver()] : null,
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  final theme = ref.watch(themeModeProvider);
+                  ErrorWidget.builder = (details) => Container(
+                      color: (theme == ThemeMode.dark
+                          ? Colors.red[700]
+                          : Colors.red[300]),
+                      child: StandardPadding(
+                        multiplier: 0.5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const Icon(Icons.sentiment_dissatisfied_outlined,
+                                size: 64),
+                            const Text(
+                              "An error occurred.",
+                              textAlign: TextAlign.center,
+                            ),
+                            StandardPadding(
+                              multiplier: 0.5,
+                              child: Card(
+                                child: StandardPadding(
+                                  multiplier: 0.5,
+                                  child: Column(
+                                    children: [
+                                      MonoText(
+                                        details.exception.toString(),
+                                      ),
+                                      ExpansionTile(
+                                        childrenPadding:
+                                            const EdgeInsets.only(left: 4),
+                                        expandedCrossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        title: const Text("More details"),
+                                        children: [
+                                          MonoText(details.toString()),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ));
-                return MaterialApp(
-                  title: appDisplayName,
-                  navigatorKey: navigatorKey,
-                  themeMode: theme,
-                  theme: themeFromColorScheme(lightColorScheme),
-                  darkTheme: themeFromColorScheme(darkColorScheme),
-                  // TODO move this away from here
-                  home: const ConvenientTestWrapperWidget(child: HomeScreen()),
-                );
-              },
+                            )
+                          ],
+                        ),
+                      ));
+                  return MaterialApp(
+                    title: appDisplayName,
+                    navigatorKey: navigatorKey,
+                    themeMode: theme,
+                    theme: themeFromColorScheme(lightColorScheme),
+                    darkTheme: themeFromColorScheme(darkColorScheme),
+                    home: const HomeScreen(),
+                  );
+                },
+              ),
             ),
           );
         },

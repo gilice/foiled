@@ -46,7 +46,7 @@ class SettingsBottomSheet extends StatelessWidget {
                       )),
             ),
             ListTile(
-              key: ValueKey("SettingsPopUpAccountManager"),
+              key: const ValueKey("SettingsPopUpAccountManager"),
               leading: const Icon(Icons.account_circle_outlined),
               title: const Text("Set up accounts"),
               onTap: () => showAccountManager(context),

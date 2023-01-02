@@ -5,6 +5,7 @@ import 'package:foiled/backend/api/model/discourse_post.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/topics/ui/single_topic_screen.dart';
 import 'package:foiled/main.dart';
+import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,7 +48,10 @@ class PostWidget extends StatelessWidget {
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       if (imgUrl.isNotEmpty)
-                        ClipOval(child: Image.network(imgUrl)),
+                        SizedBox(
+                            child: ClipOval(child: Image.network(imgUrl)),
+                            height: profilePictureSize,
+                            width: profilePictureSize),
                       Text(displayUserName),
                     ],
                   ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foiled/features/auth/exceptions.dart';
 import 'package:foiled/features/auth/ui/add_account_popup.dart';
 import 'package:foiled/features/homescreen/color_border_card.dart';
 import 'package:foiled/features/homescreen/subcategory_chip.dart';
 import 'package:foiled/features/search/ui/search_screen.dart';
 import 'package:foiled/features/server/backend/discourse_server_backend.dart';
 import 'package:foiled/features/topics/ui/topics_screen.dart';
+import 'package:foiled/main.dart';
 import 'package:foiled/shared/constants.dart';
 import 'package:foiled/shared/ui/home_app_bar.dart';
 import 'package:foiled/shared/utils.dart';
@@ -29,10 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           HomeAppBar(
             child: InkWell(
+                key: const ValueKey("AppBarSearchBar"),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const SearchScreen()));
-                  // ref.watch(DiscourseServerBackend.search("asd"));
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,8 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
                     error: (error, stackTrace) {
                       final dialogOpen = ref.watch(addAccountDialogOpen);
-                      if (!dialogOpen &&
-                          error.runtimeType == NoAccountsConfiguredException) {
+                      talker.debug("HomeScreen errorType ${error.runtimeType}");
+                      if (!dialogOpen) {
                         WidgetsFlutterBinding.ensureInitialized()
                             .addPostFrameCallback((_) {
                           showAddAccountDialog(context);
