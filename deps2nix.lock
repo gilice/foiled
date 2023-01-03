@@ -213,11 +213,11 @@
       "stripRoot": false,
       "sha256": "14410hzmgm60nn83srzyvsykpa4vvsj18icaf5sj00q5fmpbhkcq"
     },
-    "hosted/pub.dartlang.org/checked_yaml-2.0.1": {
-      "name": "pub-checked_yaml-2.0.1",
-      "url": "https://pub.dartlang.org/packages/checked_yaml/versions/2.0.1.tar.gz",
+    "hosted/pub.dartlang.org/checked_yaml-2.0.2": {
+      "name": "pub-checked_yaml-2.0.2",
+      "url": "https://pub.dartlang.org/packages/checked_yaml/versions/2.0.2.tar.gz",
       "stripRoot": false,
-      "sha256": "1gf7ankc5jb7mk17br87ajv05pfg6vb8nf35ay6c35w8jp70ra7k"
+      "sha256": "14lclyp7iar206320sb0z5hn4733668xm1vb827i522c8xkbamh0"
     },
     "hosted/pub.dartlang.org/chewie-1.3.6": {
       "name": "pub-chewie-1.3.6",
@@ -537,11 +537,11 @@
       "stripRoot": false,
       "sha256": "027c4sjkhkkx3sk1aqs6s4djb87syi9h521qpm1bf21bq3gga5jd"
     },
-    "hosted/pub.dartlang.org/image-3.2.2": {
-      "name": "pub-image-3.2.2",
-      "url": "https://pub.dartlang.org/packages/image/versions/3.2.2.tar.gz",
+    "hosted/pub.dartlang.org/image-3.3.0": {
+      "name": "pub-image-3.3.0",
+      "url": "https://pub.dartlang.org/packages/image/versions/3.3.0.tar.gz",
       "stripRoot": false,
-      "sha256": "0f6ggl5xfpj9fbjgn76njjvgwm7d332hs2bdgbmzhyp8q14gh55n"
+      "sha256": "1xswyxn9g2vr65vdvf5v9bvzwln8razghyaqvkyfsmz53i9clfv0"
     },
     "hosted/pub.dartlang.org/intl-0.17.0": {
       "name": "pub-intl-0.17.0",
@@ -591,11 +591,11 @@
       "stripRoot": false,
       "sha256": "04d7laaxrbiybcgbv3y223hy8d6n9f84h5lv9sv79zd9ffzkb2hg"
     },
-    "hosted/pub.dartlang.org/just_audio-0.9.30": {
-      "name": "pub-just_audio-0.9.30",
-      "url": "https://pub.dartlang.org/packages/just_audio/versions/0.9.30.tar.gz",
+    "hosted/pub.dartlang.org/just_audio-0.9.31": {
+      "name": "pub-just_audio-0.9.31",
+      "url": "https://pub.dartlang.org/packages/just_audio/versions/0.9.31.tar.gz",
       "stripRoot": false,
-      "sha256": "1hkr9p7z4v0s44hnw57672c3xzzp34j5qbpx4vraiy4wxv1z6v0p"
+      "sha256": "10f61dw9kr7k31mvmp61nxgjc4aqlbj03ig7bns577jpfq7jlwc3"
     },
     "hosted/pub.dartlang.org/just_audio_platform_interface-4.2.0": {
       "name": "pub-just_audio_platform_interface-4.2.0",
@@ -933,29 +933,29 @@
       "stripRoot": false,
       "sha256": "1npmnf2q4r6vjb7xvnbg6168hsvqf31r2yzvjp2fzpdz3xa3y9z0"
     },
-    "hosted/pub.dartlang.org/talker-2.2.0": {
-      "name": "pub-talker-2.2.0",
-      "url": "https://pub.dartlang.org/packages/talker/versions/2.2.0.tar.gz",
+    "hosted/pub.dartlang.org/talker-2.2.1": {
+      "name": "pub-talker-2.2.1",
+      "url": "https://pub.dartlang.org/packages/talker/versions/2.2.1.tar.gz",
       "stripRoot": false,
-      "sha256": "1vsww8agq7al70qzipkzk8khan5yn2h1v4szsa43li43by6244bb"
+      "sha256": "1c05vn0nkr02gamnsblfih4dy7aws9as6qcqalgs5pmkp7qg6zd1"
     },
-    "hosted/pub.dartlang.org/talker_dio_logger-1.0.0": {
-      "name": "pub-talker_dio_logger-1.0.0",
-      "url": "https://pub.dartlang.org/packages/talker_dio_logger/versions/1.0.0.tar.gz",
+    "hosted/pub.dartlang.org/talker_dio_logger-1.0.2": {
+      "name": "pub-talker_dio_logger-1.0.2",
+      "url": "https://pub.dartlang.org/packages/talker_dio_logger/versions/1.0.2.tar.gz",
       "stripRoot": false,
-      "sha256": "15zzshg0ga81b847g1lbr060ww80q7lnsysmkn5anfmllj5cly3i"
+      "sha256": "0mn7jx07jwccql0vxm4dwrbfpmi4pc02bmzp4w393p33kk1jnkvf"
     },
-    "hosted/pub.dartlang.org/talker_flutter-2.2.0": {
-      "name": "pub-talker_flutter-2.2.0",
-      "url": "https://pub.dartlang.org/packages/talker_flutter/versions/2.2.0.tar.gz",
+    "hosted/pub.dartlang.org/talker_flutter-2.2.1": {
+      "name": "pub-talker_flutter-2.2.1",
+      "url": "https://pub.dartlang.org/packages/talker_flutter/versions/2.2.1.tar.gz",
       "stripRoot": false,
-      "sha256": "1ph5ih1bbm0n4darv72mrhq29siclv0vpsnk1w9a475jxh5y3rvc"
+      "sha256": "0gvcnpgwqvmxhy3nb8n8v4k9y6f0fc7lsq6n2n1777n3f6q88wyw"
     },
-    "hosted/pub.dartlang.org/talker_logger-2.2.0": {
-      "name": "pub-talker_logger-2.2.0",
-      "url": "https://pub.dartlang.org/packages/talker_logger/versions/2.2.0.tar.gz",
+    "hosted/pub.dartlang.org/talker_logger-2.2.1": {
+      "name": "pub-talker_logger-2.2.1",
+      "url": "https://pub.dartlang.org/packages/talker_logger/versions/2.2.1.tar.gz",
       "stripRoot": false,
-      "sha256": "08nbszy2y9dbk6ic894sgs2fn75kyl4db2qh4fih4a6g8a9yblnw"
+      "sha256": "1c6k7jfm72kcd65vzp1wr95nz3558ihayvg8g2vdi2jk6h3v247d"
     },
     "hosted/pub.dartlang.org/term_glyph-1.2.1": {
       "name": "pub-term_glyph-1.2.1",
