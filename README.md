@@ -1,7 +1,17 @@
-<img src="./assets/icons/web/icon-512.png" width="85em" style="padding-bottom: 1em"/>
 
-<a href="https://matrix.to/#/#fuiux:matrix.org">
-<img src="https://img.shields.io/badge/join%20our%20matrix-click%20here-green" alt="click here to join matrix"/> </a>
+# We had a good run.
+Due to lack of time, and interest, I am closing this project. I definitely learned some things along the way, about databases, coupling and code speed.
+Thanks to everyone who starred this repo.
+If someone wants to take over this, contact me in the issues. Or just fork it.
+
+Until next time ^^
+
+The previous readme.md is included below.
+
+-----
+
+
+<img src="./assets/icons/web/icon-512.png" width="85em" style="padding-bottom: 1em"/>
 
 # foiled
 
